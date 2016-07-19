@@ -1,0 +1,12 @@
+example/
+typings/
+.gitignore
+index.html
+tsconfig.json
+typings.json
+webpack.config.js
+src/**/*.ts
+!src/**/*.d.ts
+src/specs/
+.npmignore
+index.ts

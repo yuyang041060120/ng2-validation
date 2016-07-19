@@ -1,0 +1,46 @@
+{
+  "name": "ng2-validation",
+  "version": "1.0.3",
+  "description": "angular2 validation",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "dev": "webpack-dev-server --config webpack.config.js --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base",
+    "tsc": "tsc --project . --declaration",
+    "build": "npm run tsc",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuyang041060120/angular2-validate.git"
+  },
+  "keywords": [
+    "angular2",
+    "validate",
+    "validation"
+  ],
+  "author": "yuyang041060120 <yuyang041060120@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yuyang041060120/angular2-validate/issues"
+  },
+  "homepage": "https://github.com/yuyang041060120/angular2-validate#readme",
+  "devDependencies": {
+    "@angular/common": "2.0.0-rc.4",
+    "@angular/compiler": "2.0.0-rc.4",
+    "@angular/core": "2.0.0-rc.4",
+    "@angular/forms": "0.2.0",
+    "@angular/http": "2.0.0-rc.4",
+    "@angular/platform-browser": "2.0.0-rc.4",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.4",
+    "raw-loader": "^0.5.1",
+    "reflect-metadata": "^0.1.3",
+    "rxjs": "5.0.0-beta.6",
+    "ts-loader": "^0.8.2",
+    "typescript": "^1.8.10",
+    "typings": "^1.3.1",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1",
+    "zone.js": "^0.6.12"
+  }
+}
