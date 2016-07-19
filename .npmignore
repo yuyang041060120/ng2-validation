@@ -10,3 +10,5 @@ src/**/*.ts
 src/specs/
 .npmignore
 index.ts
+karma-test-shim.js
+karma.conf.js
