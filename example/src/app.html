@@ -1,5 +1,5 @@
 <h1>app</h1>
 <form #form="ngForm" novalidate>
-    <input type="text" [(ngModel)]="username" name="name" #name="ngModel" dateiso />
-    {{name?.errors?.dateiso}}
+    <input type="text" [(ngModel)]="username" name="name" #name="ngModel" rangelength="[5,9]" />
+    {{name?.errors?.rangelength}}
 </form>

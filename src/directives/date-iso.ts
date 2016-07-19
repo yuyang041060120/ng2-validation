@@ -15,6 +15,6 @@ const DATE_ISO_VALIDATOR: any = {
 })
 export class DateISOValidator implements Validator {
     validate(c: AbstractControl): {[key: string]: any} {
-        return CustomValidators.dateiso(c);
+        return CustomValidators.dateISO(c);
     }
 }

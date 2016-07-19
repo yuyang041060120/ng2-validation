@@ -11,7 +11,7 @@ export class CustomValidators {
             if (isPresent(Validators.required(control))) return null;
 
             var v: string = control.value;
-            return v.length >= rangeLength[0] && v.length <= rangeLength[1] ? null : {'rangeLength': true};
+            return v.length >= rangeLength[0] && v.length <= rangeLength[1] ? null : {'rangelength': true};
         };
     }
 
@@ -104,7 +104,7 @@ export class CustomValidators {
     /**
      * Validator that requires controls to have a value of dateISO.
      */
-    static dateiso(control: AbstractControl): {[key: string]: boolean} {
+    static dateISO(control: AbstractControl): {[key: string]: boolean} {
         if (isPresent(Validators.required(control))) return null;
 
         var v: string = control.value;
