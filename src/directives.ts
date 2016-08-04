@@ -8,6 +8,11 @@ import { UrlValidator } from './directives/url';
 import { EmailValidator } from './directives/email';
 import { DateValidator } from './directives/date';
 import { DateISOValidator } from './directives/date-iso';
+import { CreditCardValidator } from './directives/credit-card';
+import { JSONValidator } from './directives/json';
+import { Base64Validator } from './directives/base64';
+import { PhoneValidator } from './directives/phone';
+import { UUIDValidator } from './directives/uuid';
 
 export const CUSTOM_FORM_DIRECTIVES = [
     RangeLengthValidator,
@@ -19,5 +24,10 @@ export const CUSTOM_FORM_DIRECTIVES = [
     UrlValidator,
     EmailValidator,
     DateValidator,
-    DateISOValidator
+    DateISOValidator,
+    CreditCardValidator,
+    JSONValidator,
+    Base64Validator,
+    PhoneValidator,
+    UUIDValidator
 ];

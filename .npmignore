@@ -1,14 +1,12 @@
 example/
 typings/
+.idea/
 .gitignore
 index.html
 tsconfig.json
 typings.json
 webpack.config.js
-src/**/*.ts
-!src/**/*.d.ts
-src/specs/
+src/
 .npmignore
-index.ts
 karma-test-shim.js
 karma.conf.js

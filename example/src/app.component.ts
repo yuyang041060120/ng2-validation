@@ -8,7 +8,7 @@ import {
     FormControl
 } from '@angular/forms';
 
-import { CUSTOM_FORM_DIRECTIVES } from '../../index';
+import { CUSTOM_FORM_DIRECTIVES } from '../../src';
 
 @Component({
     selector: 'app',
@@ -16,9 +16,6 @@ import { CUSTOM_FORM_DIRECTIVES } from '../../index';
     directives: [REACTIVE_FORM_DIRECTIVES, CUSTOM_FORM_DIRECTIVES]
 })
 export class AppComponent implements OnInit {
-    form: FormGroup;
-    username = '2';
-
     constructor() {
     }
 
@@ -26,6 +23,10 @@ export class AppComponent implements OnInit {
         // this.form = new FormGroup({
         //     username: new FormControl('', Validators.compose([CustomValidators.number]))
         // });
+    }
+
+    onSubmit(form) {
+        console.log(form);
     }
 
 }

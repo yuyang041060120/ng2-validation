@@ -19,7 +19,7 @@ npm install ng2-validation --save
 
 ## extend validators
 
-- rangelength
+- rangeLength
 - min
 - max
 - range
@@ -28,7 +28,12 @@ npm install ng2-validation --save
 - url
 - email
 - date
-- dateiso
+- dateISO
+- creditCard
+- json
+- base64
+- phone
+- uuid
 
 # Usage
 
@@ -67,11 +72,11 @@ export class AppComponent implements OnInit {
 }
 ```
 
-### rangelength
+### rangeLength
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" rangelength="[5, 9]"/>
-<p *ngIf="field.errors?.rangelength">error message</p>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" rangeLength="[5, 9]"/>
+<p *ngIf="field.errors?.rangeLength">error message</p>
 ```
 
 ### min
@@ -130,12 +135,77 @@ export class AppComponent implements OnInit {
 <p *ngIf="field.errors?.date">error message</p>
 ```
 
-### dateiso
+### dateISO
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" dateiso/>
-<p *ngIf="field.errors?.dateiso">error message</p>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" dateISO/>
+<p *ngIf="field.errors?.dateISO">error message</p>
 ```
+
+### creditCard
+
+```html
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" creditCard/>
+<p *ngIf="field.errors?.creditCard">error message</p>
+```
+
+### json
+
+```html
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" json/>
+<p *ngIf="field.errors?.json">error message</p>
+```
+
+### base64
+
+```html
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" base64/>
+<p *ngIf="field.errors?.base64">error message</p>
+```
+
+### phone
+
+```html
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" phone="zh-CN"/>
+<p *ngIf="field.errors?.phone">error message</p>
+```
+
+*default*: en-US
+
+**support**
+
+- zh-CN
+- zh-TW
+- en-ZA
+- en-AU
+- en-HK
+- fr-FR
+- pt-PT
+- el-GR
+- en-GB
+- en-US
+- en-ZM
+- ru-RU
+- nb-NO
+- nn-NO
+- vi-VN
+- en-NZ
+
+### uuid
+
+```html
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" uuid="3"/>
+<p *ngIf="field.errors?.uuid">error message</p>
+```
+
+*default*: all
+
+**support**
+
+- 3
+- 4
+- 5
+- all
 
 ## model driven
 
@@ -164,67 +234,41 @@ export class AppComponent {
 
 ```html
 <input type="text" [formControl]="form.controls.field"/>
-<p *ngIf="form.controls.field.errors?.rangelength">error message</p>
+<p *ngIf="form.controls.field.errors?.rangeLength">error message</p>
 ```
 
-### rangelength
+### examples
 
 ```javascript
 CustomValidators.rangeLength([5, 9])
-```
 
-### min
-
-```javascript
 CustomValidators.min(10)
-```
 
-### max
-
-```javascript
 CustomValidators.max(20)
-```
 
-### range
-
-```javascript
 CustomValidators.range([10, 20])
-```
 
-### digits
-
-```javascript
 CustomValidators.digits
-```
 
-### number
-
-```javascript
 CustomValidators.number
-```
 
-### url
-
-```javascript
 CustomValidators.url
-```
 
-### email
-
-```javascript
 CustomValidators.email
-```
 
-### date
-
-```javascript
 CustomValidators.date
-```
 
-### dateiso
+CustomValidators.dateISO
 
-```javascript
-CustomValidators.dateiso
+CustomValidators.creditCard
+
+CustomValidators.json
+
+CustomValidators.base64
+
+CustomValidators.phonoe
+
+CustomValidators.uuid
 ```
 
 # License

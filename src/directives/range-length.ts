@@ -10,13 +10,13 @@ const RANGE_LENGTH_VALIDATOR: any = {
 };
 
 @Directive({
-    selector: '[rangelength][formControlName],[rangelength][formControl],[rangelength][ngModel]',
+    selector: '[rangeLength][formControlName],[rangeLength][formControl],[rangeLength][ngModel]',
     providers: [RANGE_LENGTH_VALIDATOR]
 })
 export class RangeLengthValidator implements Validator {
     private validator: ValidatorFn;
 
-    constructor(@Attribute('rangelength') rangeLength: string) {
+    constructor(@Attribute('rangeLength') rangeLength: string) {
         this.validator = CustomValidators.rangeLength(JSON.parse(rangeLength));
     }
 

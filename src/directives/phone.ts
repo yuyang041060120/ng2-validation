@@ -3,21 +3,21 @@ import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular
 
 import { CustomValidators } from '../';
 
-const MIN_VALIDATOR: any = {
+const PHONE_VALIDATOR: any = {
     provide: NG_VALIDATORS,
-    useExisting: forwardRef(() => MinValidator),
+    useExisting: forwardRef(() => PhoneValidator),
     multi: true
 };
 
 @Directive({
-    selector: '[min][formControlName],[min][formControl],[min][ngModel]',
-    providers: [MIN_VALIDATOR]
+    selector: '[phone][formControlName],[phone][formControl],[phone][ngModel]',
+    providers: [PHONE_VALIDATOR]
 })
-export class MinValidator implements Validator {
+export class PhoneValidator implements Validator {
     private validator: ValidatorFn;
 
-    constructor(@Attribute('min') min: string) {
-        this.validator = CustomValidators.min(parseFloat(min));
+    constructor(@Attribute('phone') phone: string) {
+        this.validator = CustomValidators.phone(phone);
     }
 
     validate(c: AbstractControl): {[key: string]: any} {

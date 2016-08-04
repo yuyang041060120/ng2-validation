@@ -1,5 +1,25 @@
-<h1>app</h1>
-<form #form="ngForm" novalidate>
-    <input type="text" [(ngModel)]="username" name="name" #name="ngModel" rangelength="[5,9]" />
-    {{name?.errors?.rangelength}}
+<form #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
+    <h4>rangeLength</h4>
+    <input type="text" ngModel name="username" #username="ngModel" rangeLength="[4,6]" />
+    <p *ngIf="username?.errors?.rangeLength">rangeLength error</p>
+
+    <h4>creditCard</h4>
+    <input type="text" ngModel name="creditCard" #creditCard="ngModel" creditCard />
+    <p *ngIf="creditCard?.errors?.creditCard">creditCard error</p>
+
+    <h4>JSON</h4>
+    <input type="text" ngModel name="json" #json="ngModel" json />
+    <p *ngIf="json?.errors?.json">JSON error</p>
+
+    <h4>base64</h4>
+    <input type="text" ngModel name="base" #base="ngModel" base64 />
+    <p *ngIf="base?.errors?.base64">base64 error</p>
+
+    <h4>phone</h4>
+    <input type="text" ngModel name="phone" #phone="ngModel" phone="zh-CN" />
+    <p *ngIf="phone?.errors?.phone">phone error</p>
+
+    <h4>UUID</h4>
+    <input type="text" ngModel name="uuid" #uuid="ngModel" uuid />
+    <p *ngIf="uuid?.errors?.uuid">UUID error</p>
 </form>

@@ -3,21 +3,21 @@ import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular
 
 import { CustomValidators } from '../';
 
-const MIN_VALIDATOR: any = {
+const UUID_VALIDATOR: any = {
     provide: NG_VALIDATORS,
-    useExisting: forwardRef(() => MinValidator),
+    useExisting: forwardRef(() => UUIDValidator),
     multi: true
 };
 
 @Directive({
-    selector: '[min][formControlName],[min][formControl],[min][ngModel]',
-    providers: [MIN_VALIDATOR]
+    selector: '[uuid][formControlName],[uuid][formControl],[uuid][ngModel]',
+    providers: [UUID_VALIDATOR]
 })
-export class MinValidator implements Validator {
+export class UUIDValidator implements Validator {
     private validator: ValidatorFn;
 
-    constructor(@Attribute('min') min: string) {
-        this.validator = CustomValidators.min(parseFloat(min));
+    constructor(@Attribute('uuid') uuid: string) {
+        this.validator = CustomValidators.uuid(uuid);
     }
 
     validate(c: AbstractControl): {[key: string]: any} {

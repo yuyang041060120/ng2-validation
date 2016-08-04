@@ -3,7 +3,7 @@ import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular
 
 import { CustomValidators } from '../';
 
-const MAX_LENGTH_VALIDATOR: any = {
+const MAX_VALIDATOR: any = {
     provide: NG_VALIDATORS,
     useExisting: forwardRef(() => MaxValidator),
     multi: true
@@ -11,7 +11,7 @@ const MAX_LENGTH_VALIDATOR: any = {
 
 @Directive({
     selector: '[max][formControlName],[max][formControl],[max][ngModel]',
-    providers: [MAX_LENGTH_VALIDATOR]
+    providers: [MAX_VALIDATOR]
 })
 export class MaxValidator implements Validator {
     private validator: ValidatorFn;
