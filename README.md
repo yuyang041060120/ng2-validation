@@ -266,9 +266,9 @@ CustomValidators.json
 
 CustomValidators.base64
 
-CustomValidators.phonoe
+CustomValidators.phonoe('zh-CN')
 
-CustomValidators.uuid
+CustomValidators.uuid('3')
 ```
 
 # License
