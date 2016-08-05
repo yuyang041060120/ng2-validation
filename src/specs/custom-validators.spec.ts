@@ -10,9 +10,9 @@ describe('Custom Validators RangeLength [4,9],', () => {
         validator = CustomValidators.rangeLength([4, 9]);
     });
 
-    it('"abc" should equal to "{rangelength: true}"', () => {
+    it('"abc" should equal to "{rangeLength: true}"', () => {
         control = new FormControl('abc');
-        expect(validator(control)).toEqual({rangelength: true});
+        expect(validator(control)).toEqual({rangeLength: true});
     });
 
     it('"abcd" should equal to "null"', () => {
@@ -25,9 +25,9 @@ describe('Custom Validators RangeLength [4,9],', () => {
         expect(validator(control)).toBeNull();
     });
 
-    it('"abcdefghij" should equal to "{rangelength: true}"', () => {
+    it('"abcdefghij" should equal to "{rangeLength: true}"', () => {
         control = new FormControl('abcdefghij');
-        expect(validator(control)).toEqual({rangelength: true});
+        expect(validator(control)).toEqual({rangeLength: true});
     });
 });
 
