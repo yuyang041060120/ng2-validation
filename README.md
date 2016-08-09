@@ -76,28 +76,28 @@ export class AppComponent implements OnInit {
 ### rangeLength
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" rangeLength="[5, 9]"/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [rangeLength]="[5, 9]"/>
 <p *ngIf="field.errors?.rangeLength">error message</p>
 ```
 
 ### min
 
 ```html
-<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" min="10"/>
+<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [min]="10"/>
 <p *ngIf="field.errors?.min">error message</p>
 ```
 
 ### max
 
 ```html
-<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" max="20"/>
+<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [max]="20"/>
 <p *ngIf="field.errors?.max">error message</p>
 ```
 
 ### range
 
 ```html
-<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" range="[10, 20]"/>
+<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [range]="[10, 20]"/>
 <p *ngIf="field.errors?.range">error message</p>
 ```
 
@@ -167,7 +167,7 @@ export class AppComponent implements OnInit {
 ### phone
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" phone="zh-CN"/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [phone]="'zh-CN'"/>
 <p *ngIf="field.errors?.phone">error message</p>
 ```
 
@@ -195,7 +195,7 @@ export class AppComponent implements OnInit {
 ### uuid
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" uuid="3"/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [uuid]="'all'"/>
 <p *ngIf="field.errors?.uuid">error message</p>
 ```
 
@@ -211,7 +211,7 @@ export class AppComponent implements OnInit {
 ### equal
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" equal="xxx"/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [equal]="'xxx'"/>
 <p *ngIf="field.errors?.equal">error message</p>
 ```
 

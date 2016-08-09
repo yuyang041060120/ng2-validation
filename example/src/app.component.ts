@@ -16,6 +16,7 @@ import { CUSTOM_FORM_DIRECTIVES } from '../../src';
     directives: [REACTIVE_FORM_DIRECTIVES, CUSTOM_FORM_DIRECTIVES]
 })
 export class AppComponent implements OnInit {
+    rangeLength = [5, 6];
 
     constructor() {
     }

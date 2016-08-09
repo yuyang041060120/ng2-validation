@@ -1,4 +1,4 @@
-import { Directive, Attribute, forwardRef } from '@angular/core';
+import { Directive, Input, forwardRef, OnInit } from '@angular/core';
 import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular/forms';
 
 import { CustomValidators } from '../';
@@ -13,11 +13,13 @@ const RANGE_VALIDATOR: any = {
     selector: '[range][formControlName],[range][formControl],[range][ngModel]',
     providers: [RANGE_VALIDATOR]
 })
-export class RangeValidator implements Validator {
+export class RangeValidator implements Validator, OnInit {
+    @Input() range: [number];
+
     private validator: ValidatorFn;
 
-    constructor(@Attribute('range') range: string) {
-        this.validator = CustomValidators.range(JSON.parse(range));
+    ngOnInit() {
+        this.validator = CustomValidators.range(this.range);
     }
 
     validate(c: AbstractControl): {[key: string]: any} {

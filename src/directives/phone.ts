@@ -1,4 +1,4 @@
-import { Directive, Attribute, forwardRef } from '@angular/core';
+import { Directive, Input, forwardRef, OnInit } from '@angular/core';
 import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular/forms';
 
 import { CustomValidators } from '../';
@@ -13,11 +13,13 @@ const PHONE_VALIDATOR: any = {
     selector: '[phone][formControlName],[phone][formControl],[phone][ngModel]',
     providers: [PHONE_VALIDATOR]
 })
-export class PhoneValidator implements Validator {
+export class PhoneValidator implements Validator, OnInit {
+    @Input() phone: string;
+
     private validator: ValidatorFn;
 
-    constructor(@Attribute('phone') phone: string) {
-        this.validator = CustomValidators.phone(phone);
+    ngOnInit() {
+        this.validator = CustomValidators.phone(this.phone);
     }
 
     validate(c: AbstractControl): {[key: string]: any} {

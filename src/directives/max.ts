@@ -1,4 +1,4 @@
-import { Directive, Attribute, forwardRef } from '@angular/core';
+import { Directive, Input, forwardRef, OnInit } from '@angular/core';
 import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular/forms';
 
 import { CustomValidators } from '../';
@@ -13,11 +13,13 @@ const MAX_VALIDATOR: any = {
     selector: '[max][formControlName],[max][formControl],[max][ngModel]',
     providers: [MAX_VALIDATOR]
 })
-export class MaxValidator implements Validator {
+export class MaxValidator implements Validator, OnInit {
+    @Input() max: number;
+
     private validator: ValidatorFn;
 
-    constructor(@Attribute('max') max: string) {
-        this.validator = CustomValidators.max(parseFloat(max));
+    ngOnInit() {
+        this.validator = CustomValidators.max(this.max);
     }
 
     validate(c: AbstractControl): {[key: string]: any} {
