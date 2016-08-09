@@ -37,6 +37,8 @@ npm install ng2-validation --save
 - equal
 - equalTo
 
+> NOTE:creditCard, json, base64, phone and uuid come from [angular2 form validators](https://github.com/AngularClass/angular2-form-validators)
+
 # Usage
 
 First, you need use the latest form component, and disable deprecated forms.
