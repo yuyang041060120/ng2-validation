@@ -1,4 +1,4 @@
-import { Directive, Attribute, forwardRef } from '@angular/core';
+import { Directive, Input, forwardRef, OnInit } from '@angular/core';
 import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular/forms';
 
 import { CustomValidators } from '../';
@@ -13,11 +13,13 @@ const MIN_VALIDATOR: any = {
     selector: '[min][formControlName],[min][formControl],[min][ngModel]',
     providers: [MIN_VALIDATOR]
 })
-export class MinValidator implements Validator {
+export class MinValidator implements Validator, OnInit {
+    @Input() min: number;
+
     private validator: ValidatorFn;
 
-    constructor(@Attribute('min') min: string) {
-        this.validator = CustomValidators.min(parseFloat(min));
+    ngOnInit() {
+        this.validator = CustomValidators.min(this.min);
     }
 
     validate(c: AbstractControl): {[key: string]: any} {

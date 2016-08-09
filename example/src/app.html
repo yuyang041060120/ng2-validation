@@ -1,7 +1,19 @@
 <form #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
     <h4>rangeLength</h4>
-    <input type="text" ngModel name="username" #username="ngModel" rangeLength="[4,6]" />
+    <input type="text" ngModel name="username" #username="ngModel" [rangeLength]="[5, 9]" />
     <p *ngIf="username?.errors?.rangeLength">rangeLength error</p>
+
+    <h4>min</h4>
+    <input type="text" ngModel name="min" #min="ngModel" [min]="5" />
+    <p *ngIf="min?.errors?.min">min error</p>
+
+    <h4>max</h4>
+    <input type="text" ngModel name="max" #max="ngModel" [max]="9" />
+    <p *ngIf="max?.errors?.max">max error</p>
+
+    <h4>range</h4>
+    <input type="text" ngModel name="range" #range="ngModel" [range]="[5, 9]" />
+    <p *ngIf="range?.errors?.range">range error</p>
 
     <h4>creditCard</h4>
     <input type="text" ngModel name="creditCard" #creditCard="ngModel" creditCard />
@@ -16,14 +28,14 @@
     <p *ngIf="base?.errors?.base64">base64 error</p>
 
     <h4>phone</h4>
-    <input type="text" ngModel name="phone" #phone="ngModel" phone="zh-CN" />
+    <input type="text" ngModel name="phone" #phone="ngModel" [phone]="'zh-CN'" />
     <p *ngIf="phone?.errors?.phone">phone error</p>
 
     <h4>UUID</h4>
-    <input type="text" ngModel name="uuid" #uuid="ngModel" uuid />
+    <input type="text" ngModel name="uuid" #uuid="ngModel" [uuid]="4" />
     <p *ngIf="uuid?.errors?.uuid">UUID error</p>
 
     <h4>equal to "xxx"</h4>
-    <input type="text" ngModel name="equal" #equal="ngModel" equal="xxx" />
+    <input type="text" ngModel name="equal" #equal="ngModel" [equal]="'xxx'" />
     <p *ngIf="equal?.errors?.equal">equal error</p>
 </form>

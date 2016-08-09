@@ -1,4 +1,4 @@
-import { Directive, Attribute, forwardRef } from '@angular/core';
+import { Directive, Input, forwardRef, OnInit } from '@angular/core';
 import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular/forms';
 
 import { CustomValidators } from '../';
@@ -13,11 +13,13 @@ const EQUAL_VALIDATOR: any = {
     selector: '[equal][formControlName],[equal][formControl],[equal][ngModel]',
     providers: [EQUAL_VALIDATOR]
 })
-export class EqualValidator implements Validator {
+export class EqualValidator implements Validator, OnInit {
+    @Input() equal: string;
+
     private validator: ValidatorFn;
 
-    constructor(@Attribute('equal') equal: string) {
-        this.validator = CustomValidators.equal(equal);
+    ngOnInit() {
+        this.validator = CustomValidators.equal(this.equal);
     }
 
     validate(c: AbstractControl): {[key: string]: any} {

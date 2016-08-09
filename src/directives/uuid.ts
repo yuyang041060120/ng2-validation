@@ -1,4 +1,4 @@
-import { Directive, Attribute, forwardRef } from '@angular/core';
+import { Directive, Input, forwardRef, OnInit } from '@angular/core';
 import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular/forms';
 
 import { CustomValidators } from '../';
@@ -13,11 +13,13 @@ const UUID_VALIDATOR: any = {
     selector: '[uuid][formControlName],[uuid][formControl],[uuid][ngModel]',
     providers: [UUID_VALIDATOR]
 })
-export class UUIDValidator implements Validator {
+export class UUIDValidator implements Validator, OnInit {
+    @Input() uuid;
+
     private validator: ValidatorFn;
 
-    constructor(@Attribute('uuid') uuid: string) {
-        this.validator = CustomValidators.uuid(uuid);
+    ngOnInit() {
+        this.validator = CustomValidators.uuid(this.uuid);
     }
 
     validate(c: AbstractControl): {[key: string]: any} {
