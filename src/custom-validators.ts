@@ -248,4 +248,17 @@ export class CustomValidators {
             return str === v ? null : {equal: true};
         };
     }
+
+    /**
+     * Validator that requires controls to have a value to equal another control.
+     */
+    static equalTo(equalControl: AbstractControl): ValidatorFn {
+        return (control: AbstractControl): {[key: string]: any} => {
+            if (isPresent(Validators.required(control))) return null;
+
+            let v: string = control.value;
+
+            return equalControl.value === v ? null : {equalTo: true};
+        };
+    }
 }

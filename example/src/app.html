@@ -38,4 +38,9 @@
     <h4>equal to "xxx"</h4>
     <input type="text" ngModel name="equal" #equal="ngModel" [equal]="'xxx'" />
     <p *ngIf="equal?.errors?.equal">equal error</p>
+
+    <h4>equalTo to password</h4>
+    <input type="password" ngModel name="password" #password="ngModel"/>
+    <input type="password" ngModel name="certainPassword" #certainPassword="ngModel" [equalTo]="password"/>
+    <p *ngIf="certainPassword?.errors?.equalTo">equalTo error</p>
 </form>
