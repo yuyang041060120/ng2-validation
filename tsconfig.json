@@ -11,6 +11,10 @@
     "lib": [
       "es6",
       "dom"
+    ],
+    "types": [
+      "jasmine",
+      "node"
     ]
   },
   "exclude": [

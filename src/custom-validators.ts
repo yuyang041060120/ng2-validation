@@ -1,6 +1,6 @@
 import { ValidatorFn, AbstractControl, Validators } from '@angular/forms';
 
-import { isPresent } from './lang';
+import { isPresent, isString } from './lang';
 
 export class CustomValidators {
     /**
@@ -233,6 +233,19 @@ export class CustomValidators {
             let pattern = uuid[version] || uuid.all;
 
             return (new RegExp(pattern)).test(v) ? null : {'uuid': true};
+        };
+    }
+
+    /**
+     * Validator that requires controls to have a value to equal another value.
+     */
+    static equal(str: string): ValidatorFn {
+        return (control: AbstractControl): {[key: string]: any} => {
+            if (isPresent(Validators.required(control))) return null;
+
+            let v: string = control.value;
+
+            return str === v ? null : {equal: true};
         };
     }
 }

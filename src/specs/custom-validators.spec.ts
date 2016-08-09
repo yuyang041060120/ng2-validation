@@ -198,3 +198,22 @@ describe('Custom Validators Email,', () => {
         expect(validator(control)).toEqual({email: true});
     });
 });
+
+describe('Custom Validators Equal,', () => {
+    let control: FormControl;
+    let validator: ValidatorFn;
+
+    beforeEach(() => {
+        validator = CustomValidators.equal('xxx');
+    });
+
+    it('"xxx" should equal to "null"', () => {
+        control = new FormControl('xxx');
+        expect(validator(control)).toBeNull()
+    });
+
+    it('"yyy" should equal to "{equal: true}"', () => {
+        control = new FormControl('yyy');
+        expect(validator(control)).toEqual({equal: true});
+    });
+});

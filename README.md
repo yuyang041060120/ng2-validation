@@ -34,6 +34,7 @@ npm install ng2-validation --save
 - base64
 - phone
 - uuid
+- equal
 
 # Usage
 
@@ -207,6 +208,13 @@ export class AppComponent implements OnInit {
 - 5
 - all
 
+### equal
+
+```html
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" equal="xxx"/>
+<p *ngIf="field.errors?.equal">error message</p>
+```
+
 ## model driven
 
 used like angular2 build-in validators.
@@ -269,6 +277,8 @@ CustomValidators.base64
 CustomValidators.phonoe('zh-CN')
 
 CustomValidators.uuid('3')
+
+CustomValidators.equal('xxx')
 ```
 
 # License

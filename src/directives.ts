@@ -13,6 +13,7 @@ import { JSONValidator } from './directives/json';
 import { Base64Validator } from './directives/base64';
 import { PhoneValidator } from './directives/phone';
 import { UUIDValidator } from './directives/uuid';
+import { EqualValidator } from './directives/equal';
 
 export const CUSTOM_FORM_DIRECTIVES = [
     RangeLengthValidator,
@@ -29,5 +30,6 @@ export const CUSTOM_FORM_DIRECTIVES = [
     JSONValidator,
     Base64Validator,
     PhoneValidator,
-    UUIDValidator
+    UUIDValidator,
+    EqualValidator
 ];
