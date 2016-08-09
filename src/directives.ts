@@ -14,6 +14,7 @@ import { Base64Validator } from './directives/base64';
 import { PhoneValidator } from './directives/phone';
 import { UUIDValidator } from './directives/uuid';
 import { EqualValidator } from './directives/equal';
+import { EqualToValidator } from './directives/equal-to';
 
 export const CUSTOM_FORM_DIRECTIVES = [
     RangeLengthValidator,
@@ -31,5 +32,6 @@ export const CUSTOM_FORM_DIRECTIVES = [
     Base64Validator,
     PhoneValidator,
     UUIDValidator,
-    EqualValidator
+    EqualValidator,
+    EqualToValidator
 ];

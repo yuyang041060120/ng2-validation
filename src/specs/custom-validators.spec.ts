@@ -217,3 +217,24 @@ describe('Custom Validators Equal,', () => {
         expect(validator(control)).toEqual({equal: true});
     });
 });
+
+describe('Custom Validators EqualTo,', () => {
+    let equalControl: FormControl;
+    let control: FormControl;
+    let validator: ValidatorFn;
+
+    beforeEach(() => {
+        equalControl = new FormControl('xxx');
+        validator = CustomValidators.equalTo(equalControl);
+    });
+
+    it('"xxx" should equal to "null"', () => {
+        control = new FormControl('xxx');
+        expect(validator(control)).toBeNull()
+    });
+
+    it('"yyy" should equal to "{equalTo: true}"', () => {
+        control = new FormControl('yyy');
+        expect(validator(control)).toEqual({equalTo: true});
+    });
+});

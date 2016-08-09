@@ -35,6 +35,7 @@ npm install ng2-validation --save
 - phone
 - uuid
 - equal
+- equalTo
 
 # Usage
 
@@ -215,6 +216,14 @@ export class AppComponent implements OnInit {
 <p *ngIf="field.errors?.equal">error message</p>
 ```
 
+### equalTo
+
+```html
+<input type="password" ngModel name="password" #password="ngModel"/>
+<input type="password" ngModel name="certainPassword" #certainPassword="ngModel" [equalTo]="password"/>
+<p *ngIf="certainPassword?.errors?.equalTo">error message</p>
+```
+
 ## model driven
 
 used like angular2 build-in validators.
@@ -279,6 +288,8 @@ CustomValidators.phonoe('zh-CN')
 CustomValidators.uuid('3')
 
 CustomValidators.equal('xxx')
+
+CustomValidators.equalTo(formControl)
 ```
 
 # License
