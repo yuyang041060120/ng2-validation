@@ -35,6 +35,8 @@
     "@angular/http": "2.0.0-rc.4",
     "@angular/platform-browser": "2.0.0-rc.4",
     "@angular/platform-browser-dynamic": "2.0.0-rc.4",
+    "@types/jasmine": "^2.2.29",
+    "@types/node": "^4.0.29",
     "core-js": "^2.4.1",
     "jasmine-core": "^2.4.1",
     "karma": "^1.1.1",

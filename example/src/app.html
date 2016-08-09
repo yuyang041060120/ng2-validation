@@ -22,4 +22,8 @@
     <h4>UUID</h4>
     <input type="text" ngModel name="uuid" #uuid="ngModel" uuid />
     <p *ngIf="uuid?.errors?.uuid">UUID error</p>
+
+    <h4>equal to "xxx"</h4>
+    <input type="text" ngModel name="equal" #equal="ngModel" equal="xxx" />
+    <p *ngIf="equal?.errors?.equal">equal error</p>
 </form>
