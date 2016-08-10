@@ -292,7 +292,13 @@ CustomValidators.uuid('3')
 
 CustomValidators.equal('xxx')
 
-CustomValidators.equalTo(formControl)
+var password = new FormControl('', Validators.required);
+var certainPassword = new FormControl('', CustomValidators.equalTo(password));
+
+this.form = new FormGroup({
+    password: password,
+    certainPassword: certainPassword
+});
 ```
 
 # License
