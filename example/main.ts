@@ -1,9 +1,5 @@
-import { bootstrap }      from '@angular/platform-browser-dynamic';
-import { disableDeprecatedForms, provideForms } from '@angular/forms';
+import { platformBrowserDynamic }      from '@angular/platform-browser-dynamic';
 
-import { AppComponent } from './src/app.component';
+import { AppModule } from './src/app.module';
 
-bootstrap(AppComponent, [
-    disableDeprecatedForms(),
-    provideForms(),
-]).catch(err => console.error(err));
+platformBrowserDynamic().bootstrapModule(AppModule);

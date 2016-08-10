@@ -1,34 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import {
-    ValidatorFn,
-    AbstractControl,
-    Validators,
-    FormGroup,
-    REACTIVE_FORM_DIRECTIVES,
-    FormControl
-} from '@angular/forms';
+import { Validators, FormControl, FormGroup } from '@angular/forms';
 
-import { CUSTOM_FORM_DIRECTIVES } from '../../src';
+import { CustomValidators } from '../../src';
 
 @Component({
     selector: 'app',
-    template: require('./app.html'),
-    directives: [REACTIVE_FORM_DIRECTIVES, CUSTOM_FORM_DIRECTIVES]
+    template: require('./app.html')
 })
 export class AppComponent implements OnInit {
-    rangeLength = [5, 6];
+    form: FormGroup;
 
     constructor() {
     }
 
     ngOnInit() {
-        // this.form = new FormGroup({
-        //     username: new FormControl('', Validators.compose([CustomValidators.number]))
-        // });
+        var password = new FormControl('', Validators.required);
+        var certainPassword = new FormControl('', CustomValidators.equalTo(password));
+
+        this.form = new FormGroup({
+            password: password,
+            certainPassword: certainPassword
+        });
     }
 
-    onSubmit(form) {
-        console.log(form);
+    onSubmit() {
+        console.log(this.form);
     }
 
 }

@@ -19,7 +19,6 @@ export class EqualToValidator implements Validator, OnInit {
     private validator: ValidatorFn;
 
     ngOnInit() {
-        console.log(this.equalTo);
         this.validator = CustomValidators.equalTo(this.equalTo);
     }
 

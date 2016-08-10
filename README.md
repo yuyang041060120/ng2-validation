@@ -37,42 +37,26 @@ npm install ng2-validation --save
 - equal
 - equalTo
 
-> NOTE:creditCard, json, base64, phone and uuid come from [angular2 form validators](https://github.com/AngularClass/angular2-form-validators)
-
 # Usage
-
-First, you need use the latest form component, and disable deprecated forms.
-
-```javascript
-import { bootstrap }      from '@angular/platform-browser-dynamic';
-import { disableDeprecatedForms, provideForms } from '@angular/forms';
-
-import { AppComponent } from './src/app.component';
-
-bootstrap(AppComponent, [
-    disableDeprecatedForms(),
-    provideForms(),
-]).catch(err => console.error(err));
-```
-
-
 
 ## template driven
 
-First, import `CUSTOM_FORM_DIRECTIVES` and `REACTIVE_FORM_DIRECTIVES`, add them to component directives config.
+import `FormsModule` and `CustomFormsModule` in *app.module.ts*
 
 ```javascript
-import { Component } from '@angular/core';
-import { REACTIVE_FORM_DIRECTIVES, } from '@angular/forms';
-import { CUSTOM_FORM_DIRECTIVES } from 'ng2-validation';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation'
 
-@Component({
-    selector: 'app',
-    template: require('./app.html'),
-    directives: [REACTIVE_FORM_DIRECTIVES, CUSTOM_FORM_DIRECTIVES]
+import { AppComponent } from './app.component';
+
+@NgModule({
+    imports: [BrowserModule, FormsModule, CustomFormsModule],
+    declarations: [AppComponent],
+    bootstrap: [AppComponent]
 })
-export class AppComponent implements OnInit {
-    
+export class AppModule {
 }
 ```
 
@@ -228,17 +212,34 @@ export class AppComponent implements OnInit {
 
 ## model driven
 
-used like angular2 build-in validators.
+import `ReactiveFormsModule` in *app.module.ts*
+
+```javascript
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+    imports: [BrowserModule, ReactiveFormsModule],
+    declarations: [AppComponent],
+    bootstrap: [AppComponent]
+})
+export class AppModule {
+}
+```
+
+import `CustomValidators` in *app.component.ts*
 
 ```javascript
 import { Component } from '@angular/core';
-import { REACTIVE_FORM_DIRECTIVES, FormGroup, FormControl } from '@angular/forms';
-import { CUSTOM_FORM_DIRECTIVES, CustomValidators } from 'ng2-validation';
+import { FormGroup, FormControl } from '@angular/forms';
+import { CustomValidators } from 'ng2-validation';
 
 @Component({
     selector: 'app',
-    template: require('./app.html'),
-    directives: [REACTIVE_FORM_DIRECTIVES, CUSTOM_FORM_DIRECTIVES]
+    template: require('./app.html')
 })
 export class AppComponent {
     form: FormGroup;
@@ -252,7 +253,7 @@ export class AppComponent {
 ```
 
 ```html
-<input type="text" [formControl]="form.controls.field"/>
+<input type="text" formControlName="field"/>
 <p *ngIf="form.controls.field.errors?.rangeLength">error message</p>
 ```
 
