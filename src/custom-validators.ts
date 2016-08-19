@@ -2,6 +2,8 @@ import { ValidatorFn, AbstractControl, Validators } from '@angular/forms';
 
 import { isPresent, isString } from './lang';
 
+export type EqualValueType = string | boolean | number;
+
 export class CustomValidators {
     /**
      * Validator that requires controls to have a value of a range length.
@@ -239,7 +241,7 @@ export class CustomValidators {
     /**
      * Validator that requires controls to have a value to equal another value.
      */
-    static equal(str: string): ValidatorFn {
+    static equal(str: EqualValueType): ValidatorFn {
         return (control: AbstractControl): {[key: string]: any} => {
             if (isPresent(Validators.required(control))) return null;
 
