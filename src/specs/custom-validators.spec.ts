@@ -199,7 +199,7 @@ describe('Custom Validators Email,', () => {
     });
 });
 
-describe('Custom Validators Equal,', () => {
+describe('Custom Validators Equal (string),', () => {
     let control: FormControl;
     let validator: ValidatorFn;
 
@@ -214,6 +214,25 @@ describe('Custom Validators Equal,', () => {
 
     it('"yyy" should equal to "{equal: true}"', () => {
         control = new FormControl('yyy');
+        expect(validator(control)).toEqual({equal: true});
+    });
+});
+
+describe('Custom Validators Equal (boolean),', () => {
+    let control: FormControl;
+    let validator: ValidatorFn;
+
+    beforeEach(() => {
+        validator = CustomValidators.equal(true);
+    });
+
+    it('"xxx" should equal to "null"', () => {
+        control = new FormControl(true);
+        expect(validator(control)).toBeNull()
+    });
+
+    it('"yyy" should equal to "{equal: true}"', () => {
+        control = new FormControl(false);
         expect(validator(control)).toEqual({equal: true});
     });
 });
