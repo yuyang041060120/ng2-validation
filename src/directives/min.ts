@@ -4,25 +4,25 @@ import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular
 import { CustomValidators } from '../';
 
 const MIN_VALIDATOR: any = {
-    provide: NG_VALIDATORS,
-    useExisting: forwardRef(() => MinValidator),
-    multi: true
+  provide: NG_VALIDATORS,
+  useExisting: forwardRef(() => MinValidator),
+  multi: true
 };
 
 @Directive({
-    selector: '[min][formControlName],[min][formControl],[min][ngModel]',
-    providers: [MIN_VALIDATOR]
+  selector: '[min][formControlName],[min][formControl],[min][ngModel]',
+  providers: [MIN_VALIDATOR]
 })
 export class MinValidator implements Validator, OnInit {
-    @Input() min: number;
+  @Input() min: number;
 
-    private validator: ValidatorFn;
+  private validator: ValidatorFn;
 
-    ngOnInit() {
-        this.validator = CustomValidators.min(this.min);
-    }
+  ngOnInit() {
+    this.validator = CustomValidators.min(this.min);
+  }
 
-    validate(c: AbstractControl): {[key: string]: any} {
-        return this.validator(c);
-    }
+  validate(c: AbstractControl): {[key: string]: any} {
+    return this.validator(c);
+  }
 }

@@ -1,28 +1,20 @@
-import { Directive, Input, forwardRef, OnInit } from '@angular/core';
-import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular/forms';
+import { Directive, forwardRef } from '@angular/core';
+import { NG_VALIDATORS, Validator, FormGroup, NgModelGroup } from '@angular/forms';
 
 import { CustomValidators } from '../';
 
 const EQUAL_TO_VALIDATOR: any = {
-    provide: NG_VALIDATORS,
-    useExisting: forwardRef(() => EqualToValidator),
-    multi: true
+  provide: NG_VALIDATORS,
+  useExisting: forwardRef(() => EqualToValidator),
+  multi: true
 };
 
 @Directive({
-    selector: '[equalTo][formControlName],[equalTo][formControl],[equalTo][ngModel]',
-    providers: [EQUAL_TO_VALIDATOR]
+  selector: '[equalTo][ngModelGroup]',
+  providers: [EQUAL_TO_VALIDATOR]
 })
-export class EqualToValidator implements Validator, OnInit {
-    @Input() equalTo: AbstractControl;
-
-    private validator: ValidatorFn;
-
-    ngOnInit() {
-        this.validator = CustomValidators.equalTo(this.equalTo);
-    }
-
-    validate(c: AbstractControl): {[key: string]: any} {
-        return this.validator(c);
-    }
+export class EqualToValidator implements Validator {
+  validate(c: FormGroup): {[key: string]: any} {
+    return CustomValidators.equalTo(c);
+  }
 }

@@ -4,25 +4,25 @@ import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular
 import { CustomValidators } from '../';
 
 const RANGE_VALIDATOR: any = {
-    provide: NG_VALIDATORS,
-    useExisting: forwardRef(() => RangeValidator),
-    multi: true
+  provide: NG_VALIDATORS,
+  useExisting: forwardRef(() => RangeValidator),
+  multi: true
 };
 
 @Directive({
-    selector: '[range][formControlName],[range][formControl],[range][ngModel]',
-    providers: [RANGE_VALIDATOR]
+  selector: '[range][formControlName],[range][formControl],[range][ngModel]',
+  providers: [RANGE_VALIDATOR]
 })
 export class RangeValidator implements Validator, OnInit {
-    @Input() range: [number];
+  @Input() range: [number];
 
-    private validator: ValidatorFn;
+  private validator: ValidatorFn;
 
-    ngOnInit() {
-        this.validator = CustomValidators.range(this.range);
-    }
+  ngOnInit() {
+    this.validator = CustomValidators.range(this.range);
+  }
 
-    validate(c: AbstractControl): {[key: string]: any} {
-        return this.validator(c);
-    }
+  validate(c: AbstractControl): {[key: string]: any} {
+    return this.validator(c);
+  }
 }

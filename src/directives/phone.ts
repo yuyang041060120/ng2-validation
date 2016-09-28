@@ -4,25 +4,25 @@ import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular
 import { CustomValidators } from '../';
 
 const PHONE_VALIDATOR: any = {
-    provide: NG_VALIDATORS,
-    useExisting: forwardRef(() => PhoneValidator),
-    multi: true
+  provide: NG_VALIDATORS,
+  useExisting: forwardRef(() => PhoneValidator),
+  multi: true
 };
 
 @Directive({
-    selector: '[phone][formControlName],[phone][formControl],[phone][ngModel]',
-    providers: [PHONE_VALIDATOR]
+  selector: '[phone][formControlName],[phone][formControl],[phone][ngModel]',
+  providers: [PHONE_VALIDATOR]
 })
 export class PhoneValidator implements Validator, OnInit {
-    @Input() phone: string;
+  @Input() phone: string;
 
-    private validator: ValidatorFn;
+  private validator: ValidatorFn;
 
-    ngOnInit() {
-        this.validator = CustomValidators.phone(this.phone);
-    }
+  ngOnInit() {
+    this.validator = CustomValidators.phone(this.phone);
+  }
 
-    validate(c: AbstractControl): {[key: string]: any} {
-        return this.validator(c);
-    }
+  validate(c: AbstractControl): {[key: string]: any} {
+    return this.validator(c);
+  }
 }
