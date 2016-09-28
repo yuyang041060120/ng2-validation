@@ -4,17 +4,17 @@ import { NG_VALIDATORS, Validator, AbstractControl } from '@angular/forms';
 import { CustomValidators } from '../';
 
 const BASE64_VALIDATOR: any = {
-    provide: NG_VALIDATORS,
-    useExisting: forwardRef(() => Base64Validator),
-    multi: true
+  provide: NG_VALIDATORS,
+  useExisting: forwardRef(() => Base64Validator),
+  multi: true
 };
 
 @Directive({
-    selector: '[base64][formControlName],[base64][formControl],[base64][ngModel]',
-    providers: [BASE64_VALIDATOR]
+  selector: '[base64][formControlName],[base64][formControl],[base64][ngModel]',
+  providers: [BASE64_VALIDATOR]
 })
 export class Base64Validator implements Validator {
-    validate(c: AbstractControl): {[key: string]: any} {
-        return CustomValidators.base64(c);
-    }
+  validate(c: AbstractControl): {[key: string]: any} {
+    return CustomValidators.base64(c);
+  }
 }

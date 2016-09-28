@@ -4,25 +4,25 @@ import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular
 import { CustomValidators } from '../';
 
 const MAX_VALIDATOR: any = {
-    provide: NG_VALIDATORS,
-    useExisting: forwardRef(() => MaxValidator),
-    multi: true
+  provide: NG_VALIDATORS,
+  useExisting: forwardRef(() => MaxValidator),
+  multi: true
 };
 
 @Directive({
-    selector: '[max][formControlName],[max][formControl],[max][ngModel]',
-    providers: [MAX_VALIDATOR]
+  selector: '[max][formControlName],[max][formControl],[max][ngModel]',
+  providers: [MAX_VALIDATOR]
 })
 export class MaxValidator implements Validator, OnInit {
-    @Input() max: number;
+  @Input() max: number;
 
-    private validator: ValidatorFn;
+  private validator: ValidatorFn;
 
-    ngOnInit() {
-        this.validator = CustomValidators.max(this.max);
-    }
+  ngOnInit() {
+    this.validator = CustomValidators.max(this.max);
+  }
 
-    validate(c: AbstractControl): {[key: string]: any} {
-        return this.validator(c);
-    }
+  validate(c: AbstractControl): {[key: string]: any} {
+    return this.validator(c);
+  }
 }

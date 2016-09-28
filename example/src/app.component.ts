@@ -4,27 +4,25 @@ import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { CustomValidators } from '../../src';
 
 @Component({
-    selector: 'app',
-    template: require('./app.html')
+  selector: 'app',
+  template: require('./app.html')
 })
 export class AppComponent implements OnInit {
-    form: FormGroup;
+  form: FormGroup;
 
-    constructor() {
-    }
+  ngOnInit() {
+    var password = new FormControl('', Validators.required);
+    var certainPassword = new FormControl('');
 
-    ngOnInit() {
-        var password = new FormControl('', Validators.required);
-        var certainPassword = new FormControl('', CustomValidators.equalTo(password));
+    this.form = new FormGroup({
+      passwordGroup: new FormGroup({
+        password: password,
+        certainPassword: certainPassword
+      }, CustomValidators.equalTo)
+    });
+  }
 
-        this.form = new FormGroup({
-            password: password,
-            certainPassword: certainPassword
-        });
-    }
-
-    onSubmit() {
-        console.log(this.form);
-    }
-
+  onSubmit(form) {
+    console.log(form);
+  }
 }

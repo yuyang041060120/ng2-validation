@@ -20,28 +20,28 @@ import { EqualToValidator } from './directives/equal-to';
 
 
 const CUSTOM_FORM_DIRECTIVES = [
-    RangeLengthValidator,
-    MinValidator,
-    MaxValidator,
-    RangeValidator,
-    DigitsValidator,
-    NumberValidator,
-    UrlValidator,
-    EmailValidator,
-    DateValidator,
-    DateISOValidator,
-    CreditCardValidator,
-    JSONValidator,
-    Base64Validator,
-    PhoneValidator,
-    UUIDValidator,
-    EqualValidator,
-    EqualToValidator
+  RangeLengthValidator,
+  MinValidator,
+  MaxValidator,
+  RangeValidator,
+  DigitsValidator,
+  NumberValidator,
+  UrlValidator,
+  EmailValidator,
+  DateValidator,
+  DateISOValidator,
+  CreditCardValidator,
+  JSONValidator,
+  Base64Validator,
+  PhoneValidator,
+  UUIDValidator,
+  EqualValidator,
+  EqualToValidator
 ];
 
 @NgModule({
-    declarations: [CUSTOM_FORM_DIRECTIVES],
-    exports: [CUSTOM_FORM_DIRECTIVES]
+  declarations: [CUSTOM_FORM_DIRECTIVES],
+  exports: [CUSTOM_FORM_DIRECTIVES]
 })
 export class CustomFormsModule {
 }

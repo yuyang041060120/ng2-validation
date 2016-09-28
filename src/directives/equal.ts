@@ -2,7 +2,6 @@ import { Directive, Input, forwardRef, OnInit } from '@angular/core';
 import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular/forms';
 
 import { CustomValidators } from '../';
-import { EqualValueType } from '../custom-validators';
 
 const EQUAL_VALIDATOR: any = {
     provide: NG_VALIDATORS,
@@ -15,7 +14,7 @@ const EQUAL_VALIDATOR: any = {
     providers: [EQUAL_VALIDATOR]
 })
 export class EqualValidator implements Validator, OnInit {
-    @Input() equal: EqualValueType;
+    @Input() equal: any;
 
     private validator: ValidatorFn;
 

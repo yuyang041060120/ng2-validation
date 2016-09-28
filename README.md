@@ -205,9 +205,14 @@ export class AppModule {
 ### equalTo
 
 ```html
-<input type="password" ngModel name="password" #password="ngModel"/>
-<input type="password" ngModel name="certainPassword" #certainPassword="ngModel" [equalTo]="password"/>
-<p *ngIf="certainPassword?.errors?.equalTo">error message</p>
+<form #demoForm="ngForm" novalidate>
+  <div ngModelGroup="passwordGroup" equalTo>
+    <input type="password" ngModel name="password" #password="ngModel" required/>
+    <p *ngIf="password?.errors?.required">required error</p>
+    <input type="password" ngModel name="certainPassword"/>
+    <p *ngIf="demoForm.form.controls.passwordGroup?.errors?.equalTo">equalTo error</p>
+  </div>
+</form>
 ```
 
 ## model driven
@@ -254,51 +259,139 @@ export class AppComponent {
 
 ```html
 <input type="text" formControlName="field"/>
-<p *ngIf="form.controls.field.errors?.rangeLength">error message</p>
+<p *ngIf="demoForm.from.controls.field.errors?.rangeLength">error message</p>
 ```
 
-### examples
+### rangeLength
 
 ```javascript
-CustomValidators.rangeLength([5, 9])
+new FormControl('', CustomValidators.rangeLength([5, 9]))
+```
 
-CustomValidators.min(10)
+### min
 
-CustomValidators.max(20)
+```javascript
+new FormControl('', CustomValidators.min(10))
+```
 
-CustomValidators.range([10, 20])
+### max
 
-CustomValidators.digits
+```javascript
+new FormControl('', CustomValidators.max(20))
+```
 
-CustomValidators.number
+### range
 
-CustomValidators.url
+```javascript
+new FormControl('', CustomValidators.range([10, 20]))
+```
 
-CustomValidators.email
+### digits
 
-CustomValidators.date
+```javascript
+new FormControl('', CustomValidators.digits)
+```
 
-CustomValidators.dateISO
+### number
 
-CustomValidators.creditCard
+```javascript
+new FormControl('', CustomValidators.number)
+```
 
-CustomValidators.json
+### url
 
-CustomValidators.base64
+```javascript
+new FormControl('', CustomValidators.url)
+```
 
-CustomValidators.phonoe('zh-CN')
+### email
 
-CustomValidators.uuid('3')
+```javascript
+new FormControl('', CustomValidators.email)
+```
 
-CustomValidators.equal('xxx')
+### date
 
-var password = new FormControl('', Validators.required);
-var certainPassword = new FormControl('', CustomValidators.equalTo(password));
+```javascript
+new FormControl('', CustomValidators.date)
+```
 
-this.form = new FormGroup({
-    password: password,
-    certainPassword: certainPassword
-});
+### dateISO
+
+```javascript
+new FormControl('', CustomValidators.dateISO)
+```
+
+### creditCard
+
+```javascript
+new FormControl('', CustomValidators.creditCard)
+```
+
+### json
+
+```javascript
+new FormControl('', CustomValidators.json)
+```
+
+### base64
+
+```javascript
+new FormControl('', CustomValidators.base64)
+```
+
+### phone
+
+```javascript
+new FormControl('', CustomValidators.phone('zh-CN'))
+```
+
+### uuid
+
+```javascript
+new FormControl('', CustomValidators.uuid('3'))
+```
+
+### equal
+
+```javascript
+new FormControl('', CustomValidators.equal('xxx'))
+```
+
+### equalTo
+
+```javascript
+@Component({
+  selector: 'app',
+  template: require('./app.html')
+})
+export class AppComponent implements OnInit {
+  form: FormGroup;
+  
+  ngOnInit() {
+    var password = new FormControl('', Validators.required);
+    var certainPassword = new FormControl('');
+
+    this.form = new FormGroup({
+      passwordGroup: new FormGroup({
+        password: password,
+        certainPassword: certainPassword
+      }, CustomValidators.equalTo)
+    });
+  }
+}
+```
+
+```html
+<form [formGroup]="form" novalidate>
+  <div formGroupName="passwordGroup">
+    <input type="password" formControlName="password"/>
+    <p *ngIf="form.controls.passwordGroup.controls.password?.errors?.required">required error</p>
+    <input type="password" formControlName="certainPassword"/>
+    <p *ngIf="form.controls.passwordGroup?.errors?.equalTo">equalTo error</p>
+  </div>
+  <button>submit</button>
+</form>
 ```
 
 # License
