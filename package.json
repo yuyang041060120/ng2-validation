@@ -28,13 +28,13 @@
   },
   "homepage": "https://github.com/yuyang041060120/angular2-validate#readme",
   "devDependencies": {
-    "@angular/common": "2.0.0",
-    "@angular/compiler": "2.0.0",
-    "@angular/core": "2.0.0",
-    "@angular/forms": "2.0.0",
-    "@angular/http": "2.0.0",
-    "@angular/platform-browser": "2.0.0",
-    "@angular/platform-browser-dynamic": "2.0.0",
+    "@angular/common": "2.1.2",
+    "@angular/compiler": "2.1.2",
+    "@angular/core": "2.1.2",
+    "@angular/forms": "2.1.2",
+    "@angular/http": "2.1.2",
+    "@angular/platform-browser": "2.1.2",
+    "@angular/platform-browser-dynamic": "2.1.2",
     "@types/jasmine": "^2.2.29",
     "@types/node": "^4.0.29",
     "core-js": "^2.4.1",
@@ -50,9 +50,9 @@
     "rimraf": "^2.5.4",
     "rxjs": "5.0.0-beta.12",
     "ts-loader": "^0.8.2",
-    "typescript": "^2.0.0-beta",
+    "typescript": "^2.0.7",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1",
-    "zone.js": "^0.6.12"
+    "zone.js": "^0.6.23"
   }
 }
