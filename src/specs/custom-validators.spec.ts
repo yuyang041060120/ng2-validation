@@ -1,5 +1,6 @@
 import {FormControl, FormGroup, ValidatorFn} from '@angular/forms';
 import {CustomValidators} from '../custom-validators';
+const using = require('jasmine-data-provider');
 
 describe('Custom Validators RangeLength [4,9],', () => {
   let control: FormControl;
@@ -305,4 +306,60 @@ describe('Custom Validators EqualTo,', () => {
     expect(CustomValidators.equalTo(group)).toEqual(error);
   });
 
+});
+
+describe('Custom Validators phone,', () => {
+  let control: FormControl;
+  let validator: ValidatorFn;
+  let error = {phone: true};
+
+  describe('locale: hu-HU,', () => {
+
+    beforeEach(() => {
+      validator = CustomValidators.phone("hu-HU");
+    });
+
+    function phoneDataProvider() {
+      return [
+        {phone: '+36201231234', valid: true},
+        {phone: '+36211231234', valid: true},
+        {phone: '+36301231234', valid: true},
+        {phone: '+36311231234', valid: true},
+        {phone: '+36701231234', valid: true},
+        {phone: '+36901231234', valid: true},
+        {phone: '+3620123123', valid: false},
+        {phone: '+3621123123', valid: false},
+        {phone: '+3630123123', valid: false},
+        {phone: '+3670123123', valid: false},
+        {phone: '+36-20-123-1234', valid: true},
+        {phone: '+36-1-123-1234', valid: true},
+        {phone: '+36-1-123-123', valid: false},
+        {phone: '+36-11-123-123', valid: false},
+        {phone: '+36-21-123-123', valid: false},
+        {phone: '+36-22-123-123', valid: true},
+        {phone: '+3622123123', valid: true},
+        {phone: '+36/22/123/123', valid: true},
+        {phone: '+36/22/123-123', valid: true},
+        {phone: '+36-32-123-123', valid: true},
+        {phone: '+(36)-32-123-123', valid: true},
+        {phone: '(36)-32-123-123', valid: true},
+        {phone: '36-32-123-123', valid: true},
+
+      ]
+    }
+
+    using(phoneDataProvider, (data) => {
+      let testCase = data.phone + ' should be ' + (data.valid ? 'valid' : 'invalid');
+
+      it(testCase, () => {
+        control = new FormControl(data.phone);
+
+        if (data.valid)
+          return expect(validator(control)).toBeNull();
+
+        expect(validator(control)).toEqual(error);
+      })
+    });
+
+  });
 });

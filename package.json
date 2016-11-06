@@ -39,6 +39,7 @@
     "@types/node": "^4.0.29",
     "core-js": "^2.4.1",
     "jasmine-core": "^2.4.1",
+    "jasmine-data-provider": "^2.2.0",
     "karma": "^1.1.1",
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.1",
