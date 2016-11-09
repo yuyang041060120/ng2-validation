@@ -254,7 +254,10 @@ export class CustomValidators {
   /**
    * Validator that requires controls to have a value to equal another control.
    */
-  static equalTo(group: FormGroup): {[key: string]: boolean} {
+  static equalTo(group: AbstractControl): {[key: string]: any} {
+    if(!(group instanceof FormGroup))
+      return null;
+
     let keys: string[] = Object.keys(group.controls);
     let len: number = keys.length;
 
