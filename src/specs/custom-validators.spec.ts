@@ -1,6 +1,6 @@
-import { FormControl, ValidatorFn } from '@angular/forms';
-
-import { CustomValidators } from '../custom-validators';
+import {FormControl, FormGroup, ValidatorFn} from '@angular/forms';
+import {CustomValidators} from '../custom-validators';
+const using = require('jasmine-data-provider');
 
 describe('Custom Validators RangeLength [4,9],', () => {
   let control: FormControl;
@@ -240,20 +240,126 @@ describe('Custom Validators Equal (boolean),', () => {
 describe('Custom Validators EqualTo,', () => {
   let equalControl: FormControl;
   let control: FormControl;
-  let validator: ValidatorFn;
+  let group: FormGroup;
+  const error = {equalTo: true};
 
   beforeEach(() => {
-    equalControl = new FormControl('xxx');
-    validator = CustomValidators.equalTo(equalControl);
+    equalControl = new FormControl();
+    control = new FormControl();
+    group = new FormGroup({
+      control: control,
+      equalControl: equalControl
+    });
   });
 
-  it('"xxx" should equal to "null"', () => {
-    control = new FormControl('xxx');
-    expect(validator(control)).toBeNull()
+  it('all control is empty should valid', () => {
+    expect(CustomValidators.equalTo(group)).toBeNull();
   });
 
-  it('"yyy" should equal to "{equalTo: true}"', () => {
-    control = new FormControl('yyy');
-    expect(validator(control)).toEqual({equalTo: true});
+  it('control.value = "xxx" and equalControl.value is empty should equal to "{equalTo: true}"', () => {
+    control.setValue('xxx');
+    expect(CustomValidators.equalTo(group)).toEqual(error);
+  });
+
+  it('control.value = "xxx" and equalControl.value = "yyy" should equal to "{equalTo: true}"', () => {
+    control.setValue('xxx');
+    equalControl.setValue('yyy');
+    expect(CustomValidators.equalTo(group)).toEqual(error);
+  });
+
+  it('control.value = "xxx" and equalControl.value = "xxx" should valid"', () => {
+    control.setValue('xxx');
+    equalControl.setValue('xxx');
+    expect(CustomValidators.equalTo(group)).toBeNull();
+  });
+
+  it('control.value is empty and equalControl.value = "yyy" should equal to "{equalTo: true}"', () => {
+    control.setValue('');
+    equalControl.setValue('yyy');
+    expect(CustomValidators.equalTo(group)).toEqual(error);
+  });
+
+  it('3 control value are same should be valid"', () => {
+    control.setValue('xxx');
+    equalControl.setValue('xxx');
+    let thirdControl = new FormControl('xxx');
+
+    let group = new FormGroup({
+      control: control,
+      equalControl: equalControl,
+      thirdControl: thirdControl
+    });
+    expect(CustomValidators.equalTo(group)).toBeNull();
+  });
+
+  it('1 of 3 control value is different should be invalid"', () => {
+    control.setValue('xxx');
+    equalControl.setValue('xxx');
+    let thirdControl = new FormControl('yyy');
+
+    let group = new FormGroup({
+      control: control,
+      equalControl: equalControl,
+      thirdControl: thirdControl
+    });
+
+    expect(CustomValidators.equalTo(group)).toEqual(error);
+  });
+
+});
+
+describe('Custom Validators phone,', () => {
+  let control: FormControl;
+  let validator: ValidatorFn;
+  let error = {phone: true};
+
+  describe('locale: hu-HU,', () => {
+
+    beforeEach(() => {
+      validator = CustomValidators.phone("hu-HU");
+    });
+
+    function phoneDataProvider() {
+      return [
+        {phone: '+36201231234', valid: true},
+        {phone: '+36211231234', valid: true},
+        {phone: '+36301231234', valid: true},
+        {phone: '+36311231234', valid: true},
+        {phone: '+36701231234', valid: true},
+        {phone: '+36901231234', valid: true},
+        {phone: '+3620123123', valid: false},
+        {phone: '+3621123123', valid: false},
+        {phone: '+3630123123', valid: false},
+        {phone: '+3670123123', valid: false},
+        {phone: '+36-20-123-1234', valid: true},
+        {phone: '+36-1-123-1234', valid: true},
+        {phone: '+36-1-123-123', valid: false},
+        {phone: '+36-11-123-123', valid: false},
+        {phone: '+36-21-123-123', valid: false},
+        {phone: '+36-22-123-123', valid: true},
+        {phone: '+3622123123', valid: true},
+        {phone: '+36/22/123/123', valid: true},
+        {phone: '+36/22/123-123', valid: true},
+        {phone: '+36-32-123-123', valid: true},
+        {phone: '+(36)-32-123-123', valid: true},
+        {phone: '(36)-32-123-123', valid: true},
+        {phone: '36-32-123-123', valid: true},
+
+      ]
+    }
+
+    using(phoneDataProvider, (data) => {
+      let testCase = data.phone + ' should be ' + (data.valid ? 'valid' : 'invalid');
+
+      it(testCase, () => {
+        control = new FormControl(data.phone);
+
+        if (data.valid)
+          return expect(validator(control)).toBeNull();
+
+        expect(validator(control)).toEqual(error);
+      })
+    });
+
   });
 });
