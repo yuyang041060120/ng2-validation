@@ -204,7 +204,8 @@ export class CustomValidators {
       'nn-NO': /^(\+?47)?[49]\d{7}$/,
       'vi-VN': /^(0|\+?84)?((1(2([0-9])|6([2-9])|88|99))|(9((?!5)[0-9])))([0-9]{7})$/,
       'en-NZ': /^(\+?64|0)2\d{7,9}$/,
-      'hu-HU': /^(?:\+?(?:36|\(36\)))[ -\/]?(?:(?:(?:(?!1|20|21|30|31|70|90)[2-9][0-9])[ -\/]?\d{3}[ -\/]?\d{3})|(?:(?:1|20|21|30|31|70|90)[ -\/]?\d{3}[ -\/]?\d{2}[ -\/]?\d{2}))$/
+      'hu-HU': /^(?:\+?(?:36|\(36\)))[ -\/]?(?:(?:(?:(?!1|20|21|30|31|70|90)[2-9][0-9])[ -\/]?\d{3}[ -\/]?\d{3})|(?:(?:1|20|21|30|31|70|90)[ -\/]?\d{3}[ -\/]?\d{2}[ -\/]?\d{2}))$/,
+      'nl-NL': /^(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)$/
     };
 
     return (control: AbstractControl): {[key: string]: any} => {
@@ -255,8 +256,7 @@ export class CustomValidators {
    * Validator that requires controls to have a value to equal another control.
    */
   static equalTo(group: AbstractControl): {[key: string]: any} {
-    if(!(group instanceof FormGroup))
-      return null;
+    if (!(group instanceof FormGroup)) return null;
 
     let keys: string[] = Object.keys(group.controls);
     let len: number = keys.length;

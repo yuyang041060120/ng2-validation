@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Directive } from '@angular/core';
 
-import { RangeLengthValidator } from "./directives/range-length";
+import { RangeLengthValidator } from './directives/range-length';
 import { MinValidator } from './directives/min';
 import { MaxValidator } from './directives/max';
 import { RangeValidator } from './directives/range';
@@ -18,8 +18,7 @@ import { UUIDValidator } from './directives/uuid';
 import { EqualValidator } from './directives/equal';
 import { EqualToValidator } from './directives/equal-to';
 
-
-const CUSTOM_FORM_DIRECTIVES = [
+export const CUSTOM_FORM_DIRECTIVES: Directive[] = [
   RangeLengthValidator,
   MinValidator,
   MaxValidator,
