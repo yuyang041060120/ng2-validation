@@ -1,6 +1,6 @@
-import { ValidatorFn, AbstractControl, Validators, FormGroup } from '@angular/forms';
+import { ValidatorFn, AbstractControl, Validators } from '@angular/forms';
 
-import { isPresent } from './lang';
+import { isPresent, isDate } from './lang';
 
 export class CustomValidators {
   /**
@@ -99,6 +99,40 @@ export class CustomValidators {
 
     let v: string = control.value;
     return !/Invalid|NaN/.test(new Date(v).toString()) ? null : {'date': true};
+  }
+
+  /**
+   * Validator that requires controls to have a value of minDate.
+   */
+  static minDate(minDate: any): ValidatorFn {
+    if (!isDate(minDate)) throw Error('minDate value must be a formatted date');
+
+    return (control: AbstractControl): {[key: string]: any} => {
+      if (isPresent(Validators.required(control))) return null;
+
+      let d: Date = new Date(control.value);
+
+      if (!isDate(d)) return {minDate: true};
+
+      return d >= new Date(minDate) ? null : {minDate: true};
+    };
+  }
+
+  /**
+   * Validator that requires controls to have a value of maxDate.
+   */
+  static maxDate(maxDate: any): ValidatorFn {
+    if (!isDate(maxDate)) throw Error('maxDate value must be a formatted date');
+
+    return (control: AbstractControl): {[key: string]: any} => {
+      if (isPresent(Validators.required(control))) return null;
+
+      let d: Date = new Date(control.value);
+
+      if (!isDate(d)) return {maxDate: true};
+
+      return d <= new Date(maxDate) ? null : {maxDate: true};
+    };
   }
 
   /**
@@ -255,22 +289,19 @@ export class CustomValidators {
   /**
    * Validator that requires controls to have a value to equal another control.
    */
-  static equalTo(group: AbstractControl): {[key: string]: any} {
-    if (!(group instanceof FormGroup)) return null;
-
-    let keys: string[] = Object.keys(group.controls);
-    let len: number = keys.length;
-
-    if (!len) return null;
-
-    let firstKey = keys[0];
-
-    for (let i = 1; i < len; i++) {
-      if (group.controls[firstKey].value !== group.controls[keys[i]].value) {
-        return {equalTo: true};
+  static equalTo(equalControl: AbstractControl): ValidatorFn {
+    let subscribe: boolean = false;
+    return (control: AbstractControl): {[key: string]: any} => {
+      if (!subscribe) {
+        subscribe = true;
+        equalControl.valueChanges.subscribe(() => {
+          control.updateValueAndValidity();
+        });
       }
-    }
 
-    return null;
+      let v: string = control.value;
+
+      return equalControl.value === v ? null : {equalTo: true};
+    };
   }
 }

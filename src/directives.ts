@@ -9,6 +9,8 @@ import { NumberValidator } from './directives/number';
 import { UrlValidator } from './directives/url';
 import { EmailValidator } from './directives/email';
 import { DateValidator } from './directives/date';
+import { MinDateValidator } from './directives/min-date';
+import { MaxDateValidator } from './directives/max-date';
 import { DateISOValidator } from './directives/date-iso';
 import { CreditCardValidator } from './directives/credit-card';
 import { JSONValidator } from './directives/json';
@@ -28,6 +30,8 @@ export const CUSTOM_FORM_DIRECTIVES: Directive[] = [
   UrlValidator,
   EmailValidator,
   DateValidator,
+  MinDateValidator,
+  MaxDateValidator,
   DateISOValidator,
   CreditCardValidator,
   JSONValidator,

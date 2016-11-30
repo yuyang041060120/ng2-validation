@@ -3,29 +3,29 @@ import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular
 
 import { CustomValidators } from '../index';
 
-const PHONE_VALIDATOR: any = {
+const MAX_DATE_VALIDATOR: any = {
   provide: NG_VALIDATORS,
-  useExisting: forwardRef(() => PhoneValidator),
+  useExisting: forwardRef(() => MaxDateValidator),
   multi: true
 };
 
 @Directive({
-  selector: '[phone][formControlName],[phone][formControl],[phone][ngModel]',
-  providers: [PHONE_VALIDATOR]
+  selector: '[maxDate][formControlName],[maxDate][formControl],[maxDate][ngModel]',
+  providers: [MAX_DATE_VALIDATOR]
 })
-export class PhoneValidator implements Validator, OnInit, OnChanges {
-  @Input() phone: string;
+export class MaxDateValidator implements Validator, OnInit, OnChanges {
+  @Input() maxDate;
 
   private validator: ValidatorFn;
 
   ngOnInit() {
-    this.validator = CustomValidators.phone(this.phone);
+    this.validator = CustomValidators.maxDate(this.maxDate);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     for (let key in changes) {
-      if (key === 'phone') {
-        this.validator = CustomValidators.phone(changes[key].currentValue);
+      if (key === 'maxDate') {
+        this.validator = CustomValidators.maxDate(changes[key].currentValue);
       }
     }
   }

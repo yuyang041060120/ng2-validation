@@ -28,6 +28,8 @@ npm install ng2-validation --save
 - url
 - email
 - date
+- minDate
+- maxDate
 - dateISO
 - creditCard
 - json
@@ -123,6 +125,20 @@ export class AppModule {
 <p *ngIf="field.errors?.date">error message</p>
 ```
 
+### minDate
+
+```html
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" minDate="2016-09-09"/>
+<p *ngIf="field.errors?.minDate">error message</p>
+```
+
+### maxDate
+
+```html
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" maxDate="2016-09-09"/>
+<p *ngIf="field.errors?.maxDate">error message</p>
+```
+
 ### dateISO
 
 ```html
@@ -178,6 +194,8 @@ export class AppModule {
 - nn-NO
 - vi-VN
 - en-NZ
+- hu-HU
+- nl-NL
 
 ### uuid
 
@@ -205,14 +223,10 @@ export class AppModule {
 ### equalTo
 
 ```html
-<form #demoForm="ngForm" novalidate>
-  <div ngModelGroup="passwordGroup" equalTo>
-    <input type="password" ngModel name="password" #password="ngModel" required/>
-    <p *ngIf="password?.errors?.required">required error</p>
-    <input type="password" ngModel name="certainPassword"/>
-    <p *ngIf="demoForm.form.controls.passwordGroup?.errors?.equalTo">equalTo error</p>
-  </div>
-</form>
+<input type="password" ngModel name="password" #password="ngModel" required/>
+<p *ngIf="password.errors?.required">required error</p>
+<input type="password" ngModel name="certainPassword" #certainPassword="ngModel" [equalTo]="password"/>
+<p *ngIf="certainPassword.errors?.equalTo">equalTo error</p>
 ```
 
 ## model driven
@@ -316,6 +330,18 @@ new FormControl('', CustomValidators.email)
 new FormControl('', CustomValidators.date)
 ```
 
+### minDate
+
+```javascript
+new FormControl('', CustomValidators.minDate('2016-09-09'))
+```
+
+### maxDate
+
+```javascript
+new FormControl('', CustomValidators.maxDate('2016-09-09'))
+```
+
 ### dateISO
 
 ```javascript
@@ -361,36 +387,21 @@ new FormControl('', CustomValidators.equal('xxx'))
 ### equalTo
 
 ```javascript
-@Component({
-  selector: 'app',
-  template: require('./app.html')
-})
-export class AppComponent implements OnInit {
-  form: FormGroup;
-  
-  ngOnInit() {
-    var password = new FormControl('', Validators.required);
-    var certainPassword = new FormControl('');
+let password = new FormControl('', Validators.required);
+let certainPassword = new FormControl('', CustomValidators.equalTo(password));
 
-    this.form = new FormGroup({
-      passwordGroup: new FormGroup({
-        password: password,
-        certainPassword: certainPassword
-      }, CustomValidators.equalTo)
-    });
-  }
-}
+this.form = new FormGroup({
+  password: password,
+  certainPassword: certainPassword
+});
 ```
 
 ```html
-<form [formGroup]="form" novalidate>
-  <div formGroupName="passwordGroup">
-    <input type="password" formControlName="password"/>
-    <p *ngIf="form.controls.passwordGroup.controls.password?.errors?.required">required error</p>
-    <input type="password" formControlName="certainPassword"/>
-    <p *ngIf="form.controls.passwordGroup?.errors?.equalTo">equalTo error</p>
-  </div>
-  <button>submit</button>
+<form [formGroup]="form">
+  <input type="password" formControlName="password"/>
+  <p *ngIf="form.controls.password.errors?.required">required error</p>
+  <input type="password" formControlName="certainPassword"/>
+  <p *ngIf="form.controls.certainPassword.errors?.equalTo">equalTo error</p>
 </form>
 ```
 

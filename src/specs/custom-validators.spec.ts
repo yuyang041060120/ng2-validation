@@ -108,6 +108,78 @@ describe('Custom Validators Range [4,9],', () => {
   });
 });
 
+describe('Custom Validators Date,', () => {
+  let control: FormControl;
+  let validator: ValidatorFn;
+
+  beforeEach(() => {
+    validator = CustomValidators.date;
+  });
+
+  it('"" should equal to "null"', () => {
+    control = new FormControl('');
+    expect(validator(control)).toBeNull();
+  });
+
+  it('"2016-13-09" should equal to "{date: true}"', () => {
+    control = new FormControl('2016-13-09');
+    expect(validator(control)).toEqual({date: true});
+  });
+
+  it('"2016-12-09" should equal to "null"', () => {
+    control = new FormControl('2016-12-09');
+    expect(validator(control)).toBeNull();
+  });
+});
+
+describe('Custom Validators minDate,', () => {
+  let control: FormControl;
+  let validator: ValidatorFn;
+
+  beforeEach(() => {
+    validator = CustomValidators.minDate('2016-09-09');
+  });
+
+  it('"" should equal to "null"', () => {
+    control = new FormControl('');
+    expect(validator(control)).toBeNull();
+  });
+
+  it('"2016-09-08" should equal to "{minDate: true}"', () => {
+    control = new FormControl('2016-09-08');
+    expect(validator(control)).toEqual({minDate: true});
+  });
+
+  it('"2016-09-10" should equal to "null"', () => {
+    control = new FormControl('2016-09-10');
+    expect(validator(control)).toBeNull();
+  });
+});
+
+describe('Custom Validators maxDate,', () => {
+  let control: FormControl;
+  let validator: ValidatorFn;
+
+  beforeEach(() => {
+    validator = CustomValidators.maxDate('2016-09-09');
+  });
+
+  it('"" should equal to "null"', () => {
+    control = new FormControl('');
+    expect(validator(control)).toBeNull();
+  });
+
+  it('"2016-09-10" should equal to "{maxDate: true}"', () => {
+    control = new FormControl('2016-09-10');
+    expect(validator(control)).toEqual({maxDate: true});
+  });
+
+  it('"2016-09-08" should equal to "null"', () => {
+    control = new FormControl('2016-09-08');
+    expect(validator(control)).toBeNull();
+  });
+});
+
 describe('Custom Validators Digits,', () => {
   let control: FormControl;
   let validator: ValidatorFn;
@@ -240,70 +312,38 @@ describe('Custom Validators Equal (boolean),', () => {
 describe('Custom Validators EqualTo,', () => {
   let equalControl: FormControl;
   let control: FormControl;
-  let group: FormGroup;
   const error = {equalTo: true};
 
   beforeEach(() => {
     equalControl = new FormControl();
     control = new FormControl();
-    group = new FormGroup({
-      control: control,
-      equalControl: equalControl
-    });
   });
 
   it('all control is empty should valid', () => {
-    expect(CustomValidators.equalTo(group)).toBeNull();
+    expect(CustomValidators.equalTo(equalControl)(control)).toBeNull();
   });
 
   it('control.value = "xxx" and equalControl.value is empty should equal to "{equalTo: true}"', () => {
     control.setValue('xxx');
-    expect(CustomValidators.equalTo(group)).toEqual(error);
+    expect(CustomValidators.equalTo(equalControl)(control)).toEqual(error);
   });
 
   it('control.value = "xxx" and equalControl.value = "yyy" should equal to "{equalTo: true}"', () => {
     control.setValue('xxx');
     equalControl.setValue('yyy');
-    expect(CustomValidators.equalTo(group)).toEqual(error);
+    expect(CustomValidators.equalTo(equalControl)(control)).toEqual(error);
   });
 
   it('control.value = "xxx" and equalControl.value = "xxx" should valid"', () => {
     control.setValue('xxx');
     equalControl.setValue('xxx');
-    expect(CustomValidators.equalTo(group)).toBeNull();
+    expect(CustomValidators.equalTo(equalControl)(control)).toBeNull();
   });
 
   it('control.value is empty and equalControl.value = "yyy" should equal to "{equalTo: true}"', () => {
     control.setValue('');
     equalControl.setValue('yyy');
-    expect(CustomValidators.equalTo(group)).toEqual(error);
-  });
-
-  it('3 control value are same should be valid"', () => {
-    control.setValue('xxx');
-    equalControl.setValue('xxx');
-    let thirdControl = new FormControl('xxx');
-
-    let group = new FormGroup({
-      control: control,
-      equalControl: equalControl,
-      thirdControl: thirdControl
-    });
-    expect(CustomValidators.equalTo(group)).toBeNull();
-  });
-
-  it('1 of 3 control value is different should be invalid"', () => {
-    control.setValue('xxx');
-    equalControl.setValue('xxx');
-    let thirdControl = new FormControl('yyy');
-
-    let group = new FormGroup({
-      control: control,
-      equalControl: equalControl,
-      thirdControl: thirdControl
-    });
-
-    expect(CustomValidators.equalTo(group)).toEqual(error);
+    expect(CustomValidators.equalTo(equalControl)(control)).toEqual(error);
   });
 
 });

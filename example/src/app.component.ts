@@ -9,16 +9,15 @@ import { CustomValidators } from '../../src';
 })
 export class AppComponent implements OnInit {
   form: FormGroup;
+  num: number = 5;
 
   ngOnInit() {
-    var password = new FormControl('', Validators.required);
-    var certainPassword = new FormControl('');
+    let password = new FormControl('', Validators.required);
+    let certainPassword = new FormControl('', CustomValidators.equalTo(password));
 
     this.form = new FormGroup({
-      passwordGroup: new FormGroup({
-        password: password,
-        certainPassword: certainPassword
-      }, CustomValidators.equalTo)
+      password: password,
+      certainPassword: certainPassword
     });
   }
 

@@ -3,29 +3,29 @@ import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular
 
 import { CustomValidators } from '../index';
 
-const PHONE_VALIDATOR: any = {
+const MIN_DATE_VALIDATOR: any = {
   provide: NG_VALIDATORS,
-  useExisting: forwardRef(() => PhoneValidator),
+  useExisting: forwardRef(() => MinDateValidator),
   multi: true
 };
 
 @Directive({
-  selector: '[phone][formControlName],[phone][formControl],[phone][ngModel]',
-  providers: [PHONE_VALIDATOR]
+  selector: '[minDate][formControlName],[minDate][formControl],[minDate][ngModel]',
+  providers: [MIN_DATE_VALIDATOR]
 })
-export class PhoneValidator implements Validator, OnInit, OnChanges {
-  @Input() phone: string;
+export class MinDateValidator implements Validator, OnInit, OnChanges {
+  @Input() minDate;
 
   private validator: ValidatorFn;
 
   ngOnInit() {
-    this.validator = CustomValidators.phone(this.phone);
+    this.validator = CustomValidators.minDate(this.minDate);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     for (let key in changes) {
-      if (key === 'phone') {
-        this.validator = CustomValidators.phone(changes[key].currentValue);
+      if (key === 'minDate') {
+        this.validator = CustomValidators.minDate(changes[key].currentValue);
       }
     }
   }
