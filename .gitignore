@@ -3,3 +3,4 @@ typings/
 node_modules/
 dist/
 .DS_Store
+aot/

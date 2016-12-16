@@ -3,11 +3,12 @@
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
-    "sourceMap": true,
-    "inlineSources": true,
+    "sourceMap": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noEmitHelpers": false,
+    "declaration": true,
+    "outDir": "dist",
     "lib": [
       "es6",
       "dom"
@@ -21,5 +22,12 @@
     "node_modules",
     "example",
     "src/specs"
-  ]
+  ],
+  "files": [
+    "src/index"
+  ],
+  "angularCompilerOptions": {
+    "genDir": "aot",
+    "skipMetadataEmit" : false
+  }
 }
