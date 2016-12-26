@@ -383,8 +383,47 @@ describe('Custom Validators phone,', () => {
         {phone: '+36-32-123-123', valid: true},
         {phone: '+(36)-32-123-123', valid: true},
         {phone: '(36)-32-123-123', valid: true},
-        {phone: '36-32-123-123', valid: true},
+        {phone: '36-32-123-123', valid: true}
+      ]
+    }
 
+    using(phoneDataProvider, (data) => {
+      let testCase = data.phone + ' should be ' + (data.valid ? 'valid' : 'invalid');
+
+      it(testCase, () => {
+        control = new FormControl(data.phone);
+
+        if (data.valid)
+          return expect(validator(control)).toBeNull();
+
+        expect(validator(control)).toEqual(error);
+      })
+    });
+
+  });
+
+  describe('locale: de-CH,', () => {
+
+    beforeEach(() => {
+      validator = CustomValidators.phone("de-CH");
+    });
+
+    function phoneDataProvider() {
+      return [
+        {phone: '+41791234567', valid: true},
+        {phone: '+410791234567', valid: true},
+        {phone: '+41(0)791234567', valid: true},
+        {phone: '+41 79 123 45 67', valid: true},
+        {phone: '+41 079 123 45 67', valid: true},
+        {phone: '+41 (0)79 123 45 67', valid: true},
+        {phone: '41791234567', valid: true},
+        {phone: '410791234567', valid: true},
+        {phone: '41(0)791234567', valid: true},
+        {phone: '41 79 123 45 67', valid: true},
+        {phone: '41 079 123 45 67', valid: true},
+        {phone: '41 (0)79 123 45 67', valid: true},
+        {phone: '0791234567', valid: true},
+        {phone: '079 123 45 67', valid: true}
       ]
     }
 
