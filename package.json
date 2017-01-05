@@ -7,7 +7,7 @@
   "scripts": {
     "test": "karma start ./karma.conf.js",
     "dev": "webpack-dev-server --port 4001 --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base",
-    "ngc": "ngc -p tsconfig.json",
+    "ngc": "ngc",
     "prebuild": "rimraf dist",
     "build": "npm run ngc",
     "prepublish": "npm run build"

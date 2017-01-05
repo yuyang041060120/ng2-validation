@@ -8,6 +8,7 @@
     "experimentalDecorators": true,
     "noEmitHelpers": false,
     "declaration": true,
+    "rootDir": "src",
     "outDir": "dist",
     "lib": [
       "es6",
@@ -21,10 +22,8 @@
   "exclude": [
     "node_modules",
     "example",
-    "src/specs"
-  ],
-  "files": [
-    "src/index"
+    "src/specs",
+    "aot"
   ],
   "angularCompilerOptions": {
     "genDir": "aot",
