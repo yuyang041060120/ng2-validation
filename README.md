@@ -178,24 +178,26 @@ export class AppModule {
 
 **support**
 
+- de-CH
+- de-DE
+- el-GR
+- en-AU
+- en-GB
+- en-HK
+- en-NZ
+- en-US
+- en-ZA
+- en-ZM
+- fr-FR
+- hu-HU
+- nb-NO
+- nl-NL
+- nn-NO
+- pt-PT
+- ru-RU
+- vi-VN
 - zh-CN
 - zh-TW
-- en-ZA
-- en-AU
-- en-HK
-- fr-FR
-- pt-PT
-- el-GR
-- en-GB
-- en-US
-- en-ZM
-- ru-RU
-- nb-NO
-- nn-NO
-- vi-VN
-- en-NZ
-- hu-HU
-- nl-NL
 
 ### uuid
 
