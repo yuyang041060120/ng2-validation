@@ -441,4 +441,43 @@ describe('Custom Validators phone,', () => {
     });
 
   });
+
+  describe('locale: pt-BR,', () => {
+
+    beforeEach(() => {
+      validator = CustomValidators.phone("pt-BR");
+    });
+
+    function phoneDataProvider() {
+      return [
+        {phone: '+55 11 98765-4321', valid: true},
+        {phone: '+55 (11) 98765-4321', valid: true},
+        {phone: '+55-11-98765-4321', valid: true},
+        {phone: '+55 11 98765 4321', valid: true},
+        {phone: '+5511987654321', valid: true},
+        {phone: '5511987654321', valid: true},
+        {phone: '+55 11 88765-4321', valid: false},
+        {phone: '+55 (11) 8765-4321', valid: false},
+        {phone: '+55-11-98765-432', valid: false},
+        {phone: '+55 1 98765 4321', valid: false},
+        {phone: '+511987654321', valid: false},
+        {phone: '55119876543212', valid: false},
+        {phone: '+54 11 98765-4321', valid: false}
+      ]
+    }
+
+    using(phoneDataProvider, (data) => {
+      let testCase = data.phone + ' should be ' + (data.valid ? 'valid' : 'invalid');
+
+      it(testCase, () => {
+        control = new FormControl(data.phone);
+
+        if (data.valid)
+          return expect(validator(control)).toBeNull();
+
+        expect(validator(control)).toEqual(error);
+      })
+    });
+
+  });
 });
