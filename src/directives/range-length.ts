@@ -17,6 +17,7 @@ export class RangeLengthValidator implements Validator, OnInit, OnChanges {
   @Input() rangeLength: [number];
 
   private validator: ValidatorFn;
+  private _onChange: () => void;
 
   ngOnInit() {
     this.validator = CustomValidators.rangeLength(this.rangeLength);
@@ -26,11 +27,16 @@ export class RangeLengthValidator implements Validator, OnInit, OnChanges {
     for (let key in changes) {
       if (key === 'rangeLength') {
         this.validator = CustomValidators.rangeLength(changes[key].currentValue);
+        if (this._onChange) this._onChange();
       }
     }
   }
 
   validate(c: AbstractControl): {[key: string]: any} {
     return this.validator(c);
+  }
+
+  registerOnValidatorChange(fn: () => void): void {
+    this._onChange = fn;
   }
 }
