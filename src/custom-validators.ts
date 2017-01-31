@@ -105,7 +105,10 @@ export class CustomValidators {
    * Validator that requires controls to have a value of minDate.
    */
   static minDate(minDate: any): ValidatorFn {
-    if (!isDate(minDate)) throw Error('minDate value must be a formatted date');
+
+    if (!isDate(minDate) && !(minDate instanceof Function)) {
+      throw Error('minDate value must be or return a formatted date');
+    }
 
     return (control: AbstractControl): {[key: string]: any} => {
       if (isPresent(Validators.required(control))) return null;
@@ -113,6 +116,7 @@ export class CustomValidators {
       let d: Date = new Date(control.value);
 
       if (!isDate(d)) return {minDate: true};
+      if (minDate instanceof Function) minDate = minDate();
 
       return d >= new Date(minDate) ? null : {minDate: true};
     };
@@ -122,7 +126,9 @@ export class CustomValidators {
    * Validator that requires controls to have a value of maxDate.
    */
   static maxDate(maxDate: any): ValidatorFn {
-    if (!isDate(maxDate)) throw Error('maxDate value must be a formatted date');
+    if (!isDate(maxDate) && !(maxDate instanceof Function)) {
+      throw Error('maxDate value must be or return a formatted date');
+    }
 
     return (control: AbstractControl): {[key: string]: any} => {
       if (isPresent(Validators.required(control))) return null;
@@ -130,6 +136,7 @@ export class CustomValidators {
       let d: Date = new Date(control.value);
 
       if (!isDate(d)) return {maxDate: true};
+      if (maxDate instanceof Function) maxDate = maxDate();
 
       return d <= new Date(maxDate) ? null : {maxDate: true};
     };

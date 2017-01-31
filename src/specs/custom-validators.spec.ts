@@ -136,22 +136,45 @@ describe('Custom Validators minDate,', () => {
   let control: FormControl;
   let validator: ValidatorFn;
 
-  beforeEach(() => {
-    validator = CustomValidators.minDate('2016-09-09');
-  });
-
   it('"" should equal to "null"', () => {
     control = new FormControl('');
+    validator = CustomValidators.minDate('2016-09-09');
     expect(validator(control)).toBeNull();
   });
 
   it('"2016-09-08" should equal to "{minDate: true}"', () => {
     control = new FormControl('2016-09-08');
+    validator = CustomValidators.minDate('2016-09-09');
     expect(validator(control)).toEqual({minDate: true});
   });
 
   it('"2016-09-10" should equal to "null"', () => {
     control = new FormControl('2016-09-10');
+    validator = CustomValidators.minDate('2016-09-09');
+    expect(validator(control)).toBeNull();
+  });
+
+  it('Date("2016-09-08)" should equal to "{minDate: true}"', () => {
+    control = new FormControl('2016-09-08');
+    validator = CustomValidators.minDate(new Date('2016-09-09'));
+    expect(validator(control)).toEqual({minDate: true});
+  });
+
+  it('"Date(2016-09-10)" should equal to "null"', () => {
+    control = new FormControl('2016-09-10');
+    validator = CustomValidators.minDate(new Date('2016-09-09'));
+    expect(validator(control)).toBeNull();
+  });
+
+  it('() => Date("2016-09-08)" should equal to "{minDate: true}"', () => {
+    control = new FormControl('2016-09-08');
+    validator = CustomValidators.minDate(() => new Date('2016-09-09'));
+    expect(validator(control)).toEqual({minDate: true});
+  });
+
+  it('"() => Date(2016-09-10)" should equal to "null"', () => {
+    control = new FormControl('2016-09-10');
+    validator = CustomValidators.minDate(() => new Date('2016-09-09'));
     expect(validator(control)).toBeNull();
   });
 });
@@ -160,22 +183,45 @@ describe('Custom Validators maxDate,', () => {
   let control: FormControl;
   let validator: ValidatorFn;
 
-  beforeEach(() => {
-    validator = CustomValidators.maxDate('2016-09-09');
-  });
-
   it('"" should equal to "null"', () => {
     control = new FormControl('');
+    validator = CustomValidators.maxDate('2016-09-09');
     expect(validator(control)).toBeNull();
   });
 
   it('"2016-09-10" should equal to "{maxDate: true}"', () => {
     control = new FormControl('2016-09-10');
+    validator = CustomValidators.maxDate('2016-09-09');
     expect(validator(control)).toEqual({maxDate: true});
   });
 
   it('"2016-09-08" should equal to "null"', () => {
     control = new FormControl('2016-09-08');
+    validator = CustomValidators.maxDate('2016-09-09');
+    expect(validator(control)).toBeNull();
+  });
+
+  it('"Date(2016-09-10)" should equal to "{maxDate: true}"', () => {
+    control = new FormControl('2016-09-10');
+    validator = CustomValidators.maxDate(new Date('2016-09-09'));
+    expect(validator(control)).toEqual({maxDate: true});
+  });
+
+  it('"Date(2016-09-08)" should equal to "null"', () => {
+    control = new FormControl('2016-09-08');
+    validator = CustomValidators.maxDate(new Date('2016-09-09'));
+    expect(validator(control)).toBeNull();
+  });
+
+  it('"Date(2016-09-10)" should equal to "{maxDate: true}"', () => {
+    control = new FormControl('2016-09-10');
+    validator = CustomValidators.maxDate(() => new Date('2016-09-09'));
+    expect(validator(control)).toEqual({maxDate: true});
+  });
+
+  it('"Date(2016-09-08)" should equal to "null"', () => {
+    control = new FormControl('2016-09-08');
+    validator = CustomValidators.maxDate(() => new Date('2016-09-09'));
     expect(validator(control)).toBeNull();
   });
 });
