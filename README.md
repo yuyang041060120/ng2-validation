@@ -38,6 +38,7 @@ npm install ng2-validation --save
 - uuid
 - equal
 - equalTo
+- notEqualTo
 
 # Usage
 
@@ -229,6 +230,15 @@ export class AppModule {
 <input type="password" ngModel name="password" #password="ngModel" required/>
 <p *ngIf="password.errors?.required">required error</p>
 <input type="password" ngModel name="certainPassword" #certainPassword="ngModel" [equalTo]="password"/>
+<p *ngIf="certainPassword.errors?.equalTo">equalTo error</p>
+```
+
+### notEqualTo
+
+```html
+<input type="text" ngModel name="name" #name="ngModel" required/>
+<p *ngIf="name.errors?.required">required error</p>
+<input type="password" ngModel name="certainPassword" #certainPassword="ngModel" [notEqualTo]="name"/>
 <p *ngIf="certainPassword.errors?.equalTo">equalTo error</p>
 ```
 

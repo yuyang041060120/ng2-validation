@@ -306,4 +306,23 @@ export class CustomValidators {
       return equalControl.value === v ? null : {equalTo: true};
     };
   }
+
+  /**
+   * Validator that requires controls to have a value to equal another control.
+   */
+  static notEqualTo(notEqualControl: AbstractControl): ValidatorFn {
+    let subscribe: boolean = false;
+    return (control: AbstractControl): {[key: string]: any} => {
+      if (!subscribe) {
+        subscribe = true;
+        notEqualControl.valueChanges.subscribe(() => {
+          control.updateValueAndValidity();
+        });
+      }
+
+      let v: string = control.value;
+
+      return notEqualControl.value !== v ? null : {notEqualTo: true};
+    };
+  }
 }
