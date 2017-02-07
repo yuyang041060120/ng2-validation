@@ -63,3 +63,10 @@
 <!--<input type="password" formControlName="certainPassword"/>-->
 <!--<p *ngIf="form.controls.certainPassword.errors?.equalTo">equalTo error</p>-->
 <!--</form>-->
+
+<form [formGroup]="form">
+  <input type="password" formControlName="password"/>
+  <p *ngIf="form.controls.password.errors?.required">required error</p>
+  <input type="password" formControlName="certainPassword"/>
+  <p *ngIf="form.controls.certainPassword.errors?.notEqualTo">notEqualTo error</p>
+</form>

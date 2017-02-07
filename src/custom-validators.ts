@@ -308,7 +308,7 @@ export class CustomValidators {
   }
 
   /**
-   * Validator that requires controls to have a value to equal another control.
+   * Validator that requires controls to have a value to not equal another control.
    */
   static notEqualTo(notEqualControl: AbstractControl): ValidatorFn {
     let subscribe: boolean = false;
