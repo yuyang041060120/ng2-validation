@@ -193,6 +193,7 @@ export class AppModule {
 - nb-NO
 - nl-NL
 - nn-NO
+- pt-BR
 - pt-PT
 - ru-RU
 - vi-VN
