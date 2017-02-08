@@ -40,6 +40,30 @@ export class CustomValidators {
   }
 
   /**
+   * Validator that requires controls to have a value greater than a gt value.
+   */
+  static gt(gt: number): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} => {
+      if (isPresent(Validators.required(control))) return null;
+
+      let v: number = control.value;
+      return v > gt ? null : {'gt': true};
+    };
+  }
+
+  /**
+   * Validator that requires controls to have a value less than a lt value.
+   */
+  static lt(lt: number): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} => {
+      if (isPresent(Validators.required(control))) return null;
+
+      let v: number = control.value;
+      return v < lt ? null : {'lt': true};
+    };
+  }
+
+  /**
    * Validator that requires controls to have a value of a range value.
    */
   static range(range: Array<number>): ValidatorFn {
