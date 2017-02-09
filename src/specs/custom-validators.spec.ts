@@ -441,4 +441,37 @@ describe('Custom Validators phone,', () => {
     });
 
   });
+
+  describe('locale: en-US,', () => {
+
+    beforeEach(() => {
+      validator = CustomValidators.phone("en-US");
+    });
+
+    function phoneDataProvider() {
+      return [
+        {phone: '888 555 2112', valid: true},
+        {phone: '888 555 2112', valid: true},
+        {phone: '(888) 555-2112', valid: true},
+        {phone: '(888) 555 2112', valid: true},
+        {phone: '888-555-2112', valid: true},
+        {phone: '888-555 2112', valid: true},
+        {phone: '8885552112', valid: true}
+      ]
+    }
+
+    using(phoneDataProvider, (data) => {
+      let testCase = data.phone + ' should be ' + (data.valid ? 'valid' : 'invalid');
+
+      it(testCase, () => {
+        control = new FormControl(data.phone);
+
+        if (data.valid)
+          return expect(validator(control)).toBeNull();
+
+        expect(validator(control)).toEqual(error);
+      })
+    });
+
+  });
 });
