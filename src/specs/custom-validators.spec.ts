@@ -136,22 +136,45 @@ describe('Custom Validators minDate,', () => {
   let control: FormControl;
   let validator: ValidatorFn;
 
-  beforeEach(() => {
-    validator = CustomValidators.minDate('2016-09-09');
-  });
-
   it('"" should equal to "null"', () => {
     control = new FormControl('');
+    validator = CustomValidators.minDate('2016-09-09');
     expect(validator(control)).toBeNull();
   });
 
   it('"2016-09-08" should equal to "{minDate: true}"', () => {
     control = new FormControl('2016-09-08');
+    validator = CustomValidators.minDate('2016-09-09');
     expect(validator(control)).toEqual({minDate: true});
   });
 
   it('"2016-09-10" should equal to "null"', () => {
     control = new FormControl('2016-09-10');
+    validator = CustomValidators.minDate('2016-09-09');
+    expect(validator(control)).toBeNull();
+  });
+
+  it('Date("2016-09-08)" should equal to "{minDate: true}"', () => {
+    control = new FormControl('2016-09-08');
+    validator = CustomValidators.minDate(new Date('2016-09-09'));
+    expect(validator(control)).toEqual({minDate: true});
+  });
+
+  it('"Date(2016-09-10)" should equal to "null"', () => {
+    control = new FormControl('2016-09-10');
+    validator = CustomValidators.minDate(new Date('2016-09-09'));
+    expect(validator(control)).toBeNull();
+  });
+
+  it('() => Date("2016-09-08)" should equal to "{minDate: true}"', () => {
+    control = new FormControl('2016-09-08');
+    validator = CustomValidators.minDate(() => new Date('2016-09-09'));
+    expect(validator(control)).toEqual({minDate: true});
+  });
+
+  it('"() => Date(2016-09-10)" should equal to "null"', () => {
+    control = new FormControl('2016-09-10');
+    validator = CustomValidators.minDate(() => new Date('2016-09-09'));
     expect(validator(control)).toBeNull();
   });
 });
@@ -160,22 +183,45 @@ describe('Custom Validators maxDate,', () => {
   let control: FormControl;
   let validator: ValidatorFn;
 
-  beforeEach(() => {
-    validator = CustomValidators.maxDate('2016-09-09');
-  });
-
   it('"" should equal to "null"', () => {
     control = new FormControl('');
+    validator = CustomValidators.maxDate('2016-09-09');
     expect(validator(control)).toBeNull();
   });
 
   it('"2016-09-10" should equal to "{maxDate: true}"', () => {
     control = new FormControl('2016-09-10');
+    validator = CustomValidators.maxDate('2016-09-09');
     expect(validator(control)).toEqual({maxDate: true});
   });
 
   it('"2016-09-08" should equal to "null"', () => {
     control = new FormControl('2016-09-08');
+    validator = CustomValidators.maxDate('2016-09-09');
+    expect(validator(control)).toBeNull();
+  });
+
+  it('"Date(2016-09-10)" should equal to "{maxDate: true}"', () => {
+    control = new FormControl('2016-09-10');
+    validator = CustomValidators.maxDate(new Date('2016-09-09'));
+    expect(validator(control)).toEqual({maxDate: true});
+  });
+
+  it('"Date(2016-09-08)" should equal to "null"', () => {
+    control = new FormControl('2016-09-08');
+    validator = CustomValidators.maxDate(new Date('2016-09-09'));
+    expect(validator(control)).toBeNull();
+  });
+
+  it('"Date(2016-09-10)" should equal to "{maxDate: true}"', () => {
+    control = new FormControl('2016-09-10');
+    validator = CustomValidators.maxDate(() => new Date('2016-09-09'));
+    expect(validator(control)).toEqual({maxDate: true});
+  });
+
+  it('"Date(2016-09-08)" should equal to "null"', () => {
+    control = new FormControl('2016-09-08');
+    validator = CustomValidators.maxDate(() => new Date('2016-09-09'));
     expect(validator(control)).toBeNull();
   });
 });
@@ -348,6 +394,45 @@ describe('Custom Validators EqualTo,', () => {
 
 });
 
+describe('Custom Validators NotEqualTo,', () => {
+  let notEqualControl: FormControl;
+  let control: FormControl;
+  const error = {notEqualTo: true};
+
+  beforeEach(() => {
+    notEqualControl = new FormControl();
+    control = new FormControl();
+  });
+
+  it('all control is empty should valid', () => {
+    expect(CustomValidators.notEqualTo(notEqualControl)(control)).toEqual(error);
+  });
+
+  it('control.value = "xxx" and notEqualControl.value is empty should valid', () => {
+    control.setValue('xxx');
+    expect(CustomValidators.notEqualTo(notEqualControl)(control)).toBeNull();
+  });
+
+  it('control.value = "xxx" and notEqualControl.value = "yyy" should valid', () => {
+    control.setValue('xxx');
+    notEqualControl.setValue('yyy');
+    expect(CustomValidators.notEqualTo(notEqualControl)(control)).toBeNull();
+  });
+
+  it('control.value = "xxx" and notEqualControl.value = "xxx" should equal to "{notEqualTo: true}"', () => {
+    control.setValue('xxx');
+    notEqualControl.setValue('xxx');
+    expect(CustomValidators.notEqualTo(notEqualControl)(control)).toEqual(error);
+  });
+
+  it('control.value is empty and notEqualControl.value = "yyy" should valid', () => {
+    control.setValue('');
+    notEqualControl.setValue('yyy');
+    expect(CustomValidators.notEqualTo(notEqualControl)(control)).toBeNull();
+  });
+
+});
+
 describe('Custom Validators phone,', () => {
   let control: FormControl;
   let validator: ValidatorFn;
@@ -424,6 +509,45 @@ describe('Custom Validators phone,', () => {
         {phone: '41 (0)79 123 45 67', valid: true},
         {phone: '0791234567', valid: true},
         {phone: '079 123 45 67', valid: true}
+      ]
+    }
+
+    using(phoneDataProvider, (data) => {
+      let testCase = data.phone + ' should be ' + (data.valid ? 'valid' : 'invalid');
+
+      it(testCase, () => {
+        control = new FormControl(data.phone);
+
+        if (data.valid)
+          return expect(validator(control)).toBeNull();
+
+        expect(validator(control)).toEqual(error);
+      })
+    });
+
+  });
+
+  describe('locale: pt-BR,', () => {
+
+    beforeEach(() => {
+      validator = CustomValidators.phone("pt-BR");
+    });
+
+    function phoneDataProvider() {
+      return [
+        {phone: '+55 11 98765-4321', valid: true},
+        {phone: '+55 (11) 98765-4321', valid: true},
+        {phone: '+55-11-98765-4321', valid: true},
+        {phone: '+55 11 98765 4321', valid: true},
+        {phone: '+5511987654321', valid: true},
+        {phone: '5511987654321', valid: true},
+        {phone: '+55 11 88765-4321', valid: false},
+        {phone: '+55 (11) 8765-4321', valid: false},
+        {phone: '+55-11-98765-432', valid: false},
+        {phone: '+55 1 98765 4321', valid: false},
+        {phone: '+511987654321', valid: false},
+        {phone: '55119876543212', valid: false},
+        {phone: '+54 11 98765-4321', valid: false}
       ]
     }
 

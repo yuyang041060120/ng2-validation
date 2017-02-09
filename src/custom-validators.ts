@@ -105,7 +105,10 @@ export class CustomValidators {
    * Validator that requires controls to have a value of minDate.
    */
   static minDate(minDate: any): ValidatorFn {
-    if (!isDate(minDate)) throw Error('minDate value must be a formatted date');
+
+    if (!isDate(minDate) && !(minDate instanceof Function)) {
+      throw Error('minDate value must be or return a formatted date');
+    }
 
     return (control: AbstractControl): {[key: string]: any} => {
       if (isPresent(Validators.required(control))) return null;
@@ -113,6 +116,7 @@ export class CustomValidators {
       let d: Date = new Date(control.value);
 
       if (!isDate(d)) return {minDate: true};
+      if (minDate instanceof Function) minDate = minDate();
 
       return d >= new Date(minDate) ? null : {minDate: true};
     };
@@ -122,7 +126,9 @@ export class CustomValidators {
    * Validator that requires controls to have a value of maxDate.
    */
   static maxDate(maxDate: any): ValidatorFn {
-    if (!isDate(maxDate)) throw Error('maxDate value must be a formatted date');
+    if (!isDate(maxDate) && !(maxDate instanceof Function)) {
+      throw Error('maxDate value must be or return a formatted date');
+    }
 
     return (control: AbstractControl): {[key: string]: any} => {
       if (isPresent(Validators.required(control))) return null;
@@ -130,6 +136,7 @@ export class CustomValidators {
       let d: Date = new Date(control.value);
 
       if (!isDate(d)) return {maxDate: true};
+      if (maxDate instanceof Function) maxDate = maxDate();
 
       return d <= new Date(maxDate) ? null : {maxDate: true};
     };
@@ -240,7 +247,8 @@ export class CustomValidators {
       'en-NZ': /^(\+?64|0)2\d{7,9}$/,
       'hu-HU': /^(?:\+?(?:36|\(36\)))[ -\/]?(?:(?:(?:(?!1|20|21|30|31|70|90)[2-9][0-9])[ -\/]?\d{3}[ -\/]?\d{3})|(?:(?:1|20|21|30|31|70|90)[ -\/]?\d{3}[ -\/]?\d{2}[ -\/]?\d{2}))$/,
       'nl-NL': /^(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)$/,
-      'de-CH': /^(((\+|00)?41)?([ ])?(\(?0?\)?))([1-9]{2})(([ ])?[0-9]{3})(([ ])?[0-9]{2})(([ ])?[0-9]{2})$/
+      'de-CH': /^(((\+|00)?41)?([ ])?(\(?0?\)?))([1-9]{2})(([ ])?[0-9]{3})(([ ])?[0-9]{2})(([ ])?[0-9]{2})$/,
+      'pt-BR': /^(\+?55[-\s]?)?(\([1-9][1-9]\)|[1-9][1-9])[-\s]?(9[1-9]\d{3}[-\s]?\d{4})$/
     };
 
     return (control: AbstractControl): {[key: string]: any} => {
@@ -303,6 +311,25 @@ export class CustomValidators {
       let v: string = control.value;
 
       return equalControl.value === v ? null : {equalTo: true};
+    };
+  }
+
+  /**
+   * Validator that requires controls to have a value to not equal another control.
+   */
+  static notEqualTo(notEqualControl: AbstractControl): ValidatorFn {
+    let subscribe: boolean = false;
+    return (control: AbstractControl): {[key: string]: any} => {
+      if (!subscribe) {
+        subscribe = true;
+        notEqualControl.valueChanges.subscribe(() => {
+          control.updateValueAndValidity();
+        });
+      }
+
+      let v: string = control.value;
+
+      return notEqualControl.value !== v ? null : {notEqualTo: true};
     };
   }
 }

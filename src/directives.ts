@@ -19,6 +19,7 @@ import { PhoneValidator } from './directives/phone';
 import { UUIDValidator } from './directives/uuid';
 import { EqualValidator } from './directives/equal';
 import { EqualToValidator } from './directives/equal-to';
+import { NotEqualToValidator } from './directives/not-equal-to';
 
 export const CUSTOM_FORM_DIRECTIVES: Directive[] = [
   RangeLengthValidator,
@@ -39,7 +40,8 @@ export const CUSTOM_FORM_DIRECTIVES: Directive[] = [
   PhoneValidator,
   UUIDValidator,
   EqualValidator,
-  EqualToValidator
+  EqualToValidator,
+  NotEqualToValidator,
 ];
 
 @NgModule({

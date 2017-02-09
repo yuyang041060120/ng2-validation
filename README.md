@@ -38,6 +38,7 @@ npm install ng2-validation --save
 - uuid
 - equal
 - equalTo
+- notEqualTo
 
 # Usage
 
@@ -193,6 +194,7 @@ export class AppModule {
 - nb-NO
 - nl-NL
 - nn-NO
+- pt-BR
 - pt-PT
 - ru-RU
 - vi-VN
@@ -228,6 +230,15 @@ export class AppModule {
 <input type="password" ngModel name="password" #password="ngModel" required/>
 <p *ngIf="password.errors?.required">required error</p>
 <input type="password" ngModel name="certainPassword" #certainPassword="ngModel" [equalTo]="password"/>
+<p *ngIf="certainPassword.errors?.equalTo">equalTo error</p>
+```
+
+### notEqualTo
+
+```html
+<input type="text" ngModel name="password" #password="ngModel" required/>
+<p *ngIf="password.errors?.required">required error</p>
+<input type="password" ngModel name="certainPassword" #certainPassword="ngModel" [notEqualTo]="password"/>
 <p *ngIf="certainPassword.errors?.equalTo">equalTo error</p>
 ```
 
@@ -404,6 +415,27 @@ this.form = new FormGroup({
   <p *ngIf="form.controls.password.errors?.required">required error</p>
   <input type="password" formControlName="certainPassword"/>
   <p *ngIf="form.controls.certainPassword.errors?.equalTo">equalTo error</p>
+</form>
+```
+
+### notEqualTo
+
+```javascript
+let password = new FormControl('', Validators.required);
+let certainPassword = new FormControl('', CustomValidators.notEqualTo(password));
+
+this.form = new FormGroup({
+  password: password,
+  certainPassword: certainPassword
+});
+```
+
+```html
+<form [formGroup]="form">
+  <input type="password" formControlName="password"/>
+  <p *ngIf="form.controls.password.errors?.required">required error</p>
+  <input type="password" formControlName="certainPassword"/>
+  <p *ngIf="form.controls.certainPassword.errors?.notEqualTo">notEqualTo error</p>
 </form>
 ```
 

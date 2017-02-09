@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     let password = new FormControl('', Validators.required);
-    let certainPassword = new FormControl('', CustomValidators.equalTo(password));
+    let certainPassword = new FormControl('', CustomValidators.notEqualTo(password));
 
     this.form = new FormGroup({
       password: password,
