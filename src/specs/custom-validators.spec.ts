@@ -55,6 +55,30 @@ describe('Custom Validators Min 10,', () => {
   });
 });
 
+describe('Custom Validators GT 10,', () => {
+  let control: FormControl;
+  let validator: ValidatorFn;
+
+  beforeEach(() => {
+    validator = CustomValidators.gt(10);
+  });
+
+  it('"9" should equal to "{gt: true}"', () => {
+    control = new FormControl(9);
+    expect(validator(control)).toEqual({gt: true});
+  });
+
+  it('"10" should equal to "{gt: true}"', () => {
+    control = new FormControl(10);
+    expect(validator(control)).toEqual({gt: true});
+  });
+
+  it('"11" should equal to "null"', () => {
+    control = new FormControl(11);
+    expect(validator(control)).toBeNull();
+  });
+});
+
 describe('Custom Validators Max 20,', () => {
   let control: FormControl;
   let validator: ValidatorFn;
@@ -76,6 +100,30 @@ describe('Custom Validators Max 20,', () => {
   it('"21" should equal to "{max: true}"', () => {
     control = new FormControl(21);
     expect(validator(control)).toEqual({max: true});
+  });
+});
+
+describe('Custom Validators LT 20,', () => {
+  let control: FormControl;
+  let validator: ValidatorFn;
+
+  beforeEach(() => {
+    validator = CustomValidators.lt(20);
+  });
+
+  it('"19" should equal to "null"', () => {
+    control = new FormControl(19);
+    expect(validator(control)).toBeNull();
+  });
+
+  it('"20" should equal to "{lt: true}"', () => {
+    control = new FormControl(20);
+    expect(validator(control)).toEqual({lt: true});
+  });
+
+  it('"21" should equal to "{lt: true}"', () => {
+    control = new FormControl(21);
+    expect(validator(control)).toEqual({lt: true});
   });
 });
 
