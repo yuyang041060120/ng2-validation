@@ -5,7 +5,8 @@ import { CustomValidators } from '../../src';
 
 @Component({
   selector: 'app',
-  template: require('./app.html')
+  template: require('./app.html'),
+  styles: [require('./app.less')]
 })
 export class AppComponent implements OnInit {
   form: FormGroup;
