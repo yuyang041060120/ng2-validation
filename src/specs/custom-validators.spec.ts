@@ -1,5 +1,5 @@
-import {FormControl, FormGroup, ValidatorFn} from '@angular/forms';
-import {CustomValidators} from '../custom-validators';
+import { FormControl, ValidatorFn } from '@angular/forms';
+import { CustomValidators } from '../custom-validators';
 const using = require('jasmine-data-provider');
 
 describe('Custom Validators RangeLength [4,9],', () => {

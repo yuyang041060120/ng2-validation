@@ -11,3 +11,4 @@ aot/
 .npmignore
 karma-test-shim.js
 karma.conf.js
+CHANGELOG.md
