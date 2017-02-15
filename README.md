@@ -17,7 +17,7 @@ npm install ng2-validation --save
 - maxlength
 - pattern
 
-## extend validators
+## custom validators
 
 - rangeLength
 - min
@@ -39,6 +39,7 @@ npm install ng2-validation --save
 - phone
 - uuid
 - equal
+- notEqual
 - equalTo
 - notEqualTo
 
@@ -240,6 +241,13 @@ export class AppModule {
 <p *ngIf="field.errors?.equal">error message</p>
 ```
 
+### equal
+
+```html
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [notEqual]="'xxx'"/>
+<p *ngIf="field.errors?.notEqual">error message</p>
+```
+
 ### equalTo
 
 ```html
@@ -423,6 +431,12 @@ new FormControl('', CustomValidators.uuid('3'))
 
 ```javascript
 new FormControl('', CustomValidators.equal('xxx'))
+```
+
+### notEqual
+
+```javascript
+new FormControl('', CustomValidators.notEqual('xxx'))
 ```
 
 ### equalTo
