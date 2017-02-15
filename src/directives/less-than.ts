@@ -3,30 +3,30 @@ import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular
 
 import { CustomValidators } from '../index';
 
-const MIN_VALIDATOR: any = {
+const LESS_THAN_VALIDATOR: any = {
   provide: NG_VALIDATORS,
-  useExisting: forwardRef(() => MinValidator),
+  useExisting: forwardRef(() => LessThanValidator),
   multi: true
 };
 
 @Directive({
-  selector: '[min][formControlName],[min][formControl],[min][ngModel]',
-  providers: [MIN_VALIDATOR]
+  selector: '[lt][formControlName],[lt][formControl],[lt][ngModel]',
+  providers: [LESS_THAN_VALIDATOR]
 })
-export class MinValidator implements Validator, OnInit, OnChanges {
-  @Input() min: number;
+export class LessThanValidator implements Validator, OnInit, OnChanges {
+  @Input() lt: number;
 
   private validator: ValidatorFn;
   private onChange: () => void;
 
   ngOnInit() {
-    this.validator = CustomValidators.min(this.min);
+    this.validator = CustomValidators.lt(this.lt);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     for (let key in changes) {
-      if (key === 'min') {
-        this.validator = CustomValidators.min(changes[key].currentValue);
+      if (key === 'lt') {
+        this.validator = CustomValidators.lt(changes[key].currentValue);
         if (this.onChange) this.onChange();
       }
     }

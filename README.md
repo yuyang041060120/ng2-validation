@@ -21,7 +21,9 @@ npm install ng2-validation --save
 
 - rangeLength
 - min
+- gt
 - max
+- lt
 - range
 - digits
 - number
@@ -77,11 +79,25 @@ export class AppModule {
 <p *ngIf="field.errors?.min">error message</p>
 ```
 
+### gt
+
+```html
+<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [gt]="10"/>
+<p *ngIf="field.errors?.gt">error message</p>
+```
+
 ### max
 
 ```html
 <input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [max]="20"/>
 <p *ngIf="field.errors?.max">error message</p>
+```
+
+### lt
+
+```html
+<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [lt]="20"/>
+<p *ngIf="field.errors?.lt">error message</p>
 ```
 
 ### range
@@ -301,10 +317,22 @@ new FormControl('', CustomValidators.rangeLength([5, 9]))
 new FormControl('', CustomValidators.min(10))
 ```
 
+### gt
+
+```javascript
+new FormControl('', CustomValidators.gt(10))
+```
+
 ### max
 
 ```javascript
 new FormControl('', CustomValidators.max(20))
+```
+
+### lt
+
+```javascript
+new FormControl('', CustomValidators.lt(20))
 ```
 
 ### range

@@ -17,6 +17,7 @@ export class EqualValidator implements Validator, OnInit, OnChanges {
   @Input() equal: any;
 
   private validator: ValidatorFn;
+  private onChange: () => void;
 
   ngOnInit() {
     this.validator = CustomValidators.equal(this.equal);
@@ -26,11 +27,16 @@ export class EqualValidator implements Validator, OnInit, OnChanges {
     for (let key in changes) {
       if (key === 'equal') {
         this.validator = CustomValidators.equal(changes[key].currentValue);
+        if (this.onChange) this.onChange();
       }
     }
   }
 
   validate(c: AbstractControl): {[key: string]: any} {
     return this.validator(c);
+  }
+
+  registerOnValidatorChange(fn: () => void): void {
+    this.onChange = fn;
   }
 }

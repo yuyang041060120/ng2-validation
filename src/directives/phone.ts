@@ -17,6 +17,7 @@ export class PhoneValidator implements Validator, OnInit, OnChanges {
   @Input() phone: string;
 
   private validator: ValidatorFn;
+  private onChange: () => void;
 
   ngOnInit() {
     this.validator = CustomValidators.phone(this.phone);
@@ -26,11 +27,16 @@ export class PhoneValidator implements Validator, OnInit, OnChanges {
     for (let key in changes) {
       if (key === 'phone') {
         this.validator = CustomValidators.phone(changes[key].currentValue);
+        if (this.onChange) this.onChange();
       }
     }
   }
 
   validate(c: AbstractControl): {[key: string]: any} {
     return this.validator(c);
+  }
+
+  registerOnValidatorChange(fn: () => void): void {
+    this.onChange = fn;
   }
 }

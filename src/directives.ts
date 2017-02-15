@@ -2,7 +2,9 @@ import { NgModule, Directive } from '@angular/core';
 
 import { RangeLengthValidator } from './directives/range-length';
 import { MinValidator } from './directives/min';
+import { GreaterThanValidator } from './directives/greater-than';
 import { MaxValidator } from './directives/max';
+import { LessThanValidator } from './directives/less-than';
 import { RangeValidator } from './directives/range';
 import { DigitsValidator } from './directives/digits';
 import { NumberValidator } from './directives/number';
@@ -24,7 +26,9 @@ import { NotEqualToValidator } from './directives/not-equal-to';
 export const CUSTOM_FORM_DIRECTIVES: Directive[] = [
   RangeLengthValidator,
   MinValidator,
+  GreaterThanValidator,
   MaxValidator,
+  LessThanValidator,
   RangeValidator,
   DigitsValidator,
   NumberValidator,
