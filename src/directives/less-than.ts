@@ -17,6 +17,7 @@ export class LessThanValidator implements Validator, OnInit, OnChanges {
   @Input() lt: number;
 
   private validator: ValidatorFn;
+  private onChange: () => void;
 
   ngOnInit() {
     this.validator = CustomValidators.lt(this.lt);
@@ -26,11 +27,16 @@ export class LessThanValidator implements Validator, OnInit, OnChanges {
     for (let key in changes) {
       if (key === 'lt') {
         this.validator = CustomValidators.lt(changes[key].currentValue);
+        if (this.onChange) this.onChange();
       }
     }
   }
 
   validate(c: AbstractControl): {[key: string]: any} {
     return this.validator(c);
+  }
+
+  registerOnValidatorChange(fn: () => void): void {
+    this.onChange = fn;
   }
 }

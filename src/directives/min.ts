@@ -17,7 +17,7 @@ export class MinValidator implements Validator, OnInit, OnChanges {
   @Input() min: number;
 
   private validator: ValidatorFn;
-  private _onChange: () => void;
+  private onChange: () => void;
 
   ngOnInit() {
     this.validator = CustomValidators.min(this.min);
@@ -27,7 +27,7 @@ export class MinValidator implements Validator, OnInit, OnChanges {
     for (let key in changes) {
       if (key === 'min') {
         this.validator = CustomValidators.min(changes[key].currentValue);
-        if (this._onChange) this._onChange();
+        if (this.onChange) this.onChange();
       }
     }
   }
@@ -37,6 +37,6 @@ export class MinValidator implements Validator, OnInit, OnChanges {
   }
 
   registerOnValidatorChange(fn: () => void): void {
-    this._onChange = fn;
+    this.onChange = fn;
   }
 }

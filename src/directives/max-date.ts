@@ -17,7 +17,7 @@ export class MaxDateValidator implements Validator, OnInit, OnChanges {
   @Input() maxDate;
 
   private validator: ValidatorFn;
-  private _onChange: () => void;
+  private onChange: () => void;
 
   ngOnInit() {
     this.validator = CustomValidators.maxDate(this.maxDate);
@@ -27,7 +27,7 @@ export class MaxDateValidator implements Validator, OnInit, OnChanges {
     for (let key in changes) {
       if (key === 'maxDate') {
         this.validator = CustomValidators.maxDate(changes[key].currentValue);
-        if (this._onChange) this._onChange();
+        if (this.onChange) this.onChange();
       }
     }
   }
@@ -37,6 +37,6 @@ export class MaxDateValidator implements Validator, OnInit, OnChanges {
   }
 
   registerOnValidatorChange(fn: () => void): void {
-    this._onChange = fn;
+    this.onChange = fn;
   }
 }
