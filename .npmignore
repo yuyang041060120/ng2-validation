@@ -12,3 +12,4 @@ aot/
 karma-test-shim.js
 karma.conf.js
 CHANGELOG.md
+rollup.config.js
