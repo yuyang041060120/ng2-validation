@@ -353,6 +353,8 @@ var GreaterThanValidator$$1 = (function () {
 
 var gt = function (gt) {
     return function (control) {
+        if (!isPresent(gt))
+            return null;
         if (isPresent(_angular_forms.Validators.required(control)))
             return null;
         var v = +control.value;
@@ -438,6 +440,8 @@ var LessThanValidator$$1 = (function () {
 
 var lt = function (lt) {
     return function (control) {
+        if (!isPresent(lt))
+            return null;
         if (isPresent(_angular_forms.Validators.required(control)))
             return null;
         var v = +control.value;
@@ -487,6 +491,8 @@ var MaxValidator$$1 = (function () {
 
 var max = function (max) {
     return function (control) {
+        if (!isPresent(max))
+            return null;
         if (isPresent(_angular_forms.Validators.required(control)))
             return null;
         var v = +control.value;
@@ -592,10 +598,12 @@ var MinValidator$$1 = (function () {
 
 var min = function (min) {
     return function (control) {
+        if (!isPresent(min))
+            return null;
         if (isPresent(_angular_forms.Validators.required(control)))
             return null;
         var v = +control.value;
-        return v >= +min ? null : { 'min': true };
+        return v >= +min ? null : { min: true };
     };
 };
 
@@ -890,6 +898,8 @@ var RangeValidator$$1 = (function () {
 
 var range = function (range) {
     return function (control) {
+        if (!isPresent(range))
+            return null;
         if (isPresent(_angular_forms.Validators.required(control)))
             return null;
         var v = +control.value;
@@ -939,6 +949,8 @@ var RangeLengthValidator$$1 = (function () {
 
 var rangeLength = function (rangeLength) {
     return function (control) {
+        if (!isPresent(rangeLength))
+            return null;
         if (isPresent(_angular_forms.Validators.required(control)))
             return null;
         var v = control.value;

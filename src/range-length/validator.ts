@@ -4,6 +4,7 @@ import { isPresent } from '../facade/lang';
 
 export const rangeLength = (rangeLength: Array<number>): ValidatorFn => {
   return (control: AbstractControl): {[key: string]: boolean} => {
+    if (!isPresent(rangeLength)) return null;
     if (isPresent(Validators.required(control))) return null;
 
     let v: string = control.value;

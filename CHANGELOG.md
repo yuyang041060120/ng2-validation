@@ -18,3 +18,7 @@ code split
 # v3.7.1
 
 add umd file
+
+# v3.8.0
+
+[#33](https://github.com/yuyang041060120/ng2-validation/issues/33)
