@@ -7,6 +7,11 @@ Angular2 custom validation, inspired by jQuery validation.
 ```bash
 npm install ng2-validation --save
 ```
+# Systemjs
+
+```bash
+'ng2-validation': 'npm:ng2-validation/bundles/ng2-validation.umd.js'
+```
 
 # Validators
 
