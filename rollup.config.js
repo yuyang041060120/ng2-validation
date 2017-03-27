@@ -15,5 +15,6 @@ module.exports = {
   globals: {
     '@angular/core': 'ng.core',
     '@angular/forms': 'ng.forms'
-  }
+  },
+  external: [ '@angular/core', '@angular/forms' ]
 };

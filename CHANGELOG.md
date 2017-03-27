@@ -22,3 +22,7 @@ add umd file
 # v3.8.0
 
 [#33](https://github.com/yuyang041060120/ng2-validation/issues/33)
+
+# v3.9.0
+
+upgrade to angular 4
