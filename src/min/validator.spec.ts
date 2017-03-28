@@ -16,4 +16,9 @@ describe('Min', () => {
 
     expect(min(10)(control)).toEqual(error);
   });
+
+  it('should ignore date-time values', () => {
+    let control = new FormControl('2016-09-10');
+    expect(min(<any>'2016-09-09')(control)).toBeNull();
+  });
 });

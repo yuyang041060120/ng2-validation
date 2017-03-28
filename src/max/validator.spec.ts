@@ -22,4 +22,9 @@ describe('Max', () => {
 
     expect(max(5)(control)).toEqual(error);
   });
+
+  it('should ignore date-time values', () => {
+    let control = new FormControl('2016-09-08');
+    expect(max(<any>'2016-09-09')(control)).toBeNull();
+  });
 });
