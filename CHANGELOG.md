@@ -26,3 +26,7 @@ add umd file
 # v3.9.0
 
 upgrade to angular 4
+
+# v3.9.1
+
+upgrade dev dependencies and webpack@2.x.x

@@ -1,5 +1,4 @@
-const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
-const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -13,34 +12,25 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/ng2-validation/example/dist/'
   },
-  resolve: {
-    extensions: [ '', '.ts', '.js' ]
-  },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.ts$/,
         exclude: /\.d\.ts$/,
-        loader: 'ts'
+        use: 'ts-loader'
       },
       {
         test: /\.html$/,
-        loader: 'raw'
+        use: 'raw-loader'
       },
       {
         test: /\.less$/,
-        loaders: [ 'raw', 'less' ]
+        loaders: [ 'raw-loader', 'less-loader' ]
       }
     ]
   },
   plugins: [
-    new UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      comments: false
-    }),
-    new CommonsChunkPlugin({
+    new webpack.optimize.CommonsChunkPlugin({
       names: [ 'vendor', 'polyfills' ],
       filename: '[name].js'
     })
