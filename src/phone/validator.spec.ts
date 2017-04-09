@@ -97,6 +97,65 @@ describe('Phone', () => {
 
   });
 
+  describe('locale: en-NG,', () => {
+
+    beforeEach(() => {
+      validator = phone('en-NG');
+    });
+
+    function phoneDataProvider() {
+      return [
+        {phone: '+2347028616266', valid: true},
+        {phone: '+2347038616266', valid: true},
+        {phone: '+2347048616266', valid: true},
+        {phone: '+2348028616266', valid: true},
+        {phone: '+2348038616266', valid: true},
+        {phone: '+2348058616266', valid: true},
+        {phone: '+2348068616266', valid: true},
+        {phone: '+2348078616266', valid: true},
+        {phone: '+2348088616266', valid: true},
+        {phone: '+2348098616266', valid: true},
+        {phone: '2347028616266', valid: true},
+        {phone: '2347038616266', valid: true},
+        {phone: '2347048616266', valid: true},
+        {phone: '2348028616266', valid: true},
+        {phone: '2348038616266', valid: true},
+        {phone: '2348058616266', valid: true},
+        {phone: '2348068616266', valid: true},
+        {phone: '2348078616266', valid: true},
+        {phone: '2348088616266', valid: true},
+        {phone: '2348098616266', valid: true},
+        {phone: '07028616266', valid: true},
+        {phone: '07038616266', valid: true},
+        {phone: '07048616266', valid: true},
+        {phone: '08028616266', valid: true},
+        {phone: '08038616266', valid: true},
+        {phone: '08058616266', valid: true},
+        {phone: '08068616266', valid: true},
+        {phone: '08078616266', valid: true},
+        {phone: '08088616266', valid: true},
+        {phone: '08098616266', valid: true},
+        {phone: '08128616266', valid: true},
+        {phone: '08138616266', valid: true},
+        {phone: '09038616266', valid: true},
+      ]
+    }
+
+    using(phoneDataProvider, (data) => {
+      let testCase = data.phone + ' should be ' + (data.valid ? 'valid' : 'invalid');
+
+      it(testCase, () => {
+        control = new FormControl(data.phone);
+
+        if (data.valid)
+          return expect(validator(control)).toBeNull();
+
+        expect(validator(control)).toEqual(error);
+      })
+    });
+
+  });
+
   describe('locale: pt-BR,', () => {
 
     beforeEach(() => {
