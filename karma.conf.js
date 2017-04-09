@@ -14,13 +14,13 @@ module.exports = function (config) {
 
         webpack: {
             resolve: {
-                extensions: ['', '.ts', '.js']
+                extensions: ['.ts', '.js']
             },
             module: {
                 loaders: [
                     {
                         test: /\.ts$/,
-                        loader: 'ts'
+                        loader: 'ts-loader'
                     },
                     {
                         test: /\.html$/,

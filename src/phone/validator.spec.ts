@@ -168,4 +168,35 @@ describe('Phone', () => {
     });
 
   });
+
+  describe('locale: uk-UA,', () => {
+
+    beforeEach(() => {
+      validator = phone('uk-UA');
+    });
+
+    function phoneDataProvider() {
+      return [
+        {phone: '+380991233355', valid: true},
+        {phone: '+380441233355', valid: true},
+        {phone: '0441233355', valid: true},
+        {phone: '+30441233355', valid: false},
+        {phone: '0441233355345', valid: false}
+      ]
+    }
+
+    using(phoneDataProvider, (data) => {
+      let testCase = data.phone + ' should be ' + (data.valid ? 'valid' : 'invalid');
+
+      it(testCase, () => {
+        control = new FormControl(data.phone);
+
+        if (data.valid)
+          return expect(validator(control)).toBeNull();
+
+        expect(validator(control)).toEqual(error);
+      })
+    });
+
+  });
 });
