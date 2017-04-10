@@ -156,11 +156,29 @@
     </div>
 
     <div class="form-group">
+      <label class="col-xs-3 control-label">greater than equal</label>
+
+      <div class="col-xs-9">
+        <input class="form-control" type="text" ngModel name="gte" #gte="ngModel" gte="10"/>
+        <p class="alert alert-danger" *ngIf="gte?.errors?.gte">greater than equal error</p>
+      </div>
+    </div>
+
+    <div class="form-group">
       <label class="col-xs-3 control-label">less than</label>
 
       <div class="col-xs-9">
         <input class="form-control" type="text" ngModel name="lt" #lt="ngModel" lt="5"/>
         <p class="alert alert-danger" *ngIf="lt?.errors?.lt">less than error</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-xs-3 control-label">less than equal</label>
+
+      <div class="col-xs-9">
+        <input class="form-control" type="text" ngModel name="lte" #lte="ngModel" lte="5"/>
+        <p class="alert alert-danger" *ngIf="lte?.errors?.lte">less than equal error</p>
       </div>
     </div>
 

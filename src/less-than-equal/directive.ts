@@ -1,32 +1,32 @@
 import { Directive, Input, forwardRef, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular/forms';
 
-import { lt } from './';
+import { lte } from './';
 
-const LESS_THAN_VALIDATOR: any = {
+const LESS_THAN_EQUAL_VALIDATOR: any = {
   provide: NG_VALIDATORS,
-  useExisting: forwardRef(() => LessThanValidator),
+  useExisting: forwardRef(() => LessThanEqualValidator),
   multi: true
 };
 
 @Directive({
-  selector: '[lt][formControlName],[lt][formControl],[lt][ngModel]',
-  providers: [LESS_THAN_VALIDATOR]
+  selector: '[lte][formControlName],[lte][formControl],[lte][ngModel]',
+  providers: [LESS_THAN_EQUAL_VALIDATOR]
 })
-export class LessThanValidator implements Validator, OnInit, OnChanges {
-  @Input() lt: number;
+export class LessThanEqualValidator implements Validator, OnInit, OnChanges {
+  @Input() lte: number;
 
   private validator: ValidatorFn;
   private onChange: () => void;
 
   ngOnInit() {
-    this.validator = lt(this.lt);
+    this.validator = lte(this.lte);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     for (let key in changes) {
-      if (key === 'lt') {
-        this.validator = lt(changes[key].currentValue);
+      if (key === 'lte') {
+        this.validator = lte(changes[key].currentValue);
         if (this.onChange) this.onChange();
       }
     }

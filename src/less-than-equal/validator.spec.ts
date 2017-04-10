@@ -1,19 +1,25 @@
 import { FormControl } from '@angular/forms';
 
-import { lt } from './';
+import { lte } from './';
 
-describe('LT', () => {
-  const error = {lt: true};
+describe('LTE', () => {
+  const error = {lte: true};
 
-  it('3 should be lt 5', () => {
+  it('3 should be lte 5', () => {
     let control = new FormControl(3);
 
-    expect(lt(5)(control)).toBeNull();
+    expect(lte(5)(control)).toBeNull();
   });
 
-  it('5 should not be lt 3', () => {
+  it('5 should be lte 5', () => {
     let control = new FormControl(5);
 
-    expect(lt(3)(control)).toEqual(error);
+    expect(lte(5)(control)).toBeNull();
+  });
+
+  it('5 should not be lte 3', () => {
+    let control = new FormControl(5);
+
+    expect(lte(3)(control)).toEqual(error);
   });
 });

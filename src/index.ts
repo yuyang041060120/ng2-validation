@@ -9,8 +9,10 @@ import { email, EmailValidator } from './email';
 import { equal, EqualValidator } from './equal';
 import { equalTo, EqualToValidator } from './equal-to';
 import { gt, GreaterThanValidator } from './greater-than';
+import { gte, GreaterThanEqualValidator } from './greater-than-equal';
 import { json, JSONValidator } from './json';
 import { lt, LessThanValidator } from './less-than';
+import { lte, LessThanEqualValidator } from './less-than-equal';
 import { max, MaxValidator } from './max';
 import { maxDate, MaxDateValidator } from './max-date';
 import { min, MinValidator } from './min';
@@ -34,8 +36,10 @@ export const CustomValidators: any = {
   equal,
   equalTo,
   gt,
+  gte,
   json,
   lt,
+  lte,
   max,
   maxDate,
   min,
@@ -60,8 +64,10 @@ const CUSTOM_FORM_DIRECTIVES = [
   EqualValidator,
   EqualToValidator,
   GreaterThanValidator,
+  GreaterThanEqualValidator,
   JSONValidator,
   LessThanValidator,
+  LessThanEqualValidator,
   MaxValidator,
   MaxDateValidator,
   MinValidator,

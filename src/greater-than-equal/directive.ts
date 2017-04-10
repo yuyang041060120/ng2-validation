@@ -1,32 +1,32 @@
 import { Directive, Input, forwardRef, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular/forms';
 
-import { gt } from './';
+import { gte } from './';
 
-const GREATER_THAN_VALIDATOR: any = {
+const GREATER_THAN_EQUAL_VALIDATOR: any = {
   provide: NG_VALIDATORS,
-  useExisting: forwardRef(() => GreaterThanValidator),
+  useExisting: forwardRef(() => GreaterThanEqualValidator),
   multi: true
 };
 
 @Directive({
-  selector: '[gt][formControlName],[gt][formControl],[gt][ngModel]',
-  providers: [GREATER_THAN_VALIDATOR]
+  selector: '[gte][formControlName],[gte][formControl],[gte][ngModel]',
+  providers: [GREATER_THAN_EQUAL_VALIDATOR]
 })
-export class GreaterThanValidator implements Validator, OnInit, OnChanges {
-  @Input() gt: number;
+export class GreaterThanEqualValidator implements Validator, OnInit, OnChanges {
+  @Input() gte: number;
 
   private validator: ValidatorFn;
   private onChange: () => void;
 
   ngOnInit() {
-    this.validator = gt(this.gt);
+    this.validator = gte(this.gte);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     for (let key in changes) {
-      if (key === 'gt') {
-        this.validator = gt(changes[key].currentValue);
+      if (key === 'gte') {
+        this.validator = gte(changes[key].currentValue);
         if (this.onChange) this.onChange();
       }
     }
