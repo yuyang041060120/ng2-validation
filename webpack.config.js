@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 
 module.exports = {
+  context: __dirname,
   entry: {
     main: './example/main',
     vendor: './example/vendor',
@@ -11,6 +12,9 @@ module.exports = {
     path: __dirname + '/example/dist',
     filename: 'bundle.js',
     publicPath: '/ng2-validation/example/dist/'
+  },
+  resolve: {
+    extensions: ['.js', '.ts']
   },
   module: {
     rules: [

@@ -1,8 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/forms'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.validation = global.ng.validation || {}),global.ng.core,global.ng.forms));
-}(this, (function (exports,_angular_core,_angular_forms) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('libphonenumber-js')) :
+	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/forms', 'libphonenumber-js'], factory) :
+	(factory((global.ng = global.ng || {}, global.ng.validation = global.ng.validation || {}),global.ng.core,global.ng.forms,global.libphonenumberJs));
+}(this, (function (exports,_angular_core,_angular_forms,libphonenumberJs) { 'use strict';
 
 function __decorate(decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -804,36 +804,12 @@ PhoneValidator$$1 = __decorate([
     })
 ], PhoneValidator$$1);
 
-var phones = {
-    'zh-CN': /^(\+?0?86\-?)?((13\d|14[57]|15[^4,\D]|17[678]|18\d)\d{8}|170[059]\d{7})$/,
-    'zh-TW': /^(\+?886\-?|0)?9\d{8}$/,
-    'en-ZA': /^(\+?27|0)\d{9}$/,
-    'en-AU': /^(\+?61|0)4\d{8}$/,
-    'en-HK': /^(\+?852\-?)?[569]\d{3}\-?\d{4}$/,
-    'fr-FR': /^(\+?33|0)[67]\d{8}$/,
-    'de-DE': /^(\+?49|0)[1-9]\d{10}$/,
-    'pt-PT': /^(\+351)?9[1236]\d{7}$/,
-    'el-GR': /^(\+?30)?(69\d{8})$/,
-    'en-GB': /^(\+?44|0)7\d{9}$/,
-    'en-US': /^(\(?[0-9]{3}\)?)((\s|\-){1})?[0-9]{3}((\s|\-){1})?[0-9]{4}$/,
-    'en-ZM': /^(\+26)?09[567]\d{7}$/,
-    'ru-RU': /^(\+?7|8)?9\d{9}$/,
-    'nb-NO': /^(\+?47)?[49]\d{7}$/,
-    'nn-NO': /^(\+?47)?[49]\d{7}$/,
-    'vi-VN': /^(0|\+?84)?((1(2([0-9])|6([2-9])|88|99))|(9((?!5)[0-9])))([0-9]{7})$/,
-    'en-NZ': /^(\+?64|0)2\d{7,9}$/,
-    'hu-HU': /^(?:\+?(?:36|\(36\)))[ -\/]?(?:(?:(?:(?!1|20|21|30|31|70|90)[2-9][0-9])[ -\/]?\d{3}[ -\/]?\d{3})|(?:(?:1|20|21|30|31|70|90)[ -\/]?\d{3}[ -\/]?\d{2}[ -\/]?\d{2}))$/,
-    'nl-NL': /^(^\+[0-9]{2}|^\+[0-9]{2}\(0\)|^\(\+[0-9]{2}\)\(0\)|^00[0-9]{2}|^0)([0-9]{9}$|[0-9\-\s]{10}$)$/,
-    'de-CH': /^(((\+|00)?41)?([ ])?(\(?0?\)?))([1-9]{2})(([ ])?[0-9]{3})(([ ])?[0-9]{2})(([ ])?[0-9]{2})$/,
-    'pt-BR': /^(\+?55[-\s]?)?(\([1-9][1-9]\)|[1-9][1-9])[-\s]?(9[1-9]\d{3}[-\s]?\d{4})$/
-};
-var phone = function (locale) {
+var phone = function (country) {
     return function (control) {
         if (isPresent(_angular_forms.Validators.required(control)))
             return null;
         var v = control.value;
-        var pattern = phones[locale] || phones['en-US'];
-        return (new RegExp(pattern)).test(v) ? null : { phone: true };
+        return libphonenumberJs.isValidNumber({ phone: v, country: country || 'US' }) ? null : { phone: true };
     };
 };
 

@@ -1,6 +1,6 @@
 import { AbstractControl, Validators, ValidatorFn } from '@angular/forms';
 
-import { isPresent } from '../facade/lang';
+import { isPresent } from '../util/lang';
 
 export const json: ValidatorFn = (control: AbstractControl): {[key: string]: boolean} => {
   if (isPresent(Validators.required(control))) return null;

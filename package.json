@@ -64,5 +64,8 @@
     "webpack": "^2.3.2",
     "webpack-dev-server": "^2.4.2",
     "zone.js": "^0.8.4"
+  },
+  "dependencies": {
+    "libphonenumber-js": "^0.4.5"
   }
 }

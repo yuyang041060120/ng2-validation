@@ -193,35 +193,11 @@ export class AppModule {
 ### phone
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [phone]="'zh-CN'"/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" phone="CN"/>
 <p *ngIf="field.errors?.phone">error message</p>
 ```
 
-*default*: en-US
-
-**support**
-
-- de-CH
-- de-DE
-- el-GR
-- en-AU
-- en-GB
-- en-HK
-- en-NZ
-- en-US
-- en-ZA
-- en-ZM
-- fr-FR
-- hu-HU
-- nb-NO
-- nl-NL
-- nn-NO
-- pt-BR
-- pt-PT
-- ru-RU
-- vi-VN
-- zh-CN
-- zh-TW
+details see [libphonenumber](https://github.com/halt-hammerzeit/libphonenumber-js)
 
 ### uuid
 

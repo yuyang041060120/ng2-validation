@@ -1,6 +1,6 @@
 import { AbstractControl, Validators, ValidatorFn } from '@angular/forms';
 
-import { isPresent } from '../facade/lang';
+import { isPresent } from '../util/lang';
 
 const uuids = {
   '3': /^[0-9A-F]{8}-[0-9A-F]{4}-3[0-9A-F]{3}-[0-9A-F]{4}-[0-9A-F]{12}$/i,
