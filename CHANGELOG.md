@@ -30,3 +30,8 @@ upgrade to angular 4
 # v3.9.1
 
 upgrade dev dependencies and webpack@2.x.x
+
+# v4.0.0
+
+- support libphonenumber #23
+- add lte and gte validator #69

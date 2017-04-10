@@ -27,8 +27,10 @@ npm install ng2-validation --save
 - rangeLength
 - min
 - gt
+- gte
 - max
 - lt
+- lte
 - range
 - digits
 - number
@@ -92,6 +94,13 @@ export class AppModule {
 <p *ngIf="field.errors?.gt">error message</p>
 ```
 
+### gte
+
+```html
+<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [gte]="10"/>
+<p *ngIf="field.errors?.gte">error message</p>
+```
+
 ### max
 
 ```html
@@ -104,6 +113,13 @@ export class AppModule {
 ```html
 <input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [lt]="20"/>
 <p *ngIf="field.errors?.lt">error message</p>
+```
+
+### lte
+
+```html
+<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [lte]="20"/>
+<p *ngIf="field.errors?.lte">error message</p>
 ```
 
 ### range

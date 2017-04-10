@@ -8,7 +8,7 @@
     "experimentalDecorators": true,
     "noEmitHelpers": false,
     "declaration": true,
-    "rootDir": ".",
+    "rootDir": "src",
     "outDir": "dist",
     "lib": [
       "es6",

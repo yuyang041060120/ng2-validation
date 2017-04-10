@@ -353,6 +353,56 @@ var gt = function (gt) {
     };
 };
 
+var GREATER_THAN_EQUAL_VALIDATOR = {
+    provide: _angular_forms.NG_VALIDATORS,
+    useExisting: _angular_core.forwardRef(function () { return GreaterThanEqualValidator$$1; }),
+    multi: true
+};
+var GreaterThanEqualValidator$$1 = (function () {
+    function GreaterThanEqualValidator$$1() {
+    }
+    GreaterThanEqualValidator$$1.prototype.ngOnInit = function () {
+        this.validator = gte(this.gte);
+    };
+    GreaterThanEqualValidator$$1.prototype.ngOnChanges = function (changes) {
+        for (var key in changes) {
+            if (key === 'gte') {
+                this.validator = gte(changes[key].currentValue);
+                if (this.onChange)
+                    this.onChange();
+            }
+        }
+    };
+    GreaterThanEqualValidator$$1.prototype.validate = function (c) {
+        return this.validator(c);
+    };
+    GreaterThanEqualValidator$$1.prototype.registerOnValidatorChange = function (fn) {
+        this.onChange = fn;
+    };
+    return GreaterThanEqualValidator$$1;
+}());
+__decorate([
+    _angular_core.Input(),
+    __metadata("design:type", Number)
+], GreaterThanEqualValidator$$1.prototype, "gte", void 0);
+GreaterThanEqualValidator$$1 = __decorate([
+    _angular_core.Directive({
+        selector: '[gte][formControlName],[gte][formControl],[gte][ngModel]',
+        providers: [GREATER_THAN_EQUAL_VALIDATOR]
+    })
+], GreaterThanEqualValidator$$1);
+
+var gte = function (gte) {
+    return function (control) {
+        if (!isPresent(gte))
+            return null;
+        if (isPresent(_angular_forms.Validators.required(control)))
+            return null;
+        var v = +control.value;
+        return v >= +gte ? null : { gte: true };
+    };
+};
+
 var JSON_VALIDATOR = {
     provide: _angular_forms.NG_VALIDATORS,
     useExisting: _angular_core.forwardRef(function () { return JSONValidator$$1; }),
@@ -435,6 +485,56 @@ var lt = function (lt) {
             return null;
         var v = +control.value;
         return v < +lt ? null : { lt: true };
+    };
+};
+
+var LESS_THAN_EQUAL_VALIDATOR = {
+    provide: _angular_forms.NG_VALIDATORS,
+    useExisting: _angular_core.forwardRef(function () { return LessThanEqualValidator$$1; }),
+    multi: true
+};
+var LessThanEqualValidator$$1 = (function () {
+    function LessThanEqualValidator$$1() {
+    }
+    LessThanEqualValidator$$1.prototype.ngOnInit = function () {
+        this.validator = lte(this.lte);
+    };
+    LessThanEqualValidator$$1.prototype.ngOnChanges = function (changes) {
+        for (var key in changes) {
+            if (key === 'lte') {
+                this.validator = lte(changes[key].currentValue);
+                if (this.onChange)
+                    this.onChange();
+            }
+        }
+    };
+    LessThanEqualValidator$$1.prototype.validate = function (c) {
+        return this.validator(c);
+    };
+    LessThanEqualValidator$$1.prototype.registerOnValidatorChange = function (fn) {
+        this.onChange = fn;
+    };
+    return LessThanEqualValidator$$1;
+}());
+__decorate([
+    _angular_core.Input(),
+    __metadata("design:type", Number)
+], LessThanEqualValidator$$1.prototype, "lte", void 0);
+LessThanEqualValidator$$1 = __decorate([
+    _angular_core.Directive({
+        selector: '[lte][formControlName],[lte][formControl],[lte][ngModel]',
+        providers: [LESS_THAN_EQUAL_VALIDATOR]
+    })
+], LessThanEqualValidator$$1);
+
+var lte = function (lte) {
+    return function (control) {
+        if (!isPresent(lte))
+            return null;
+        if (isPresent(_angular_forms.Validators.required(control)))
+            return null;
+        var v = +control.value;
+        return v <= +lte ? null : { lte: true };
     };
 };
 
@@ -809,7 +909,7 @@ var phone = function (country) {
         if (isPresent(_angular_forms.Validators.required(control)))
             return null;
         var v = control.value;
-        return libphonenumberJs.isValidNumber({ phone: v, country: country || 'US' }) ? null : { phone: true };
+        return libphonenumberJs.isValidNumber({ phone: v, country: country }) ? null : { phone: true };
     };
 };
 
@@ -1005,8 +1105,10 @@ var CustomValidators = {
     equal: equal,
     equalTo: equalTo,
     gt: gt,
+    gte: gte,
     json: json,
     lt: lt,
+    lte: lte,
     max: max,
     maxDate: maxDate,
     min: min,
@@ -1030,8 +1132,10 @@ var CUSTOM_FORM_DIRECTIVES = [
     EqualValidator$$1,
     EqualToValidator$$1,
     GreaterThanValidator$$1,
+    GreaterThanEqualValidator$$1,
     JSONValidator$$1,
     LessThanValidator$$1,
+    LessThanEqualValidator$$1,
     MaxValidator$$1,
     MaxDateValidator$$1,
     MinValidator$$1,
