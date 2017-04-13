@@ -584,7 +584,7 @@ var max = function (max) {
         if (isPresent(_angular_forms.Validators.required(control)))
             return null;
         var v = +control.value;
-        return v <= +max ? null : { max: true };
+        return v <= +max ? null : { actualValue: v, requiredValue: +max, max: true };
     };
 };
 
@@ -689,7 +689,7 @@ var min = function (min) {
         if (isPresent(_angular_forms.Validators.required(control)))
             return null;
         var v = +control.value;
-        return v >= +min ? null : { min: true };
+        return v >= +min ? null : { actualValue: v, requiredValue: +min, min: true };
     };
 };
 

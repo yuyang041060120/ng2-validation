@@ -1,6 +1,6 @@
 {
   "name": "ng2-validation",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "angular2 validation",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
