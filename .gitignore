@@ -1,4 +1,5 @@
 .idea/
+*.iml
 typings/
 node_modules/
 dist/
