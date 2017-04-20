@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 
+// the following is required by "declaration: true" in tsconfig.json
+// otherwise the compiler does not know the dependencies
+// see https://github.com/Microsoft/TypeScript/issues/5711#issuecomment-157793294
+import { ValidatorFn, AbstractControl } from '@angular/forms';
+
 import { base64, Base64Validator } from './base64';
 import { creditCard, CreditCardValidator } from './credit-card';
 import { date, DateValidator } from './date';
@@ -26,7 +31,7 @@ import { rangeLength, RangeLengthValidator } from './range-length';
 import { url, UrlValidator } from './url';
 import { uuid, UUIDValidator } from './uuid';
 
-export const CustomValidators: any = {
+export const CustomValidators = {
   base64,
   creditCard,
   date,
