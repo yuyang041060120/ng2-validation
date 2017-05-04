@@ -33,5 +33,9 @@ upgrade dev dependencies and webpack@2.x.x
 
 # v4.0.0
 
-- support libphonenumber #23
-- add lte and gte validator #69
+- support libphonenumber [#23](https://github.com/yuyang041060120/ng2-validation/issues/23)
+- add lte and gte validator [#69](https://github.com/yuyang041060120/ng2-validation/issues/69)
+
+# v4.2.0
+
+- add error details in range validator [#82](https://github.com/yuyang041060120/ng2-validation/issues/82)
