@@ -959,7 +959,7 @@ var range = function (range) {
         if (isPresent(_angular_forms.Validators.required(control)))
             return null;
         var v = +control.value;
-        return v >= range[0] && v <= range[1] ? null : { range: true };
+        return v >= range[0] && v <= range[1] ? null : { actualValue: v, requiredValue: range, range: true };
     };
 };
 
