@@ -8,6 +8,6 @@ export const range = (range: Array<number>): ValidatorFn => {
     if (isPresent(Validators.required(control))) return null;
 
     let v: number = +control.value;
-    return v >= range[0] && v <= range[1] ? null : {range: true};
+    return v >= range[0] && v <= range[1] ? null : {actualValue: v, requiredValue: range, range: true};
   };
 };
