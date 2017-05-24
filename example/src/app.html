@@ -165,6 +165,17 @@
     </div>
 
     <div class="form-group">
+      <label class="col-xs-3 control-label">greater than to</label>
+
+      <div class="col-xs-9">
+        <input class="form-control" type="text" ngModel name="gtTo0" #gtToNumber="ngModel"/>
+        <input class="form-control" type="text" ngModel name="gtTo1" #gtTo1="ngModel" [gtTo]="gtToNumber"/>
+        <p class="alert alert-danger" *ngIf="gtTo1?.errors?.gtTo">gtTo error</p>
+      </div>
+    </div>
+
+
+    <div class="form-group">
       <label class="col-xs-3 control-label">less than</label>
 
       <div class="col-xs-9">
