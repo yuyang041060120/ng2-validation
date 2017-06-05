@@ -238,7 +238,7 @@ details see [libphonenumber](https://github.com/halt-hammerzeit/libphonenumber-j
 <p *ngIf="field.errors?.equal">error message</p>
 ```
 
-### equal
+### notEqual
 
 ```html
 <input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [notEqual]="'xxx'"/>
