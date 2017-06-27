@@ -7,7 +7,7 @@ export const equalTo = (equalControl: AbstractControl): ValidatorFn => {
     if (!subscribe) {
       subscribe = true;
       equalControl.valueChanges.subscribe(() => {
-        control.updateValueAndValidity();
+        control.updateValueAndValidity({ emitEvent: false });
       });
     }
 

@@ -6,7 +6,7 @@ export const notEqualTo = (notEqualControl: AbstractControl): ValidatorFn => {
     if (!subscribe) {
       subscribe = true;
       notEqualControl.valueChanges.subscribe(() => {
-        control.updateValueAndValidity();
+        control.updateValueAndValidity({ emitEvent: false });
       });
     }
 
