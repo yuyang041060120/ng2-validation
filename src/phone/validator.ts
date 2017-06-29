@@ -9,6 +9,6 @@ export const phone = (country: string): ValidatorFn => {
 
     let v: string = control.value;
 
-    return isValidNumber({phone: v, country}) ? null : {phone: true};
+    return isValidNumber(v, country) ? null : {phone: true};
   };
 };
