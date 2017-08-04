@@ -7,8 +7,6 @@ export const phone = (country: string): ValidatorFn => {
   return (control: AbstractControl): { [key: string]: boolean } => {
     if (isPresent(Validators.required(control))) return null;
 
-    let v: string = control.value;
-
-    return isValidNumber({phone: v, country}) ? null : {phone: true};
+    return isValidNumber(control.value, country) ? null : {phone: true};
   };
 };
