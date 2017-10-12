@@ -1,8 +1,10 @@
 import { AbstractControl, Validators, ValidatorFn } from '@angular/forms';
 
-import { isPresent, isDate } from '../util/lang';
+import { isPresent, isDate, parseDate } from '../util/lang';
 
 export const minDate = (minDate: any): ValidatorFn => {
+
+  minDate = parseDate(minDate);
 
   if (!isDate(minDate) && !(minDate instanceof Function)) {
     throw Error('minDate value must be or return a formatted date');
