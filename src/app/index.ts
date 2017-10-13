@@ -20,7 +20,6 @@ import { minDate, MinDateValidator } from './min-date';
 import { notEqual, NotEqualValidator } from './not-equal';
 import { notEqualTo, NotEqualToValidator } from './not-equal-to';
 import { number, NumberValidator } from './number';
-import { phone, PhoneValidator } from './phone';
 import { hasProperty, PropertyValidator } from './property';
 import { range, RangeValidator } from './range';
 import { rangeLength, RangeLengthValidator } from './range-length';
@@ -48,7 +47,6 @@ export const CustomValidators: any = {
   notEqual,
   notEqualTo,
   number,
-  phone,
   hasProperty,
   range,
   rangeLength,
@@ -77,7 +75,6 @@ const CUSTOM_FORM_DIRECTIVES = [
   NotEqualValidator,
   NotEqualToValidator,
   NumberValidator,
-  PhoneValidator,
   PropertyValidator,
   RangeValidator,
   RangeLengthValidator,

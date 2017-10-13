@@ -67,5 +67,10 @@
     "tslint": "~5.7.0",
     "typescript": "~2.3.4",
     "zone.js": "^0.8.18"
-  }
+  },
+  "main": "bundles/ng4-validators.umd.js",
+  "module": "ng4-validators/ng4-validators.es5.js",
+  "es2015": "ng4-validators/ng4-validators.js",
+  "typings": "ng4-validators.d.ts",
+  "metadata": "ng4-validators.metadata.json"
 }
