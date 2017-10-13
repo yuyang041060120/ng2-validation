@@ -1,32 +1,32 @@
 import { Directive, Input, forwardRef, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular/forms';
 
-import { min } from './validator';
+import { hasProperty } from './validator';
 
-const MIN_VALIDATOR: any = {
+const PROPERTY_VALIDATOR: any = {
   provide: NG_VALIDATORS,
-  useExisting: forwardRef(() => MinValidator),
+  useExisting: forwardRef(() => PropertyValidator),
   multi: true
 };
 
 @Directive({
-  selector: '[min][formControlName],[min][formControl],[min][ngModel]',
-  providers: [MIN_VALIDATOR]
+  selector: '[property][formControlName],[property][formControl],[property][ngModel]',
+  providers: [PROPERTY_VALIDATOR]
 })
-export class MinValidator implements Validator, OnInit, OnChanges {
-  @Input() min: number;
+export class PropertyValidator implements Validator, OnInit, OnChanges {
+  @Input() property: string;
 
   private validator: ValidatorFn;
   private onChange: () => void;
 
   ngOnInit() {
-    this.validator = min(this.min);
+    this.validator = hasProperty(this.property);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     for (const key in changes) {
-      if (key === 'min') {
-        this.validator = min(changes[key].currentValue);
+      if (key === 'property') {
+        this.validator = hasProperty(changes[key].currentValue);
         if (this.onChange) {
           this.onChange();
         }

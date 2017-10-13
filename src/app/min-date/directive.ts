@@ -24,10 +24,12 @@ export class MinDateValidator implements Validator, OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    for (let key in changes) {
+    for (const key in changes) {
       if (key === 'minDate') {
         this.validator = minDate(changes[key].currentValue);
-        if (this.onChange) this.onChange();
+        if (this.onChange) {
+          this.onChange();
+        }
       }
     }
   }

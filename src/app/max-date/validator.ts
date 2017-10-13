@@ -1,20 +1,28 @@
 import { AbstractControl, Validators, ValidatorFn } from '@angular/forms';
+import { isPresent, isDate, parseDate } from '../util/lang';
 
-import { isPresent, isDate } from '../util/lang';
+export const maxDate = (value: any): ValidatorFn => {
 
-export const maxDate = (maxDate: any): ValidatorFn => {
-  if (!isDate(maxDate) && !(maxDate instanceof Function)) {
+  value = parseDate(value);
+
+  if (!isDate(value) && !(value instanceof Function)) {
     throw Error('maxDate value must be or return a formatted date');
   }
 
   return (control: AbstractControl): {[key: string]: any} => {
-    if (isPresent(Validators.required(control))) return null;
+    if (isPresent(Validators.required(control))) {
+      return null;
+    }
 
-    let d: Date = new Date(control.value);
+    const d = new Date(control.value).getTime();
 
-    if (!isDate(d)) return {maxDate: true};
-    if (maxDate instanceof Function) maxDate = maxDate();
+    if (!isDate(d)) {
+      return { value: true };
+    }
+    if (value instanceof Function) {
+      value = value();
+    }
 
-    return d <= new Date(maxDate) ? null : {maxDate: true};
+    return d <= new Date(value).getTime() ? null : {maxDate: true};
   };
 };

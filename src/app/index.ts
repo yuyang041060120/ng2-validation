@@ -21,6 +21,7 @@ import { notEqual, NotEqualValidator } from './not-equal';
 import { notEqualTo, NotEqualToValidator } from './not-equal-to';
 import { number, NumberValidator } from './number';
 import { phone, PhoneValidator } from './phone';
+import { hasProperty, PropertyValidator } from './property';
 import { range, RangeValidator } from './range';
 import { rangeLength, RangeLengthValidator } from './range-length';
 import { url, UrlValidator } from './url';
@@ -48,6 +49,7 @@ export const CustomValidators: any = {
   notEqualTo,
   number,
   phone,
+  hasProperty,
   range,
   rangeLength,
   url,
@@ -76,6 +78,7 @@ const CUSTOM_FORM_DIRECTIVES = [
   NotEqualToValidator,
   NumberValidator,
   PhoneValidator,
+  PropertyValidator,
   RangeValidator,
   RangeLengthValidator,
   UrlValidator,

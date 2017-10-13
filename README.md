@@ -1,62 +1,57 @@
 # Description
 
-Angular2 custom validation, inspired by jQuery validation.
+Angular 4 custom validation, forked from [ng2-validation](https://github.com/yuyang041060120/ng2-validation).
+Directives for form validation (template or model driven).
 
-# Install
+# Installation
 
-```bash
-npm install ng2-validation --save
-```
-# Systemjs
-
-```bash
-'ng2-validation': 'npm:ng2-validation/bundles/ng2-validation.umd.js'
-```
+Will be release on npm soon.
 
 # Validators
 
-## angular2 built-in validators
+## Angular built-in validators
 
-- required
-- minlength
 - maxlength
+- minlength
 - pattern
+- required
 
-## custom validators
+## Custom validators
 
-- rangeLength
-- min
+- base64
+- creditCard
+- date
+- dateISO
+- digits
+- email
+- equal
+- equalTo
 - gt
 - gte
-- max
+- json
 - lt
 - lte
-- range
-- digits
-- number
-- url
-- email
-- date
-- minDate
+- max
 - maxDate
-- dateISO
-- creditCard
-- json
-- base64
-- phone
-- uuid
-- equal
+- min
+- minDate
 - notEqual
-- equalTo
 - notEqualTo
+- number
+- phone
+- property
+- range
+- rangeLength
+- url
+- uuid
 
 # Usage
 
-## template driven
+## Template driven
 
 import `FormsModule` and `CustomFormsModule` in *app.module.ts*
 
-```javascript
+```typescript
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -263,11 +258,11 @@ details see [libphonenumber](https://github.com/halt-hammerzeit/libphonenumber-j
 <p *ngIf="certainPassword.errors?.equalTo">equalTo error</p>
 ```
 
-## model driven
+## Model driven
 
 import `ReactiveFormsModule` in *app.module.ts*
 
-```javascript
+```typescript
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -285,7 +280,7 @@ export class AppModule {
 
 import `CustomValidators` in *app.component.ts*
 
-```javascript
+```typescript
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
@@ -312,133 +307,133 @@ export class AppComponent {
 
 ### rangeLength
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.rangeLength([5, 9]))
 ```
 
 ### min
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.min(10))
 ```
 
 ### gt
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.gt(10))
 ```
 
 ### max
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.max(20))
 ```
 
 ### lt
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.lt(20))
 ```
 
 ### range
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.range([10, 20]))
 ```
 
 ### digits
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.digits)
 ```
 
 ### number
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.number)
 ```
 
 ### url
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.url)
 ```
 
 ### email
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.email)
 ```
 
 ### date
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.date)
 ```
 
 ### minDate
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.minDate('2016-09-09'))
 ```
 
 ### maxDate
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.maxDate('2016-09-09'))
 ```
 
 ### dateISO
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.dateISO)
 ```
 
 ### creditCard
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.creditCard)
 ```
 
 ### json
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.json)
 ```
 
 ### base64
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.base64)
 ```
 
 ### phone
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.phone('zh-CN'))
 ```
 
 ### uuid
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.uuid('3'))
 ```
 
 ### equal
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.equal('xxx'))
 ```
 
 ### notEqual
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.notEqual('xxx'))
 ```
 
 ### equalTo
 
-```javascript
+```typescript
 let password = new FormControl('', Validators.required);
 let certainPassword = new FormControl('', CustomValidators.equalTo(password));
 
@@ -459,7 +454,7 @@ this.form = new FormGroup({
 
 ### notEqualTo
 
-```javascript
+```typescript
 let password = new FormControl('', Validators.required);
 let certainPassword = new FormControl('', CustomValidators.notEqualTo(password));
 
@@ -475,6 +470,22 @@ this.form = new FormGroup({
   <p *ngIf="form.controls.password.errors?.required">required error</p>
   <input type="password" formControlName="certainPassword"/>
   <p *ngIf="form.controls.certainPassword.errors?.notEqualTo">notEqualTo error</p>
+</form>
+```
+
+### property
+```typescript
+let obj = { id: 1 };
+
+this.form = new FormGroup({
+  obj: new FormControl('', CustomValidators.property('id'))
+});
+```
+
+```html
+<form [formGroup]="form">
+  <input type="text" formControlName="obj"/>
+  <p *ngIf="form.controls.obj.errors?.property">property error</p>
 </form>
 ```
 
