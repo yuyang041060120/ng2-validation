@@ -11,10 +11,12 @@ const uuids = {
 
 export const uuid = (version?: string): ValidatorFn => {
   return (control: AbstractControl): {[key: string]: any} => {
-    if (isPresent(Validators.required(control))) return null;
+    if (isPresent(Validators.required(control))) {
+      return null;
+    }
 
-    let v: string = control.value;
-    let pattern = uuids[version] || uuids.all;
+    const v: string = control.value;
+    const pattern = uuids[version] || uuids.all;
 
     return (new RegExp(pattern)).test(v) ? null : {uuid: true};
   };

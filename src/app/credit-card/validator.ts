@@ -3,16 +3,20 @@ import { AbstractControl, Validators, ValidatorFn } from '@angular/forms';
 import { isPresent } from '../util/lang';
 
 export const creditCard: ValidatorFn = (control: AbstractControl): {[key: string]: boolean} => {
-  if (isPresent(Validators.required(control))) return null;
+  if (isPresent(Validators.required(control))) {
+    return null;
+  }
 
-  let v: string = control.value;
+  const v: string = control.value;
 
-  let sanitized = v.replace(/[^0-9]+/g, '');
+  const sanitized = v.replace(/[^0-9]+/g, '');
 
   // problem with chrome
+  /* tslint:disable */
   if (!(/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/.test(sanitized))) {
     return {creditCard: true};
   }
+  /* tslint:enable */
 
   let sum = 0;
   let digit;

@@ -24,10 +24,12 @@ export class RangeLengthValidator implements Validator, OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    for (let key in changes) {
+    for (const key in changes) {
       if (key === 'rangeLength') {
         this.validator = rangeLength(changes[key].currentValue);
-        if (this.onChange) this.onChange();
+        if (this.onChange) {
+          this.onChange();
+        }
       }
     }
   }

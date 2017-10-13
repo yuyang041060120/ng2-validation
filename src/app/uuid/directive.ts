@@ -24,10 +24,12 @@ export class UUIDValidator implements Validator, OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    for (let key in changes) {
+    for (const key in changes) {
       if (key === 'uuid') {
         this.validator = uuid(changes[key].currentValue);
-        if (this.onChange) this.onChange();
+        if (this.onChange) {
+          this.onChange();
+        }
       }
     }
   }

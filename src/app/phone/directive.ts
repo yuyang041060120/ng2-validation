@@ -24,10 +24,12 @@ export class PhoneValidator implements Validator, OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    for (let key in changes) {
+    for (const key in changes) {
       if (key === 'phone') {
         this.validator = phone(changes[key].currentValue);
-        if (this.onChange) this.onChange();
+        if (this.onChange) {
+          this.onChange();
+        }
       }
     }
   }

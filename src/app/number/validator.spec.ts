@@ -7,12 +7,12 @@ describe('Number', () => {
 
   it('"23" should equal to "null"', () => {
     control = new FormControl('23');
-    expect(number(control)).toBeNull()
+    expect(number(control)).toBeNull();
   });
 
   it('"23.3" should equal to "null"', () => {
     control = new FormControl('23.3');
-    expect(number(control)).toBeNull()
+    expect(number(control)).toBeNull();
   });
 
   it('"23a" should equal to "{number: true}"', () => {

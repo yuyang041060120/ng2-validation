@@ -12,12 +12,12 @@ describe('Url', () => {
 
   it('"http://www.test.com" should equal to "null"', () => {
     control = new FormControl('http://www.test.com');
-    expect(validator(control)).toBeNull()
+    expect(validator(control)).toBeNull();
   });
 
   it('"https://www.test.com" should equal to "null"', () => {
     control = new FormControl('https://www.test.com');
-    expect(validator(control)).toBeNull()
+    expect(validator(control)).toBeNull();
   });
 
   it('"23a" should equal to "{url: true}"', () => {
