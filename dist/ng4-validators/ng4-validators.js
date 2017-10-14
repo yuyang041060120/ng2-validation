@@ -1114,13 +1114,13 @@ NumberValidator.decorators = [
  */
 NumberValidator.ctorParameters = () => [];
 
-const hasProperty = (property) => {
+const property = (value) => {
     return (control) => {
         if (isPresent(Validators.required(control))) {
             return null;
         }
         const /** @type {?} */ obj = control.value;
-        return obj[property] != null ? null : { property: true };
+        return obj[value] != null ? null : { hasProperty: true, property: value };
     };
 };
 
@@ -1134,7 +1134,7 @@ class PropertyValidator {
      * @return {?}
      */
     ngOnInit() {
-        this.validator = hasProperty(this.property);
+        this.validator = property(this.property);
     }
     /**
      * @param {?} changes
@@ -1143,7 +1143,7 @@ class PropertyValidator {
     ngOnChanges(changes) {
         for (const /** @type {?} */ key in changes) {
             if (key === 'property') {
-                this.validator = hasProperty(changes[key].currentValue);
+                this.validator = property(changes[key].currentValue);
                 if (this.onChange) {
                     this.onChange();
                 }
@@ -1422,33 +1422,6 @@ UUIDValidator.propDecorators = {
     'uuid': [{ type: Input },],
 };
 
-const CustomValidators = {
-    base64,
-    creditCard,
-    date,
-    dateISO,
-    digits,
-    email,
-    equal,
-    equalTo,
-    gt,
-    gte,
-    json,
-    lt,
-    lte,
-    max,
-    maxDate,
-    min,
-    minDate,
-    notEqual,
-    notEqualTo,
-    number,
-    hasProperty,
-    range,
-    rangeLength,
-    url,
-    uuid
-};
 const CUSTOM_FORM_DIRECTIVES = [
     Base64Validator,
     CreditCardValidator,
@@ -1489,9 +1462,37 @@ CustomFormsModule.decorators = [
  */
 CustomFormsModule.ctorParameters = () => [];
 
+const CustomValidators = {
+    base64,
+    creditCard,
+    date,
+    dateISO,
+    digits,
+    email,
+    equal,
+    equalTo,
+    gt,
+    gte,
+    json,
+    lt,
+    lte,
+    max,
+    maxDate,
+    min,
+    minDate,
+    notEqual,
+    notEqualTo,
+    number,
+    property,
+    range,
+    rangeLength,
+    url,
+    uuid
+};
+
 /**
  * Generated bundle index. Do not edit.
  */
 
-export { CustomFormsModule, CustomValidators, Base64Validator as ɵa, base64 as ɵz, CreditCardValidator as ɵb, creditCard as ɵba, DateValidator as ɵc, date as ɵbb, DateISOValidator as ɵd, dateISO as ɵbc, DigitsValidator as ɵe, digits as ɵbd, EmailValidator as ɵf, email as ɵbe, EqualValidator as ɵg, equal as ɵbf, EqualToValidator as ɵh, equalTo as ɵbg, GreaterThanValidator as ɵi, gt as ɵbh, GreaterThanEqualValidator as ɵj, gte as ɵbi, JSONValidator as ɵk, json as ɵbj, LessThanValidator as ɵl, lt as ɵbk, LessThanEqualValidator as ɵm, lte as ɵbl, MaxValidator as ɵn, max as ɵbm, MaxDateValidator as ɵo, maxDate as ɵbn, MinValidator as ɵp, min as ɵbo, MinDateValidator as ɵq, minDate as ɵbp, NotEqualValidator as ɵr, notEqual as ɵbq, NotEqualToValidator as ɵs, notEqualTo as ɵbr, NumberValidator as ɵt, number as ɵbs, PropertyValidator as ɵu, hasProperty as ɵbt, RangeValidator as ɵv, range as ɵbu, RangeLengthValidator as ɵw, rangeLength as ɵbv, UrlValidator as ɵx, url as ɵbw, UUIDValidator as ɵy, uuid as ɵbx };
+export { CustomFormsModule, CustomValidators, Base64Validator as ɵz, base64 as ɵa, CreditCardValidator as ɵba, creditCard as ɵb, DateValidator as ɵbb, date as ɵc, DateISOValidator as ɵbc, dateISO as ɵd, DigitsValidator as ɵbd, digits as ɵe, EmailValidator as ɵbe, email as ɵf, EqualValidator as ɵbf, equal as ɵg, EqualToValidator as ɵbg, equalTo as ɵh, GreaterThanValidator as ɵbh, gt as ɵi, GreaterThanEqualValidator as ɵbi, gte as ɵj, JSONValidator as ɵbj, json as ɵk, LessThanValidator as ɵbk, lt as ɵl, LessThanEqualValidator as ɵbl, lte as ɵm, MaxValidator as ɵbm, max as ɵn, MaxDateValidator as ɵbn, maxDate as ɵo, MinValidator as ɵbo, min as ɵp, MinDateValidator as ɵbp, minDate as ɵq, NotEqualValidator as ɵbq, notEqual as ɵr, NotEqualToValidator as ɵbr, notEqualTo as ɵs, NumberValidator as ɵbs, number as ɵt, PropertyValidator as ɵbt, property as ɵu, RangeValidator as ɵbu, range as ɵv, RangeLengthValidator as ɵbv, rangeLength as ɵw, UrlValidator as ɵbw, url as ɵx, UUIDValidator as ɵbx, uuid as ɵy };
 //# sourceMappingURL=ng4-validators.js.map

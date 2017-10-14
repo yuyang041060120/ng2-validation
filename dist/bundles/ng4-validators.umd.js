@@ -1136,13 +1136,13 @@ NumberValidator.decorators = [
  * @nocollapse
  */
 NumberValidator.ctorParameters = function () { return []; };
-var hasProperty = function (property) {
+var property = function (value) {
     return function (control) {
         if (isPresent(forms.Validators.required(control))) {
             return null;
         }
         var /** @type {?} */ obj = control.value;
-        return obj[property] != null ? null : { property: true };
+        return obj[value] != null ? null : { hasProperty: true, property: value };
     };
 };
 var PROPERTY_VALIDATOR = {
@@ -1157,7 +1157,7 @@ var PropertyValidator = (function () {
      * @return {?}
      */
     PropertyValidator.prototype.ngOnInit = function () {
-        this.validator = hasProperty(this.property);
+        this.validator = property(this.property);
     };
     /**
      * @param {?} changes
@@ -1166,7 +1166,7 @@ var PropertyValidator = (function () {
     PropertyValidator.prototype.ngOnChanges = function (changes) {
         for (var /** @type {?} */ key in changes) {
             if (key === 'property') {
-                this.validator = hasProperty(changes[key].currentValue);
+                this.validator = property(changes[key].currentValue);
                 if (this.onChange) {
                     this.onChange();
                 }
@@ -1449,33 +1449,6 @@ UUIDValidator.ctorParameters = function () { return []; };
 UUIDValidator.propDecorators = {
     'uuid': [{ type: core.Input },],
 };
-var CustomValidators = {
-    base64: base64,
-    creditCard: creditCard,
-    date: date,
-    dateISO: dateISO,
-    digits: digits,
-    email: email,
-    equal: equal,
-    equalTo: equalTo,
-    gt: gt,
-    gte: gte,
-    json: json,
-    lt: lt,
-    lte: lte,
-    max: max,
-    maxDate: maxDate,
-    min: min,
-    minDate: minDate,
-    notEqual: notEqual,
-    notEqualTo: notEqualTo,
-    number: number,
-    hasProperty: hasProperty,
-    range: range,
-    rangeLength: rangeLength,
-    url: url,
-    uuid: uuid
-};
 var CUSTOM_FORM_DIRECTIVES = [
     Base64Validator,
     CreditCardValidator,
@@ -1518,59 +1491,86 @@ CustomFormsModule.decorators = [
  * @nocollapse
  */
 CustomFormsModule.ctorParameters = function () { return []; };
+var CustomValidators = {
+    base64: base64,
+    creditCard: creditCard,
+    date: date,
+    dateISO: dateISO,
+    digits: digits,
+    email: email,
+    equal: equal,
+    equalTo: equalTo,
+    gt: gt,
+    gte: gte,
+    json: json,
+    lt: lt,
+    lte: lte,
+    max: max,
+    maxDate: maxDate,
+    min: min,
+    minDate: minDate,
+    notEqual: notEqual,
+    notEqualTo: notEqualTo,
+    number: number,
+    property: property,
+    range: range,
+    rangeLength: rangeLength,
+    url: url,
+    uuid: uuid
+};
 
 exports.CustomFormsModule = CustomFormsModule;
 exports.CustomValidators = CustomValidators;
-exports.ɵa = Base64Validator;
-exports.ɵz = base64;
-exports.ɵb = CreditCardValidator;
-exports.ɵba = creditCard;
-exports.ɵc = DateValidator;
-exports.ɵbb = date;
-exports.ɵd = DateISOValidator;
-exports.ɵbc = dateISO;
-exports.ɵe = DigitsValidator;
-exports.ɵbd = digits;
-exports.ɵf = EmailValidator;
-exports.ɵbe = email;
-exports.ɵg = EqualValidator;
-exports.ɵbf = equal;
-exports.ɵh = EqualToValidator;
-exports.ɵbg = equalTo;
-exports.ɵi = GreaterThanValidator;
-exports.ɵbh = gt;
-exports.ɵj = GreaterThanEqualValidator;
-exports.ɵbi = gte;
-exports.ɵk = JSONValidator;
-exports.ɵbj = json;
-exports.ɵl = LessThanValidator;
-exports.ɵbk = lt;
-exports.ɵm = LessThanEqualValidator;
-exports.ɵbl = lte;
-exports.ɵn = MaxValidator;
-exports.ɵbm = max;
-exports.ɵo = MaxDateValidator;
-exports.ɵbn = maxDate;
-exports.ɵp = MinValidator;
-exports.ɵbo = min;
-exports.ɵq = MinDateValidator;
-exports.ɵbp = minDate;
-exports.ɵr = NotEqualValidator;
-exports.ɵbq = notEqual;
-exports.ɵs = NotEqualToValidator;
-exports.ɵbr = notEqualTo;
-exports.ɵt = NumberValidator;
-exports.ɵbs = number;
-exports.ɵu = PropertyValidator;
-exports.ɵbt = hasProperty;
-exports.ɵv = RangeValidator;
-exports.ɵbu = range;
-exports.ɵw = RangeLengthValidator;
-exports.ɵbv = rangeLength;
-exports.ɵx = UrlValidator;
-exports.ɵbw = url;
-exports.ɵy = UUIDValidator;
-exports.ɵbx = uuid;
+exports.ɵz = Base64Validator;
+exports.ɵa = base64;
+exports.ɵba = CreditCardValidator;
+exports.ɵb = creditCard;
+exports.ɵbb = DateValidator;
+exports.ɵc = date;
+exports.ɵbc = DateISOValidator;
+exports.ɵd = dateISO;
+exports.ɵbd = DigitsValidator;
+exports.ɵe = digits;
+exports.ɵbe = EmailValidator;
+exports.ɵf = email;
+exports.ɵbf = EqualValidator;
+exports.ɵg = equal;
+exports.ɵbg = EqualToValidator;
+exports.ɵh = equalTo;
+exports.ɵbh = GreaterThanValidator;
+exports.ɵi = gt;
+exports.ɵbi = GreaterThanEqualValidator;
+exports.ɵj = gte;
+exports.ɵbj = JSONValidator;
+exports.ɵk = json;
+exports.ɵbk = LessThanValidator;
+exports.ɵl = lt;
+exports.ɵbl = LessThanEqualValidator;
+exports.ɵm = lte;
+exports.ɵbm = MaxValidator;
+exports.ɵn = max;
+exports.ɵbn = MaxDateValidator;
+exports.ɵo = maxDate;
+exports.ɵbo = MinValidator;
+exports.ɵp = min;
+exports.ɵbp = MinDateValidator;
+exports.ɵq = minDate;
+exports.ɵbq = NotEqualValidator;
+exports.ɵr = notEqual;
+exports.ɵbr = NotEqualToValidator;
+exports.ɵs = notEqualTo;
+exports.ɵbs = NumberValidator;
+exports.ɵt = number;
+exports.ɵbt = PropertyValidator;
+exports.ɵu = property;
+exports.ɵbu = RangeValidator;
+exports.ɵv = range;
+exports.ɵbv = RangeLengthValidator;
+exports.ɵw = rangeLength;
+exports.ɵbw = UrlValidator;
+exports.ɵx = url;
+exports.ɵbx = UUIDValidator;
+exports.ɵy = uuid;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

@@ -1,6 +1,6 @@
 {
   "name": "ng4-validators",
-  "version": "4.3.1",
+  "version": "4.3.2",
   "description": "Angular 4 directives validation",
   "scripts": {
     "ng": "ng",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rsaenen/ngx-validation.git"
+    "url": "git+https://github.com/rsaenen/ng4-validators.git"
   },
   "keywords": [
     "angular",
@@ -28,9 +28,9 @@
   "author": "Ralf Saenen <ralf.saenen@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yuyang041060120/angular2-validation/issues"
+    "url": "https://github.com/rsaenen/ng4-validators/issues"
   },
-  "homepage": "https://github.com/rsaenen/ngx-validation#readme",
+  "homepage": "https://github.com/rsaenen/ng4-validators#readme",
   "devDependencies": {
     "@angular/animations": "^4.4.4",
     "@angular/cli": "1.4.5",

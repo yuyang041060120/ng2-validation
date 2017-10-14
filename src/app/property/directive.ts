@@ -1,7 +1,7 @@
 import { Directive, Input, forwardRef, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular/forms';
 
-import { hasProperty } from './validator';
+import { property } from './validator';
 
 const PROPERTY_VALIDATOR: any = {
   provide: NG_VALIDATORS,
@@ -20,13 +20,13 @@ export class PropertyValidator implements Validator, OnInit, OnChanges {
   private onChange: () => void;
 
   ngOnInit() {
-    this.validator = hasProperty(this.property);
+    this.validator = property(this.property);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     for (const key in changes) {
       if (key === 'property') {
-        this.validator = hasProperty(changes[key].currentValue);
+        this.validator = property(changes[key].currentValue);
         if (this.onChange) {
           this.onChange();
         }
