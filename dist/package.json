@@ -1,6 +1,6 @@
 {
   "name": "ng4-validators",
-  "version": "4.3.2",
+  "version": "4.3.3",
   "description": "Angular 4 directives validation",
   "scripts": {
     "ng": "ng",
