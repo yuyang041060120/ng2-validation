@@ -1449,7 +1449,34 @@ UUIDValidator.ctorParameters = function () { return []; };
 UUIDValidator.propDecorators = {
     'uuid': [{ type: core.Input },],
 };
-var CUSTOM_FORM_DIRECTIVES = [
+var CustomValidators = {
+    base64: base64,
+    creditCard: creditCard,
+    date: date,
+    dateISO: dateISO,
+    digits: digits,
+    email: email,
+    equal: equal,
+    equalTo: equalTo,
+    gt: gt,
+    gte: gte,
+    json: json,
+    lt: lt,
+    lte: lte,
+    max: max,
+    maxDate: maxDate,
+    min: min,
+    minDate: minDate,
+    notEqual: notEqual,
+    notEqualTo: notEqualTo,
+    number: number,
+    property: property,
+    range: range,
+    rangeLength: rangeLength,
+    url: url,
+    uuid: uuid
+};
+var CustomDirectives = [
     Base64Validator,
     CreditCardValidator,
     DateValidator,
@@ -1483,44 +1510,17 @@ var CustomFormsModule = (function () {
 }());
 CustomFormsModule.decorators = [
     { type: core.NgModule, args: [{
-                declarations: [CUSTOM_FORM_DIRECTIVES],
-                exports: [CUSTOM_FORM_DIRECTIVES]
+                declarations: [CustomDirectives],
+                exports: [CustomDirectives]
             },] },
 ];
 /**
  * @nocollapse
  */
 CustomFormsModule.ctorParameters = function () { return []; };
-var CustomValidators = {
-    base64: base64,
-    creditCard: creditCard,
-    date: date,
-    dateISO: dateISO,
-    digits: digits,
-    email: email,
-    equal: equal,
-    equalTo: equalTo,
-    gt: gt,
-    gte: gte,
-    json: json,
-    lt: lt,
-    lte: lte,
-    max: max,
-    maxDate: maxDate,
-    min: min,
-    minDate: minDate,
-    notEqual: notEqual,
-    notEqualTo: notEqualTo,
-    number: number,
-    property: property,
-    range: range,
-    rangeLength: rangeLength,
-    url: url,
-    uuid: uuid
-};
 
-exports.CustomFormsModule = CustomFormsModule;
 exports.CustomValidators = CustomValidators;
+exports.CustomFormsModule = CustomFormsModule;
 exports.ɵz = Base64Validator;
 exports.ɵa = base64;
 exports.ɵba = CreditCardValidator;
