@@ -35,33 +35,6 @@ var base64 = function (control) {
     var /** @type {?} */ v = control.value;
     return /^(?:[A-Z0-9+\/]{4})*(?:[A-Z0-9+\/]{2}==|[A-Z0-9+\/]{3}=|[A-Z0-9+\/]{4})$/i.test(v) ? null : { 'base64': true };
 };
-var BASE64_VALIDATOR = {
-    provide: forms.NG_VALIDATORS,
-    useExisting: core.forwardRef(function () { return Base64Validator; }),
-    multi: true
-};
-var Base64Validator = (function () {
-    function Base64Validator() {
-    }
-    /**
-     * @param {?} c
-     * @return {?}
-     */
-    Base64Validator.prototype.validate = function (c) {
-        return base64(c);
-    };
-    return Base64Validator;
-}());
-Base64Validator.decorators = [
-    { type: core.Directive, args: [{
-                selector: '[base64][formControlName],[base64][formControl],[base64][ngModel]',
-                providers: [BASE64_VALIDATOR]
-            },] },
-];
-/**
- * @nocollapse
- */
-Base64Validator.ctorParameters = function () { return []; };
 var creditCard = function (control) {
     if (isPresent(forms.Validators.required(control))) {
         return null;
@@ -100,6 +73,296 @@ var creditCard = function (control) {
     }
     return { creditCard: true };
 };
+var date = function (control) {
+    if (isPresent(forms.Validators.required(control))) {
+        return null;
+    }
+    var /** @type {?} */ v = control.value;
+    return isDate(v) ? null : { date: true };
+};
+var dateISO = function (control) {
+    if (isPresent(forms.Validators.required(control))) {
+        return null;
+    }
+    var /** @type {?} */ v = control.value;
+    return /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test(v) ? null : { dateISO: true };
+};
+var digits = function (control) {
+    if (isPresent(forms.Validators.required(control))) {
+        return null;
+    }
+    var /** @type {?} */ v = control.value;
+    return /^\d+$/.test(v) ? null : { digits: true };
+};
+var email = function (control) {
+    if (isPresent(forms.Validators.required(control))) {
+        return null;
+    }
+    var /** @type {?} */ v = control.value;
+    /* tslint:disable */
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) ? null : { 'email': true };
+    /* tslint:enable */
+};
+var equal = function (val) {
+    return function (control) {
+        if (isPresent(forms.Validators.required(control))) {
+            return null;
+        }
+        var /** @type {?} */ v = control.value;
+        return val === v ? null : { equal: true };
+    };
+};
+var equalTo = function (equalControl) {
+    var /** @type {?} */ subscribe = false;
+    return function (control) {
+        if (!subscribe) {
+            subscribe = true;
+            equalControl.valueChanges.subscribe(function () {
+                control.updateValueAndValidity();
+            });
+        }
+        var /** @type {?} */ v = control.value;
+        return equalControl.value === v ? null : { equalTo: true };
+    };
+};
+var gt = function (value) {
+    return function (control) {
+        if (!isPresent(value)) {
+            return null;
+        }
+        if (isPresent(forms.Validators.required(control))) {
+            return null;
+        }
+        var /** @type {?} */ v = +control.value;
+        return v > +value ? null : { gt: true };
+    };
+};
+var gte = function (value) {
+    return function (control) {
+        if (!isPresent(value)) {
+            return null;
+        }
+        if (isPresent(forms.Validators.required(control))) {
+            return null;
+        }
+        var /** @type {?} */ v = +control.value;
+        return v >= +value ? null : { gte: true };
+    };
+};
+var json = function (control) {
+    if (isPresent(forms.Validators.required(control))) {
+        return null;
+    }
+    var /** @type {?} */ v = control.value;
+    try {
+        var /** @type {?} */ obj = JSON.parse(v);
+        if (Boolean(obj) && typeof obj === 'object') {
+            return null;
+        }
+    }
+    catch (e) { }
+    return { json: true };
+};
+var lt = function (value) {
+    return function (control) {
+        if (!isPresent(value)) {
+            return null;
+        }
+        if (isPresent(forms.Validators.required(control))) {
+            return null;
+        }
+        var /** @type {?} */ v = +control.value;
+        return v < +value ? null : { lt: true };
+    };
+};
+var lte = function (value) {
+    return function (control) {
+        if (!isPresent(value)) {
+            return null;
+        }
+        if (isPresent(forms.Validators.required(control))) {
+            return null;
+        }
+        var /** @type {?} */ v = +control.value;
+        return v <= +value ? null : { lte: true };
+    };
+};
+var max = function (value) {
+    return function (control) {
+        if (!isPresent(value)) {
+            return null;
+        }
+        if (isPresent(forms.Validators.required(control))) {
+            return null;
+        }
+        var /** @type {?} */ v = +control.value;
+        return v <= +value ? null : { actualValue: v, requiredValue: +value, max: true };
+    };
+};
+var maxDate = function (value) {
+    value = parseDate(value);
+    if (!isDate(value) && !(value instanceof Function)) {
+        throw Error('maxDate value must be or return a formatted date');
+    }
+    return function (control) {
+        if (isPresent(forms.Validators.required(control))) {
+            return null;
+        }
+        var /** @type {?} */ d = new Date(control.value).getTime();
+        if (!isDate(d)) {
+            return { value: true };
+        }
+        if (value instanceof Function) {
+            value = value();
+        }
+        return d <= new Date(value).getTime() ? null : { maxDate: true };
+    };
+};
+var min = function (value) {
+    return function (control) {
+        if (!isPresent(value)) {
+            return null;
+        }
+        if (isPresent(forms.Validators.required(control))) {
+            return null;
+        }
+        var /** @type {?} */ v = +control.value;
+        return v >= +value ? null : { actualValue: v, requiredValue: +value, min: true };
+    };
+};
+var minDate = function (value) {
+    value = parseDate(value);
+    if (!isDate(value) && !(value instanceof Function)) {
+        throw Error('minDate value must be or return a formatted date');
+    }
+    return function (control) {
+        if (isPresent(forms.Validators.required(control))) {
+            return null;
+        }
+        var /** @type {?} */ d = new Date(control.value).getTime();
+        if (!isDate(d)) {
+            return { value: true };
+        }
+        if (value instanceof Function) {
+            value = value();
+        }
+        return d >= new Date(value).getTime() ? null : { minDate: true };
+    };
+};
+var notEqual = function (val) {
+    return function (control) {
+        if (isPresent(forms.Validators.required(control))) {
+            return null;
+        }
+        var /** @type {?} */ v = control.value;
+        return val !== v ? null : { notEqual: true };
+    };
+};
+var notEqualTo = function (notEqualControl) {
+    var /** @type {?} */ subscribe = false;
+    return function (control) {
+        if (!subscribe) {
+            subscribe = true;
+            notEqualControl.valueChanges.subscribe(function () {
+                control.updateValueAndValidity();
+            });
+        }
+        var /** @type {?} */ v = control.value;
+        return notEqualControl.value !== v ? null : { notEqualTo: true };
+    };
+};
+var number = function (control) {
+    if (isPresent(forms.Validators.required(control))) {
+        return null;
+    }
+    var /** @type {?} */ v = control.value;
+    return /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(v) ? null : { 'number': true };
+};
+var property = function (value) {
+    return function (control) {
+        if (isPresent(forms.Validators.required(control))) {
+            return null;
+        }
+        var /** @type {?} */ obj = control.value;
+        return obj[value] != null ? null : { hasProperty: true, property: value };
+    };
+};
+var range = function (value) {
+    return function (control) {
+        if (!isPresent(value)) {
+            return null;
+        }
+        if (isPresent(forms.Validators.required(control))) {
+            return null;
+        }
+        var /** @type {?} */ v = +control.value;
+        return v >= value[0] && v <= value[1] ? null : { actualValue: v, requiredValue: value, range: true };
+    };
+};
+var rangeLength = function (value) {
+    return function (control) {
+        if (!isPresent(value)) {
+            return null;
+        }
+        if (isPresent(forms.Validators.required(control))) {
+            return null;
+        }
+        var /** @type {?} */ v = control.value;
+        return v.length >= value[0] && v.length <= value[1] ? null : { rangeLength: true };
+    };
+};
+var uuids = {
+    '3': /^[0-9A-F]{8}-[0-9A-F]{4}-3[0-9A-F]{3}-[0-9A-F]{4}-[0-9A-F]{12}$/i,
+    '4': /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
+    '5': /^[0-9A-F]{8}-[0-9A-F]{4}-5[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
+    'all': /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i
+};
+var uuid = function (version) {
+    return function (control) {
+        if (isPresent(forms.Validators.required(control))) {
+            return null;
+        }
+        var /** @type {?} */ v = control.value;
+        var /** @type {?} */ pattern = uuids[version] || uuids.all;
+        return (new RegExp(pattern)).test(v) ? null : { uuid: true };
+    };
+};
+var url = function (control) {
+    if (isPresent(forms.Validators.required(control))) {
+        return null;
+    }
+    var /** @type {?} */ v = control.value;
+    /* tslint:disable */
+    return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(v) ? null : { 'url': true };
+    /* tslint:enable */
+};
+var BASE64_VALIDATOR = {
+    provide: forms.NG_VALIDATORS,
+    useExisting: core.forwardRef(function () { return Base64Validator; }),
+    multi: true
+};
+var Base64Validator = (function () {
+    function Base64Validator() {
+    }
+    /**
+     * @param {?} c
+     * @return {?}
+     */
+    Base64Validator.prototype.validate = function (c) {
+        return base64(c);
+    };
+    return Base64Validator;
+}());
+Base64Validator.decorators = [
+    { type: core.Directive, args: [{
+                selector: '[base64][formControlName],[base64][formControl],[base64][ngModel]',
+                providers: [BASE64_VALIDATOR]
+            },] },
+];
+/**
+ * @nocollapse
+ */
+Base64Validator.ctorParameters = function () { return []; };
 var CREDIT_CARD_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return CreditCardValidator; }),
@@ -127,13 +390,6 @@ CreditCardValidator.decorators = [
  * @nocollapse
  */
 CreditCardValidator.ctorParameters = function () { return []; };
-var date = function (control) {
-    if (isPresent(forms.Validators.required(control))) {
-        return null;
-    }
-    var /** @type {?} */ v = control.value;
-    return isDate(v) ? null : { date: true };
-};
 var DATE_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return DateValidator; }),
@@ -161,13 +417,6 @@ DateValidator.decorators = [
  * @nocollapse
  */
 DateValidator.ctorParameters = function () { return []; };
-var dateISO = function (control) {
-    if (isPresent(forms.Validators.required(control))) {
-        return null;
-    }
-    var /** @type {?} */ v = control.value;
-    return /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test(v) ? null : { dateISO: true };
-};
 var DATE_ISO_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return DateISOValidator; }),
@@ -195,13 +444,6 @@ DateISOValidator.decorators = [
  * @nocollapse
  */
 DateISOValidator.ctorParameters = function () { return []; };
-var digits = function (control) {
-    if (isPresent(forms.Validators.required(control))) {
-        return null;
-    }
-    var /** @type {?} */ v = control.value;
-    return /^\d+$/.test(v) ? null : { digits: true };
-};
 var DIGITS_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return DigitsValidator; }),
@@ -229,15 +471,6 @@ DigitsValidator.decorators = [
  * @nocollapse
  */
 DigitsValidator.ctorParameters = function () { return []; };
-var email = function (control) {
-    if (isPresent(forms.Validators.required(control))) {
-        return null;
-    }
-    var /** @type {?} */ v = control.value;
-    /* tslint:disable */
-    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) ? null : { 'email': true };
-    /* tslint:enable */
-};
 var EMAIL_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return EmailValidator; }),
@@ -265,15 +498,6 @@ EmailValidator.decorators = [
  * @nocollapse
  */
 EmailValidator.ctorParameters = function () { return []; };
-var equal = function (val) {
-    return function (control) {
-        if (isPresent(forms.Validators.required(control))) {
-            return null;
-        }
-        var /** @type {?} */ v = control.value;
-        return val === v ? null : { equal: true };
-    };
-};
 var EQUAL_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return EqualValidator; }),
@@ -331,19 +555,6 @@ EqualValidator.ctorParameters = function () { return []; };
 EqualValidator.propDecorators = {
     'equal': [{ type: core.Input },],
 };
-var equalTo = function (equalControl) {
-    var /** @type {?} */ subscribe = false;
-    return function (control) {
-        if (!subscribe) {
-            subscribe = true;
-            equalControl.valueChanges.subscribe(function () {
-                control.updateValueAndValidity();
-            });
-        }
-        var /** @type {?} */ v = control.value;
-        return equalControl.value === v ? null : { equalTo: true };
-    };
-};
 var EQUAL_TO_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return EqualToValidator; }),
@@ -379,18 +590,6 @@ EqualToValidator.decorators = [
 EqualToValidator.ctorParameters = function () { return []; };
 EqualToValidator.propDecorators = {
     'equalTo': [{ type: core.Input },],
-};
-var gt = function (value) {
-    return function (control) {
-        if (!isPresent(value)) {
-            return null;
-        }
-        if (isPresent(forms.Validators.required(control))) {
-            return null;
-        }
-        var /** @type {?} */ v = +control.value;
-        return v > +value ? null : { gt: true };
-    };
 };
 var GREATER_THAN_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
@@ -449,18 +648,6 @@ GreaterThanValidator.ctorParameters = function () { return []; };
 GreaterThanValidator.propDecorators = {
     'gt': [{ type: core.Input },],
 };
-var gte = function (value) {
-    return function (control) {
-        if (!isPresent(value)) {
-            return null;
-        }
-        if (isPresent(forms.Validators.required(control))) {
-            return null;
-        }
-        var /** @type {?} */ v = +control.value;
-        return v >= +value ? null : { gte: true };
-    };
-};
 var GREATER_THAN_EQUAL_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return GreaterThanEqualValidator; }),
@@ -518,20 +705,6 @@ GreaterThanEqualValidator.ctorParameters = function () { return []; };
 GreaterThanEqualValidator.propDecorators = {
     'gte': [{ type: core.Input },],
 };
-var json = function (control) {
-    if (isPresent(forms.Validators.required(control))) {
-        return null;
-    }
-    var /** @type {?} */ v = control.value;
-    try {
-        var /** @type {?} */ obj = JSON.parse(v);
-        if (Boolean(obj) && typeof obj === 'object') {
-            return null;
-        }
-    }
-    catch (e) { }
-    return { json: true };
-};
 var JSON_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return JSONValidator; }),
@@ -559,18 +732,6 @@ JSONValidator.decorators = [
  * @nocollapse
  */
 JSONValidator.ctorParameters = function () { return []; };
-var lt = function (value) {
-    return function (control) {
-        if (!isPresent(value)) {
-            return null;
-        }
-        if (isPresent(forms.Validators.required(control))) {
-            return null;
-        }
-        var /** @type {?} */ v = +control.value;
-        return v < +value ? null : { lt: true };
-    };
-};
 var LESS_THAN_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return LessThanValidator; }),
@@ -627,18 +788,6 @@ LessThanValidator.decorators = [
 LessThanValidator.ctorParameters = function () { return []; };
 LessThanValidator.propDecorators = {
     'lt': [{ type: core.Input },],
-};
-var lte = function (value) {
-    return function (control) {
-        if (!isPresent(value)) {
-            return null;
-        }
-        if (isPresent(forms.Validators.required(control))) {
-            return null;
-        }
-        var /** @type {?} */ v = +control.value;
-        return v <= +value ? null : { lte: true };
-    };
 };
 var LESS_THAN_EQUAL_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
@@ -697,18 +846,6 @@ LessThanEqualValidator.ctorParameters = function () { return []; };
 LessThanEqualValidator.propDecorators = {
     'lte': [{ type: core.Input },],
 };
-var max = function (value) {
-    return function (control) {
-        if (!isPresent(value)) {
-            return null;
-        }
-        if (isPresent(forms.Validators.required(control))) {
-            return null;
-        }
-        var /** @type {?} */ v = +control.value;
-        return v <= +value ? null : { actualValue: v, requiredValue: +value, max: true };
-    };
-};
 var MAX_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return MaxValidator; }),
@@ -765,25 +902,6 @@ MaxValidator.decorators = [
 MaxValidator.ctorParameters = function () { return []; };
 MaxValidator.propDecorators = {
     'max': [{ type: core.Input },],
-};
-var maxDate = function (value) {
-    value = parseDate(value);
-    if (!isDate(value) && !(value instanceof Function)) {
-        throw Error('maxDate value must be or return a formatted date');
-    }
-    return function (control) {
-        if (isPresent(forms.Validators.required(control))) {
-            return null;
-        }
-        var /** @type {?} */ d = new Date(control.value).getTime();
-        if (!isDate(d)) {
-            return { value: true };
-        }
-        if (value instanceof Function) {
-            value = value();
-        }
-        return d <= new Date(value).getTime() ? null : { maxDate: true };
-    };
 };
 var MAX_DATE_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
@@ -842,18 +960,6 @@ MaxDateValidator.ctorParameters = function () { return []; };
 MaxDateValidator.propDecorators = {
     'maxDate': [{ type: core.Input },],
 };
-var min = function (value) {
-    return function (control) {
-        if (!isPresent(value)) {
-            return null;
-        }
-        if (isPresent(forms.Validators.required(control))) {
-            return null;
-        }
-        var /** @type {?} */ v = +control.value;
-        return v >= +value ? null : { actualValue: v, requiredValue: +value, min: true };
-    };
-};
 var MIN_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return MinValidator; }),
@@ -910,25 +1016,6 @@ MinValidator.decorators = [
 MinValidator.ctorParameters = function () { return []; };
 MinValidator.propDecorators = {
     'min': [{ type: core.Input },],
-};
-var minDate = function (value) {
-    value = parseDate(value);
-    if (!isDate(value) && !(value instanceof Function)) {
-        throw Error('minDate value must be or return a formatted date');
-    }
-    return function (control) {
-        if (isPresent(forms.Validators.required(control))) {
-            return null;
-        }
-        var /** @type {?} */ d = new Date(control.value).getTime();
-        if (!isDate(d)) {
-            return { value: true };
-        }
-        if (value instanceof Function) {
-            value = value();
-        }
-        return d >= new Date(value).getTime() ? null : { minDate: true };
-    };
 };
 var MIN_DATE_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
@@ -987,15 +1074,6 @@ MinDateValidator.ctorParameters = function () { return []; };
 MinDateValidator.propDecorators = {
     'minDate': [{ type: core.Input },],
 };
-var notEqual = function (val) {
-    return function (control) {
-        if (isPresent(forms.Validators.required(control))) {
-            return null;
-        }
-        var /** @type {?} */ v = control.value;
-        return val !== v ? null : { notEqual: true };
-    };
-};
 var NOT_EQUAL_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return NotEqualValidator; }),
@@ -1053,19 +1131,6 @@ NotEqualValidator.ctorParameters = function () { return []; };
 NotEqualValidator.propDecorators = {
     'notEqual': [{ type: core.Input },],
 };
-var notEqualTo = function (notEqualControl) {
-    var /** @type {?} */ subscribe = false;
-    return function (control) {
-        if (!subscribe) {
-            subscribe = true;
-            notEqualControl.valueChanges.subscribe(function () {
-                control.updateValueAndValidity();
-            });
-        }
-        var /** @type {?} */ v = control.value;
-        return notEqualControl.value !== v ? null : { notEqualTo: true };
-    };
-};
 var NOT_EQUAL_TO_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return NotEqualToValidator; }),
@@ -1102,13 +1167,6 @@ NotEqualToValidator.ctorParameters = function () { return []; };
 NotEqualToValidator.propDecorators = {
     'notEqualTo': [{ type: core.Input },],
 };
-var number = function (control) {
-    if (isPresent(forms.Validators.required(control))) {
-        return null;
-    }
-    var /** @type {?} */ v = control.value;
-    return /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(v) ? null : { 'number': true };
-};
 var NUMBER_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return NumberValidator; }),
@@ -1136,15 +1194,6 @@ NumberValidator.decorators = [
  * @nocollapse
  */
 NumberValidator.ctorParameters = function () { return []; };
-var property = function (value) {
-    return function (control) {
-        if (isPresent(forms.Validators.required(control))) {
-            return null;
-        }
-        var /** @type {?} */ obj = control.value;
-        return obj[value] != null ? null : { hasProperty: true, property: value };
-    };
-};
 var PROPERTY_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return PropertyValidator; }),
@@ -1201,18 +1250,6 @@ PropertyValidator.decorators = [
 PropertyValidator.ctorParameters = function () { return []; };
 PropertyValidator.propDecorators = {
     'property': [{ type: core.Input },],
-};
-var range = function (value) {
-    return function (control) {
-        if (!isPresent(value)) {
-            return null;
-        }
-        if (isPresent(forms.Validators.required(control))) {
-            return null;
-        }
-        var /** @type {?} */ v = +control.value;
-        return v >= value[0] && v <= value[1] ? null : { actualValue: v, requiredValue: value, range: true };
-    };
 };
 var RANGE_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
@@ -1271,18 +1308,6 @@ RangeValidator.ctorParameters = function () { return []; };
 RangeValidator.propDecorators = {
     'range': [{ type: core.Input },],
 };
-var rangeLength = function (value) {
-    return function (control) {
-        if (!isPresent(value)) {
-            return null;
-        }
-        if (isPresent(forms.Validators.required(control))) {
-            return null;
-        }
-        var /** @type {?} */ v = control.value;
-        return v.length >= value[0] && v.length <= value[1] ? null : { rangeLength: true };
-    };
-};
 var RANGE_LENGTH_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return RangeLengthValidator; }),
@@ -1340,15 +1365,6 @@ RangeLengthValidator.ctorParameters = function () { return []; };
 RangeLengthValidator.propDecorators = {
     'rangeLength': [{ type: core.Input },],
 };
-var url = function (control) {
-    if (isPresent(forms.Validators.required(control))) {
-        return null;
-    }
-    var /** @type {?} */ v = control.value;
-    /* tslint:disable */
-    return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(v) ? null : { 'url': true };
-    /* tslint:enable */
-};
 var URL_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return UrlValidator; }),
@@ -1376,22 +1392,6 @@ UrlValidator.decorators = [
  * @nocollapse
  */
 UrlValidator.ctorParameters = function () { return []; };
-var uuids = {
-    '3': /^[0-9A-F]{8}-[0-9A-F]{4}-3[0-9A-F]{3}-[0-9A-F]{4}-[0-9A-F]{12}$/i,
-    '4': /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
-    '5': /^[0-9A-F]{8}-[0-9A-F]{4}-5[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
-    'all': /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i
-};
-var uuid = function (version) {
-    return function (control) {
-        if (isPresent(forms.Validators.required(control))) {
-            return null;
-        }
-        var /** @type {?} */ v = control.value;
-        var /** @type {?} */ pattern = uuids[version] || uuids.all;
-        return (new RegExp(pattern)).test(v) ? null : { uuid: true };
-    };
-};
 var UUID_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return UUIDValidator; }),
@@ -1525,48 +1525,48 @@ exports.ɵz = Base64Validator;
 exports.ɵa = base64;
 exports.ɵba = CreditCardValidator;
 exports.ɵb = creditCard;
-exports.ɵbb = DateValidator;
-exports.ɵc = date;
 exports.ɵbc = DateISOValidator;
 exports.ɵd = dateISO;
+exports.ɵbb = DateValidator;
+exports.ɵc = date;
 exports.ɵbd = DigitsValidator;
 exports.ɵe = digits;
 exports.ɵbe = EmailValidator;
 exports.ɵf = email;
-exports.ɵbf = EqualValidator;
-exports.ɵg = equal;
 exports.ɵbg = EqualToValidator;
 exports.ɵh = equalTo;
-exports.ɵbh = GreaterThanValidator;
-exports.ɵi = gt;
+exports.ɵbf = EqualValidator;
+exports.ɵg = equal;
 exports.ɵbi = GreaterThanEqualValidator;
 exports.ɵj = gte;
+exports.ɵbh = GreaterThanValidator;
+exports.ɵi = gt;
 exports.ɵbj = JSONValidator;
 exports.ɵk = json;
-exports.ɵbk = LessThanValidator;
-exports.ɵl = lt;
 exports.ɵbl = LessThanEqualValidator;
 exports.ɵm = lte;
-exports.ɵbm = MaxValidator;
-exports.ɵn = max;
+exports.ɵbk = LessThanValidator;
+exports.ɵl = lt;
 exports.ɵbn = MaxDateValidator;
 exports.ɵo = maxDate;
-exports.ɵbo = MinValidator;
-exports.ɵp = min;
+exports.ɵbm = MaxValidator;
+exports.ɵn = max;
 exports.ɵbp = MinDateValidator;
 exports.ɵq = minDate;
-exports.ɵbq = NotEqualValidator;
-exports.ɵr = notEqual;
+exports.ɵbo = MinValidator;
+exports.ɵp = min;
 exports.ɵbr = NotEqualToValidator;
 exports.ɵs = notEqualTo;
+exports.ɵbq = NotEqualValidator;
+exports.ɵr = notEqual;
 exports.ɵbs = NumberValidator;
 exports.ɵt = number;
 exports.ɵbt = PropertyValidator;
 exports.ɵu = property;
-exports.ɵbu = RangeValidator;
-exports.ɵv = range;
 exports.ɵbv = RangeLengthValidator;
 exports.ɵw = rangeLength;
+exports.ɵbu = RangeValidator;
+exports.ɵv = range;
 exports.ɵbw = UrlValidator;
 exports.ɵx = url;
 exports.ɵbx = UUIDValidator;
