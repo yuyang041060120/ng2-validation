@@ -4,6 +4,7 @@ import { isPresent } from '../util/lang';
 
 export const lte = (lte: number): ValidatorFn => {
   return (control: AbstractControl): {[key: string]: boolean} => {
+    if (!lte) return null;
     if (!isPresent(lte)) return null;
     if (isPresent(Validators.required(control))) return null;
 
