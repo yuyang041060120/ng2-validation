@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-import { dateISO } from './';
+import { dateISO } from './validator';
 
 describe('DateISO', () => {
   const error = {dateISO: true};

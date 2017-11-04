@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-import { uuid } from './';
+import { uuid } from './validator';
 
 describe('Uuid', () => {
 

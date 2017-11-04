@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-import { email } from './';
+import { email } from './validator';
 
 describe('Email', () => {
   const error = {email: true};

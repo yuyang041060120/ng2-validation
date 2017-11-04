@@ -1,6 +1,6 @@
 import { FormControl, ValidatorFn } from '@angular/forms';
 
-import { url } from './';
+import { url } from './validator';
 
 describe('Url', () => {
   let control: FormControl;

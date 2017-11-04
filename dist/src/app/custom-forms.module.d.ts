@@ -1,5 +1,6 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 export declare const CustomValidators: {
+    arrayLength: (value: string) => ValidatorFn;
     base64: ValidatorFn;
     creditCard: ValidatorFn;
     date: ValidatorFn;

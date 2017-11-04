@@ -1,8 +1,8 @@
 import { FormControl } from '@angular/forms';
 
-import { property } from './';
+import { property } from './validator';
 
-describe('Object validator', () => {
+describe('Property validator', () => {
   it('Input is object and has identifier', () => {
     const control = new FormControl({ id: 1 });
     expect(property('id')(control)).toBeNull();

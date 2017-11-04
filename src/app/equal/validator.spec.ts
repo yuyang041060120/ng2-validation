@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-import { equal } from './';
+import { equal } from './validator';
 
 describe('Equal', () => {
   const error = {equal: true};

@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-import { json } from './';
+import { json } from './validator';
 
 describe('JSON', () => {
   const error = {json: true};

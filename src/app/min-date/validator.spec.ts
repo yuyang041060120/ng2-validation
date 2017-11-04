@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-import { minDate } from './';
+import { minDate } from './validator';
 
 describe('MinDate', () => {
   let control: FormControl;

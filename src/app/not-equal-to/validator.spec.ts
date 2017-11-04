@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-import { notEqualTo } from './';
+import { notEqualTo } from './validator';
 
 describe('NotEqualTo', () => {
   let notEqualControl: FormControl;

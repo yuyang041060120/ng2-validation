@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-import { min } from './';
+import { min } from './validator';
 
 describe('Min', () => {
   it('6 should be over 5', () => {

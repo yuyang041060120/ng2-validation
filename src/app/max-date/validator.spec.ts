@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-import { maxDate } from './';
+import { maxDate } from './validator';
 
 describe('MaxDate', () => {
   let control: FormControl;

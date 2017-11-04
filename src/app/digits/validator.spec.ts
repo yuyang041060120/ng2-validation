@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-import { digits } from './';
+import { digits } from './validator';
 
 describe('Digits', () => {
   const error = {digits: true};

@@ -1,5 +1,6 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { arrayLength } from './array-length/validator';
 import { base64 } from './base64/validator';
 import { creditCard } from './credit-card/validator';
 import { date } from './date/validator';
@@ -26,6 +27,7 @@ import { rangeLength } from './range-length/validator';
 import { uuid } from './uuid/validator';
 import { url } from './url/validator';
 
+import { ArrayLengthValidator } from './array-length/directive';
 import { Base64Validator } from './base64/directive';
 import { CreditCardValidator } from './credit-card/directive';
 import { DateValidator } from './date/directive';
@@ -53,6 +55,7 @@ import { UrlValidator } from './url/directive';
 import { UUIDValidator } from './uuid/directive';
 
 export const CustomValidators = {
+  arrayLength,
   base64,
   creditCard,
   date,
@@ -81,6 +84,7 @@ export const CustomValidators = {
 };
 
 const CustomDirectives = [
+  ArrayLengthValidator,
   Base64Validator,
   CreditCardValidator,
   DateValidator,

@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-import { creditCard } from './';
+import { creditCard } from './validator';
 
 describe('CreditCard', () => {
   const error = {creditCard: true};

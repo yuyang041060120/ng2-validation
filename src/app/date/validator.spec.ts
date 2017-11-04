@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-import { date } from './';
+import { date } from './validator';
 
 describe('Date', () => {
   const error = {date: true};

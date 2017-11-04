@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-import { gte } from './';
+import { gte } from './validator';
 
 describe('GTE', () => {
   const error = {gte: true};

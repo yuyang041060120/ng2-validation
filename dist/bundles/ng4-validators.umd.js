@@ -28,6 +28,15 @@ function parseDate(obj) {
     }
     return obj;
 }
+var arrayLength = function (value) {
+    return function (control) {
+        if (isPresent(forms.Validators.required(control))) {
+            return null;
+        }
+        var /** @type {?} */ obj = control.value;
+        return Array.isArray(obj) && obj.length >= +value ? null : { arrayLength: +value };
+    };
+};
 var base64 = function (control) {
     if (isPresent(forms.Validators.required(control))) {
         return null;
@@ -335,6 +344,63 @@ var url = function (control) {
     /* tslint:disable */
     return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(v) ? null : { 'url': true };
     /* tslint:enable */
+};
+var ARRAY_LENGTH_VALIDATOR = {
+    provide: forms.NG_VALIDATORS,
+    useExisting: core.forwardRef(function () { return ArrayLengthValidator; }),
+    multi: true
+};
+var ArrayLengthValidator = (function () {
+    function ArrayLengthValidator() {
+    }
+    /**
+     * @return {?}
+     */
+    ArrayLengthValidator.prototype.ngOnInit = function () {
+        this.validator = arrayLength(this.arrayLength);
+    };
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    ArrayLengthValidator.prototype.ngOnChanges = function (changes) {
+        for (var /** @type {?} */ key in changes) {
+            if (key === 'arrayLength') {
+                this.validator = arrayLength(changes[key].currentValue);
+                if (this.onChange) {
+                    this.onChange();
+                }
+            }
+        }
+    };
+    /**
+     * @param {?} c
+     * @return {?}
+     */
+    ArrayLengthValidator.prototype.validate = function (c) {
+        return this.validator(c);
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    ArrayLengthValidator.prototype.registerOnValidatorChange = function (fn) {
+        this.onChange = fn;
+    };
+    return ArrayLengthValidator;
+}());
+ArrayLengthValidator.decorators = [
+    { type: core.Directive, args: [{
+                selector: '[arrayLength][formControlName],[arrayLength][formControl],[arrayLength][ngModel]',
+                providers: [ARRAY_LENGTH_VALIDATOR]
+            },] },
+];
+/**
+ * @nocollapse
+ */
+ArrayLengthValidator.ctorParameters = function () { return []; };
+ArrayLengthValidator.propDecorators = {
+    'arrayLength': [{ type: core.Input },],
 };
 var BASE64_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
@@ -1450,6 +1516,7 @@ UUIDValidator.propDecorators = {
     'uuid': [{ type: core.Input },],
 };
 var CustomValidators = {
+    arrayLength: arrayLength,
     base64: base64,
     creditCard: creditCard,
     date: date,
@@ -1477,6 +1544,7 @@ var CustomValidators = {
     uuid: uuid
 };
 var CustomDirectives = [
+    ArrayLengthValidator,
     Base64Validator,
     CreditCardValidator,
     DateValidator,
@@ -1521,56 +1589,58 @@ CustomFormsModule.ctorParameters = function () { return []; };
 
 exports.CustomValidators = CustomValidators;
 exports.CustomFormsModule = CustomFormsModule;
-exports.ɵz = Base64Validator;
-exports.ɵa = base64;
-exports.ɵba = CreditCardValidator;
-exports.ɵb = creditCard;
-exports.ɵbc = DateISOValidator;
-exports.ɵd = dateISO;
-exports.ɵbb = DateValidator;
-exports.ɵc = date;
-exports.ɵbd = DigitsValidator;
-exports.ɵe = digits;
-exports.ɵbe = EmailValidator;
-exports.ɵf = email;
-exports.ɵbg = EqualToValidator;
-exports.ɵh = equalTo;
-exports.ɵbf = EqualValidator;
-exports.ɵg = equal;
-exports.ɵbi = GreaterThanEqualValidator;
-exports.ɵj = gte;
-exports.ɵbh = GreaterThanValidator;
-exports.ɵi = gt;
-exports.ɵbj = JSONValidator;
-exports.ɵk = json;
-exports.ɵbl = LessThanEqualValidator;
-exports.ɵm = lte;
-exports.ɵbk = LessThanValidator;
-exports.ɵl = lt;
-exports.ɵbn = MaxDateValidator;
-exports.ɵo = maxDate;
-exports.ɵbm = MaxValidator;
-exports.ɵn = max;
-exports.ɵbp = MinDateValidator;
-exports.ɵq = minDate;
-exports.ɵbo = MinValidator;
-exports.ɵp = min;
-exports.ɵbr = NotEqualToValidator;
-exports.ɵs = notEqualTo;
-exports.ɵbq = NotEqualValidator;
-exports.ɵr = notEqual;
-exports.ɵbs = NumberValidator;
-exports.ɵt = number;
-exports.ɵbt = PropertyValidator;
-exports.ɵu = property;
-exports.ɵbv = RangeLengthValidator;
-exports.ɵw = rangeLength;
-exports.ɵbu = RangeValidator;
-exports.ɵv = range;
-exports.ɵbw = UrlValidator;
-exports.ɵx = url;
-exports.ɵbx = UUIDValidator;
-exports.ɵy = uuid;
+exports.ɵba = ArrayLengthValidator;
+exports.ɵa = arrayLength;
+exports.ɵbb = Base64Validator;
+exports.ɵb = base64;
+exports.ɵbc = CreditCardValidator;
+exports.ɵc = creditCard;
+exports.ɵbe = DateISOValidator;
+exports.ɵe = dateISO;
+exports.ɵbd = DateValidator;
+exports.ɵd = date;
+exports.ɵbf = DigitsValidator;
+exports.ɵf = digits;
+exports.ɵbg = EmailValidator;
+exports.ɵg = email;
+exports.ɵbi = EqualToValidator;
+exports.ɵi = equalTo;
+exports.ɵbh = EqualValidator;
+exports.ɵh = equal;
+exports.ɵbk = GreaterThanEqualValidator;
+exports.ɵk = gte;
+exports.ɵbj = GreaterThanValidator;
+exports.ɵj = gt;
+exports.ɵbl = JSONValidator;
+exports.ɵl = json;
+exports.ɵbn = LessThanEqualValidator;
+exports.ɵn = lte;
+exports.ɵbm = LessThanValidator;
+exports.ɵm = lt;
+exports.ɵbp = MaxDateValidator;
+exports.ɵp = maxDate;
+exports.ɵbo = MaxValidator;
+exports.ɵo = max;
+exports.ɵbr = MinDateValidator;
+exports.ɵr = minDate;
+exports.ɵbq = MinValidator;
+exports.ɵq = min;
+exports.ɵbt = NotEqualToValidator;
+exports.ɵt = notEqualTo;
+exports.ɵbs = NotEqualValidator;
+exports.ɵs = notEqual;
+exports.ɵbu = NumberValidator;
+exports.ɵu = number;
+exports.ɵbv = PropertyValidator;
+exports.ɵv = property;
+exports.ɵbx = RangeLengthValidator;
+exports.ɵx = rangeLength;
+exports.ɵbw = RangeValidator;
+exports.ɵw = range;
+exports.ɵby = UrlValidator;
+exports.ɵy = url;
+exports.ɵbz = UUIDValidator;
+exports.ɵz = uuid;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

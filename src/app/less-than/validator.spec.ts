@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-import { lt } from './';
+import { lt } from './validator';
 
 describe('LT', () => {
   const error = {lt: true};

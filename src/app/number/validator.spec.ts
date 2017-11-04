@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-import { number } from './';
+import { number } from './validator';
 
 describe('Number', () => {
   let control: FormControl;

@@ -24,6 +24,15 @@ function parseDate(obj) {
     }
     return obj;
 }
+var arrayLength = function (value) {
+    return function (control) {
+        if (isPresent(Validators.required(control))) {
+            return null;
+        }
+        var /** @type {?} */ obj = control.value;
+        return Array.isArray(obj) && obj.length >= +value ? null : { arrayLength: +value };
+    };
+};
 var base64 = function (control) {
     if (isPresent(Validators.required(control))) {
         return null;
@@ -331,6 +340,63 @@ var url = function (control) {
     /* tslint:disable */
     return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(v) ? null : { 'url': true };
     /* tslint:enable */
+};
+var ARRAY_LENGTH_VALIDATOR = {
+    provide: NG_VALIDATORS,
+    useExisting: forwardRef(function () { return ArrayLengthValidator; }),
+    multi: true
+};
+var ArrayLengthValidator = (function () {
+    function ArrayLengthValidator() {
+    }
+    /**
+     * @return {?}
+     */
+    ArrayLengthValidator.prototype.ngOnInit = function () {
+        this.validator = arrayLength(this.arrayLength);
+    };
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    ArrayLengthValidator.prototype.ngOnChanges = function (changes) {
+        for (var /** @type {?} */ key in changes) {
+            if (key === 'arrayLength') {
+                this.validator = arrayLength(changes[key].currentValue);
+                if (this.onChange) {
+                    this.onChange();
+                }
+            }
+        }
+    };
+    /**
+     * @param {?} c
+     * @return {?}
+     */
+    ArrayLengthValidator.prototype.validate = function (c) {
+        return this.validator(c);
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    ArrayLengthValidator.prototype.registerOnValidatorChange = function (fn) {
+        this.onChange = fn;
+    };
+    return ArrayLengthValidator;
+}());
+ArrayLengthValidator.decorators = [
+    { type: Directive, args: [{
+                selector: '[arrayLength][formControlName],[arrayLength][formControl],[arrayLength][ngModel]',
+                providers: [ARRAY_LENGTH_VALIDATOR]
+            },] },
+];
+/**
+ * @nocollapse
+ */
+ArrayLengthValidator.ctorParameters = function () { return []; };
+ArrayLengthValidator.propDecorators = {
+    'arrayLength': [{ type: Input },],
 };
 var BASE64_VALIDATOR = {
     provide: NG_VALIDATORS,
@@ -1446,6 +1512,7 @@ UUIDValidator.propDecorators = {
     'uuid': [{ type: Input },],
 };
 var CustomValidators = {
+    arrayLength: arrayLength,
     base64: base64,
     creditCard: creditCard,
     date: date,
@@ -1473,6 +1540,7 @@ var CustomValidators = {
     uuid: uuid
 };
 var CustomDirectives = [
+    ArrayLengthValidator,
     Base64Validator,
     CreditCardValidator,
     DateValidator,
@@ -1517,5 +1585,5 @@ CustomFormsModule.ctorParameters = function () { return []; };
 /**
  * Generated bundle index. Do not edit.
  */
-export { CustomValidators, CustomFormsModule, Base64Validator as ɵz, base64 as ɵa, CreditCardValidator as ɵba, creditCard as ɵb, DateISOValidator as ɵbc, dateISO as ɵd, DateValidator as ɵbb, date as ɵc, DigitsValidator as ɵbd, digits as ɵe, EmailValidator as ɵbe, email as ɵf, EqualToValidator as ɵbg, equalTo as ɵh, EqualValidator as ɵbf, equal as ɵg, GreaterThanEqualValidator as ɵbi, gte as ɵj, GreaterThanValidator as ɵbh, gt as ɵi, JSONValidator as ɵbj, json as ɵk, LessThanEqualValidator as ɵbl, lte as ɵm, LessThanValidator as ɵbk, lt as ɵl, MaxDateValidator as ɵbn, maxDate as ɵo, MaxValidator as ɵbm, max as ɵn, MinDateValidator as ɵbp, minDate as ɵq, MinValidator as ɵbo, min as ɵp, NotEqualToValidator as ɵbr, notEqualTo as ɵs, NotEqualValidator as ɵbq, notEqual as ɵr, NumberValidator as ɵbs, number as ɵt, PropertyValidator as ɵbt, property as ɵu, RangeLengthValidator as ɵbv, rangeLength as ɵw, RangeValidator as ɵbu, range as ɵv, UrlValidator as ɵbw, url as ɵx, UUIDValidator as ɵbx, uuid as ɵy };
+export { CustomValidators, CustomFormsModule, ArrayLengthValidator as ɵba, arrayLength as ɵa, Base64Validator as ɵbb, base64 as ɵb, CreditCardValidator as ɵbc, creditCard as ɵc, DateISOValidator as ɵbe, dateISO as ɵe, DateValidator as ɵbd, date as ɵd, DigitsValidator as ɵbf, digits as ɵf, EmailValidator as ɵbg, email as ɵg, EqualToValidator as ɵbi, equalTo as ɵi, EqualValidator as ɵbh, equal as ɵh, GreaterThanEqualValidator as ɵbk, gte as ɵk, GreaterThanValidator as ɵbj, gt as ɵj, JSONValidator as ɵbl, json as ɵl, LessThanEqualValidator as ɵbn, lte as ɵn, LessThanValidator as ɵbm, lt as ɵm, MaxDateValidator as ɵbp, maxDate as ɵp, MaxValidator as ɵbo, max as ɵo, MinDateValidator as ɵbr, minDate as ɵr, MinValidator as ɵbq, min as ɵq, NotEqualToValidator as ɵbt, notEqualTo as ɵt, NotEqualValidator as ɵbs, notEqual as ɵs, NumberValidator as ɵbu, number as ɵu, PropertyValidator as ɵbv, property as ɵv, RangeLengthValidator as ɵbx, rangeLength as ɵx, RangeValidator as ɵbw, range as ɵw, UrlValidator as ɵby, url as ɵy, UUIDValidator as ɵbz, uuid as ɵz };
 //# sourceMappingURL=ng4-validators.es5.js.map

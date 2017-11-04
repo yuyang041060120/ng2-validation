@@ -20,29 +20,32 @@ npm i ng4-validators --save
 
 ## Custom validators
 
+- array length
 - base64
-- creditCard
+- credit card
 - date
-- dateISO
+- date ISO
 - digits
 - email
 - equal
-- equalTo
-- gt
-- gte
+- not equal
+- equal to
+- not equal to
+- greater than
+- greater than or equal
 - json
-- lt
-- lte
+- less than
+- less than or equal
 - max
-- maxDate
+- max date
 - min
-- minDate
-- notEqual
-- notEqualTo
+- min date
+- not equal
+- not equal to
 - number
 - property
 - range
-- rangeLength
+- range length
 - url
 - uuid
 
@@ -69,7 +72,7 @@ export class AppModule {
 }
 ```
 
-### rangeLength
+### range length - rangeLenght
 
 ```html
 <input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [rangeLength]="[5, 9]">
@@ -83,14 +86,14 @@ export class AppModule {
 <p *ngIf="field.errors?.min">error message</p>
 ```
 
-### gt
+### greater than - gt
 
 ```html
 <input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [gt]="10">
 <p *ngIf="field.errors?.gt">error message</p>
 ```
 
-### gte
+### greater than or equal - gte
 
 ```html
 <input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [gte]="10">
@@ -104,14 +107,14 @@ export class AppModule {
 <p *ngIf="field.errors?.max">error message</p>
 ```
 
-### lt
+### less than - lt
 
 ```html
 <input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [lt]="20">
 <p *ngIf="field.errors?.lt">error message</p>
 ```
 
-### lte
+### less than or equal - lte
 
 ```html
 <input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [lte]="20">
@@ -160,28 +163,28 @@ export class AppModule {
 <p *ngIf="field.errors?.date">error message</p>
 ```
 
-### minDate
+### min date - minDate
 
 ```html
 <input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" minDate="2016-09-09">
 <p *ngIf="field.errors?.minDate">error message</p>
 ```
 
-### maxDate
+### max date - maxDate
 
 ```html
 <input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" maxDate="2016-09-09">
 <p *ngIf="field.errors?.maxDate">error message</p>
 ```
 
-### dateISO
+### date ISO - dateISO
 
 ```html
 <input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" dateISO>
 <p *ngIf="field.errors?.dateISO">error message</p>
 ```
 
-### creditCard
+### credit card - creditCard
 
 ```html
 <input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" creditCard>
@@ -225,14 +228,14 @@ export class AppModule {
 <p *ngIf="field.errors?.equal">error message</p>
 ```
 
-### equal
+### not equal - notEqual
 
 ```html
 <input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [notEqual]="'xxx'">
 <p *ngIf="field.errors?.notEqual">error message</p>
 ```
 
-### equalTo
+### equal to - equalTo
 
 ```html
 <input type="password" ngModel name="password" #password="ngModel" required>
@@ -241,7 +244,7 @@ export class AppModule {
 <p *ngIf="certainPassword.errors?.equalTo">equalTo error</p>
 ```
 
-### notEqualTo
+### not equal to - notEqualTo
 
 ```html
 <input type="text" ngModel name="password" #password="ngModel" required>
@@ -251,6 +254,7 @@ export class AppModule {
 ```
 
 ### property
+
 ```typescript
 public obj = { id: 1 } // OK
 public obj = { name: 'baguette' } // KO
@@ -259,6 +263,17 @@ public obj = { name: 'baguette' } // KO
 ```html
 <input type="text" ngModel name="obj" #obj="ngModel" property="id">
 <p *ngIf="obj.errors?.property">property error</p>
+```
+
+### array length - ArrayLength
+```typescript
+public arr = [{ name: 'baguette' }, { name: 'croisant' }] // OK
+public arr = [{ name: 'baguette' }] // KO
+```
+
+```html
+<input type="text" ngModel name="arr" #arr="ngModel" arrayLength="2">
+<p *ngIf="arr.errors?.arrayLength">arrayLength error</p>
 ```
 
 ## Model driven
@@ -308,7 +323,7 @@ export class AppComponent {
 <p *ngIf="demoForm.from.controls.field.errors?.rangeLength">error message</p>
 ```
 
-### rangeLength
+### range length - rangeLenght
 
 ```typescript
 new FormControl('', CustomValidators.rangeLength([5, 9]))
@@ -320,7 +335,7 @@ new FormControl('', CustomValidators.rangeLength([5, 9]))
 new FormControl('', CustomValidators.min(10))
 ```
 
-### gt
+### greater than - gt
 
 ```typescript
 new FormControl('', CustomValidators.gt(10))
@@ -332,7 +347,7 @@ new FormControl('', CustomValidators.gt(10))
 new FormControl('', CustomValidators.max(20))
 ```
 
-### lt
+### less than - lt
 
 ```typescript
 new FormControl('', CustomValidators.lt(20))
@@ -374,25 +389,25 @@ new FormControl('', CustomValidators.email)
 new FormControl('', CustomValidators.date)
 ```
 
-### minDate
+### min date - minDate
 
 ```typescript
 new FormControl('', CustomValidators.minDate('2016-09-09'))
 ```
 
-### maxDate
+### max date - maxDate
 
 ```typescript
 new FormControl('', CustomValidators.maxDate('2016-09-09'))
 ```
 
-### dateISO
+### date ISO - dateISO
 
 ```typescript
 new FormControl('', CustomValidators.dateISO)
 ```
 
-### creditCard
+### credit card - creditCard
 
 ```typescript
 new FormControl('', CustomValidators.creditCard)
@@ -422,13 +437,13 @@ new FormControl('', CustomValidators.uuid('3'))
 new FormControl('', CustomValidators.equal('xxx'))
 ```
 
-### notEqual
+### not equal - notEqual
 
 ```typescript
 new FormControl('', CustomValidators.notEqual('xxx'))
 ```
 
-### equalTo
+### equal to - equalTo
 
 ```typescript
 let password = new FormControl('', Validators.required);
@@ -449,7 +464,7 @@ this.form = new FormGroup({
 </form>
 ```
 
-### notEqualTo
+### not equal to - notEqualTo
 
 ```typescript
 let password = new FormControl('', Validators.required);
@@ -483,6 +498,21 @@ this.form = new FormGroup({
 <form [formGroup]="form">
   <input type="text" formControlName="obj">
   <p *ngIf="form.controls.obj.errors?.property">property error</p>
+</form>
+```
+
+### array length - ArrayLength
+```typescript
+public arr = [{ name: 'baguette' }, { name: 'croisant' }]
+this.form = new FormGroup({
+  arr: new FormControl('', CustomValidators.arrayLength(2))
+});
+```
+
+```html
+<form [formGroup]="form">
+  <input type="text" formControlName="arr">
+  <p *ngIf="arr.errors?.arrayLength">arrayLength error</p>
 </form>
 ```
 

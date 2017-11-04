@@ -1,6 +1,6 @@
 import { FormControl, ValidatorFn } from '@angular/forms';
 
-import { rangeLength } from './';
+import { rangeLength } from './validator';
 
 describe('RangeLength [4,9],', () => {
   let control: FormControl;

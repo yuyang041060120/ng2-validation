@@ -1,6 +1,6 @@
 import { FormControl } from '@angular/forms';
 
-import { base64 } from './';
+import { base64 } from './validator';
 
 describe('Base64', () => {
   const error = {base64: true};
