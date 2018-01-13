@@ -292,8 +292,17 @@ var property = function (value) {
         if (isPresent(forms.Validators.required(control))) {
             return null;
         }
+        var /** @type {?} */ properties = value.split(',');
         var /** @type {?} */ obj = control.value;
-        return obj[value] != null ? null : { hasProperty: true, property: value };
+        var /** @type {?} */ isValid = true;
+        for (var _i = 0, properties_1 = properties; _i < properties_1.length; _i++) {
+            var prop = properties_1[_i];
+            if (obj[prop] == null) {
+                isValid = false;
+                break;
+            }
+        }
+        return isValid ? null : { hasProperty: true, property: value };
     };
 };
 var range = function (value) {

@@ -9,7 +9,16 @@ export const property = (value: string): ValidatorFn => {
       return null;
     }
 
+    const properties = value.split(',');
+
     const obj = control.value;
-    return obj[value] != null ? null : { hasProperty: true, property: value };
+    let isValid = true;
+    for (const prop of properties) {
+      if (obj[prop] == null) {
+        isValid = false;
+        break;
+      }
+    }
+    return isValid ? null : { hasProperty: true, property: value };
   };
 };

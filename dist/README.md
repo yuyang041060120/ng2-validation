@@ -262,6 +262,8 @@ public obj = { name: 'baguette' } // KO
 
 ```html
 <input type="text" ngModel name="obj" #obj="ngModel" property="id">
+<!-- For multiple properties check -->
+<input type="text" ngModel name="obj" #obj="ngModel" property="id,value,name">
 <p *ngIf="obj.errors?.property">property error</p>
 ```
 
@@ -491,6 +493,8 @@ public obj = { id: 1 };
 
 this.form = new FormGroup({
   obj: new FormControl('', CustomValidators.property('id'))
+  // For multiple properties check
+  obj: new FormControl('', CustomValidators.property('id,value,name'))
 });
 ```
 

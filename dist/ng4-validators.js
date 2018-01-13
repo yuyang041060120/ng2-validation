@@ -311,8 +311,16 @@ const property = (value) => {
         if (isPresent(Validators.required(control))) {
             return null;
         }
+        const /** @type {?} */ properties = value.split(',');
         const /** @type {?} */ obj = control.value;
-        return obj[value] != null ? null : { hasProperty: true, property: value };
+        let /** @type {?} */ isValid = true;
+        for (const /** @type {?} */ prop of properties) {
+            if (obj[prop] == null) {
+                isValid = false;
+                break;
+            }
+        }
+        return isValid ? null : { hasProperty: true, property: value };
     };
 };
 
