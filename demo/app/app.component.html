@@ -1,0 +1,18 @@
+<layout-header [version]="version"></layout-header>
+<div class="container fill">
+    <div class="row">
+        <div class="col-12 col-md-3 col-xl-3 py-md-4 bd-sidebar">
+            <layout-sidenav></layout-sidenav>
+        </div>
+        <main class="col-12 col-md-9 col-xl-8 py-md-4 pl-md-4 bd-content">
+            <h2 class="bd-title">
+                {{title}}
+            </h2>
+            <div class="card">
+                <div class="card-body">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
