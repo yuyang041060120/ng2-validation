@@ -76,7 +76,8 @@
       <label class="col-xs-3 control-label">maxDate</label>
 
       <div class="col-xs-9">
-        <input class="form-control" type="text" ngModel name="maxDate" #maxDate="ngModel" maxDate="2016-12-12"/>
+        <input class="form-control" type="date" [ngModel]="maxDateto" name="maxDateto" #maxDateTo="ngModel" />
+        <input class="form-control" type="date" ngModel name="maxDate" #maxDate="ngModel" [maxDate]="maxDateTo.control" />
         <p class="alert alert-danger" *ngIf="maxDate?.errors?.maxDate">maxDate error</p>
       </div>
     </div>
@@ -85,7 +86,8 @@
       <label class="col-xs-3 control-label">minDate</label>
 
       <div class="col-xs-9">
-        <input class="form-control" type="text" ngModel name="minDate" #minDate="ngModel" minDate="2016-12-12"/>
+        <input class="form-control" type="date" [ngModel]="minDateFrom" name="minDateFrom" #minDateFrom="ngModel" />
+        <input class="form-control" type="date" ngModel name="minDate" #minDate="ngModel" [minDate]="minDateFrom.control"/>
         <p class="alert alert-danger" *ngIf="minDate?.errors?.minDate">minDate error</p>
       </div>
     </div>

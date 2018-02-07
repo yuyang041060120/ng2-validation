@@ -11,6 +11,7 @@ import { CustomValidators } from '../../src';
 export class AppComponent implements OnInit {
   form: FormGroup;
   num: number = 5;
+  minDateFrom = new Date();
 
   ngOnInit() {
     let password = new FormControl('', Validators.required);

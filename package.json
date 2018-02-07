@@ -2,7 +2,7 @@
   "description": "Native angular form validators",
   "scripts": {
     "test": "karma start ./karma.conf.js",
-    "dev": "webpack-dev-server --port 4001 --watch",
+    "start": "webpack-dev-server --port 4001 --watch",
     "example": "webpack --optimize-minimize",
     "prebuild": "rimraf dist",
     "build": "ng-packagr -p ./src/ng-package.json",
