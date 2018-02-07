@@ -8,6 +8,8 @@
     "experimentalDecorators": true,
     "noEmitHelpers": false,
     "declaration": true,
+    "skipLibCheck": true,
+    "stripInternal": true,
     "rootDir": "src",
     "outDir": "dist",
     "lib": [

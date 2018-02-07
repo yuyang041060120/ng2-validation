@@ -43,7 +43,6 @@ npm install ng2-validation --save
 - creditCard
 - json
 - base64
-- phone
 - uuid
 - equal
 - notEqual
@@ -205,15 +204,6 @@ export class AppModule {
 <input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" base64/>
 <p *ngIf="field.errors?.base64">error message</p>
 ```
-
-### phone
-
-```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" phone="CN"/>
-<p *ngIf="field.errors?.phone">error message</p>
-```
-
-details see [libphonenumber](https://github.com/halt-hammerzeit/libphonenumber-js)
 
 ### uuid
 
