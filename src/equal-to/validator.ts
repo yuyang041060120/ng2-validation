@@ -1,7 +1,7 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 export const equalTo = (equalControl: AbstractControl): ValidatorFn => {
-  let subscribe: boolean = false;
+  let subscribe = false;
 
   return (control: AbstractControl): {[key: string]: boolean} => {
     if (!subscribe) {

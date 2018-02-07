@@ -27,7 +27,9 @@ export class GreaterThanValidator implements Validator, OnInit, OnChanges {
     for (let key in changes) {
       if (key === 'gt') {
         this.validator = gt(changes[key].currentValue);
-        if (this.onChange) this.onChange();
+        if (this.onChange) {
+            this.onChange();
+        }
       }
     }
   }

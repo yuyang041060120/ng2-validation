@@ -4,39 +4,41 @@ import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular
 import { gte } from './';
 
 const GREATER_THAN_EQUAL_VALIDATOR: any = {
-  provide: NG_VALIDATORS,
-  useExisting: forwardRef(() => GreaterThanEqualValidator),
-  multi: true
+    provide: NG_VALIDATORS,
+    useExisting: forwardRef(() => GreaterThanEqualValidator),
+    multi: true
 };
 
 @Directive({
-  selector: '[gte][formControlName],[gte][formControl],[gte][ngModel]',
-  providers: [GREATER_THAN_EQUAL_VALIDATOR]
+    selector: '[gte][formControlName],[gte][formControl],[gte][ngModel]',
+    providers: [GREATER_THAN_EQUAL_VALIDATOR]
 })
 export class GreaterThanEqualValidator implements Validator, OnInit, OnChanges {
-  @Input() gte: number;
+    @Input() gte: number;
 
-  private validator: ValidatorFn;
-  private onChange: () => void;
+    private validator: ValidatorFn;
+    private onChange: () => void;
 
-  ngOnInit() {
-    this.validator = gte(this.gte);
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    for (let key in changes) {
-      if (key === 'gte') {
-        this.validator = gte(changes[key].currentValue);
-        if (this.onChange) this.onChange();
-      }
+    ngOnInit() {
+        this.validator = gte(this.gte);
     }
-  }
 
-  validate(c: AbstractControl): {[key: string]: any} {
-    return this.validator(c);
-  }
+    ngOnChanges(changes: SimpleChanges) {
+        for (let key in changes) {
+            if (key === 'gte') {
+                this.validator = gte(changes[key].currentValue);
+                if (this.onChange) {
+                    this.onChange();
+                }
+            }
+        }
+    }
 
-  registerOnValidatorChange(fn: () => void): void {
-    this.onChange = fn;
-  }
+    validate(c: AbstractControl): { [key: string]: any } {
+        return this.validator(c);
+    }
+
+    registerOnValidatorChange(fn: () => void): void {
+        this.onChange = fn;
+    }
 }

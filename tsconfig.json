@@ -1,32 +1,27 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "es2015",
     "moduleResolution": "node",
     "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "noEmitHelpers": false,
+    "inlineSources": true,
     "declaration": true,
-    "rootDir": "src",
-    "outDir": "dist",
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "skipLibCheck": true,
+    "stripInternal": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
     "lib": [
-      "es6",
+      "es2015",
       "dom"
-    ],
-    "types": [
-      "jasmine",
-      "node"
     ]
   },
   "exclude": [
     "node_modules",
-    "example",
-    "src/**/*.spec.ts",
-    "aot"
-  ],
-  "angularCompilerOptions": {
-    "genDir": "aot",
-    "skipMetadataEmit" : false
-  }
+    "coverage",
+    "integration",
+    "dist"
+  ]
 }

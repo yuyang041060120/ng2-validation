@@ -1,0 +1,37 @@
+@import "~bootstrap/scss/bootstrap";
+@import "github-highlight";
+@import "custom";
+@import "sidebar";
+@import "content";
+body {
+    position: relative;
+}
+
+html,
+body,
+demo-app {
+    height: 100%;
+}
+
+demo-app,
+layout-header,
+layout-sidenav {
+    display: block;
+}
+
+.fill {
+    height: 100%;
+}
+
+.card {
+    label {
+        margin-bottom: 5px;
+    }
+    p {
+        margin: 10px 0 20px 0;
+    }
+}
+
+.bd-main {
+    order: 1;
+}

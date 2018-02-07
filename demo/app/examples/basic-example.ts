@@ -1,0 +1,276 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+    selector: 'basic',
+    template: `
+      <div class="container">
+      <form class="form-horizontal" novalidate>
+        <div class="form-group">
+          <label class="col-xs-3 control-label">required</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="requried" #requried="ngModel" required/>
+            <p class="alert alert-danger" *ngIf="requried?.errors?.required">required error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">minlength</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="minlength" #minlength="ngModel" minlength="5"/>
+            <p class="alert alert-danger" *ngIf="minlength?.errors?.minlength">minlength error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">maxlength</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="maxlength" #maxlength="ngModel" maxlength="5"/>
+            <p class="alert alert-danger" *ngIf="maxlength?.errors?.maxlength">maxlength error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">pattern</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="pattern" #pattern="ngModel" pattern="[a-z]{6}"/>
+            <p class="alert alert-danger" *ngIf="pattern?.errors?.pattern">pattern error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">base64</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="base64" #base64="ngModel" base64/>
+            <p class="alert alert-danger" *ngIf="base64?.errors?.base64">base64 error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">creditCard</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="creditCard" #creditCard="ngModel" creditCard/>
+            <p class="alert alert-danger" *ngIf="creditCard?.errors?.creditCard">creditCard error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">date</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="date" #date="ngModel" date/>
+            <p class="alert alert-danger" *ngIf="date?.errors?.date">date error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">dateISO</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="dateISO" #dateISO="ngModel" dateISO/>
+            <p class="alert alert-danger" *ngIf="dateISO?.errors?.dateISO">dateISO error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">maxDate</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="date" [ngModel]="maxDateto" name="maxDateto" #maxDateTo="ngModel" />
+            <input class="form-control" type="date" ngModel name="maxDate" #maxDate="ngModel" [maxDate]="maxDateTo.control" />
+            <p class="alert alert-danger" *ngIf="maxDate?.errors?.maxDate">maxDate error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">minDate</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="date" [ngModel]="minDateFrom" name="minDateFrom" #minDateFrom="ngModel" />
+            <input class="form-control" type="date" ngModel name="minDate" #minDate="ngModel" [minDate]="minDateFrom.control"/>
+            <p class="alert alert-danger" *ngIf="minDate?.errors?.minDate">minDate error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">digits</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="digits" #digits="ngModel" digits/>
+            <p class="alert alert-danger" *ngIf="digits?.errors?.digits">digits error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">email</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="email" #email="ngModel" email/>
+            <p class="alert alert-danger" *ngIf="email?.errors?.email">email error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">equal</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="equal" #equal="ngModel" equal="aabbcc"/>
+            <p class="alert alert-danger" *ngIf="equal?.errors?.equal">equal error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">notEqual</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="notEqual" #notEqual="ngModel" notEqual="aabbcc"/>
+            <p class="alert alert-danger" *ngIf="notEqual?.errors?.notEqual">notEqual error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">equalTo</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="password" #password="ngModel"/>
+            <input class="form-control" type="text" ngModel name="equalTo" #equalTo="ngModel" [equalTo]="password"/>
+            <p class="alert alert-danger" *ngIf="equalTo?.errors?.equalTo">equalTo error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">notEqualTo</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="oldPassword" #oldPassword="ngModel"/>
+            <input class="form-control" type="text" ngModel name="notEqualTo" #notEqualTo="ngModel" [notEqualTo]="oldPassword"/>
+            <p class="alert alert-danger" *ngIf="notEqualTo?.errors?.notEqualTo">notEqualTo error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">greater than</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="gt" #gt="ngModel" gt="10"/>
+            <p class="alert alert-danger" *ngIf="gt?.errors?.gt">greater than error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">greater than equal</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="gte" #gte="ngModel" gte="10"/>
+            <p class="alert alert-danger" *ngIf="gte?.errors?.gte">greater than equal error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">less than</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="lt" #lt="ngModel" lt="5"/>
+            <p class="alert alert-danger" *ngIf="lt?.errors?.lt">less than error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">less than equal</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="lte" #lte="ngModel" lte="5"/>
+            <p class="alert alert-danger" *ngIf="lte?.errors?.lte">less than equal error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">json</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="json" #json="ngModel" json/>
+            <p class="alert alert-danger" *ngIf="json?.errors?.json">json error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">max</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="max" #max="ngModel" max="5"/>
+            <p class="alert alert-danger" *ngIf="max?.errors?.max">max error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">min</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="min" #min="ngModel" min="5"/>
+            <p class="alert alert-danger" *ngIf="min?.errors?.min">min error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">number</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="number" #number="ngModel" number/>
+            <p class="alert alert-danger" *ngIf="number?.errors?.number">number error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">range</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="range" #range="ngModel" [range]="[4,9]"/>
+            <p class="alert alert-danger" *ngIf="range?.errors?.range">range error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">rangeLength</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="rangeLength" #rangeLength="ngModel" [rangeLength]="[4,9]"/>
+            <p class="alert alert-danger" *ngIf="rangeLength?.errors?.rangeLength">rangeLength error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">url</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="url" #url="ngModel" url/>
+            <p class="alert alert-danger" *ngIf="url?.errors?.url">url error</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-xs-3 control-label">uuid</label>
+
+          <div class="col-xs-9">
+            <input class="form-control" type="text" ngModel name="uuid" #uuid="ngModel" uuid="3"/>
+            <p class="alert alert-danger" *ngIf="uuid?.errors?.uuid">uuid error</p>
+          </div>
+        </div>
+      </form>
+    </div>
+
+        ---
+    `
+})
+
+export class BasicExample implements OnInit {
+
+    constructor() { }
+
+    ngOnInit() {
+    }
+}

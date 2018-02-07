@@ -5,12 +5,12 @@ Angular2 custom validation, inspired by jQuery validation.
 # Install
 
 ```bash
-npm install ng2-validation --save
+npm install @ng-validators/ng-validators --save
 ```
 # Systemjs
 
 ```bash
-'ng2-validation': 'npm:ng2-validation/bundles/ng2-validation.umd.js'
+'ng2-validation': 'npm:@ng-validators/bundles/ng-validators-ng-validators.umd.js'
 ```
 
 # Validators
@@ -43,7 +43,6 @@ npm install ng2-validation --save
 - creditCard
 - json
 - base64
-- phone
 - uuid
 - equal
 - notEqual
@@ -60,7 +59,7 @@ import `FormsModule` and `CustomFormsModule` in *app.module.ts*
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { CustomFormsModule } from 'ng2-validation'
+import { CustomFormsModule } from '@ng-validators/ng-validators'
 
 import { AppComponent } from './app.component';
 
@@ -205,15 +204,6 @@ export class AppModule {
 <input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" base64/>
 <p *ngIf="field.errors?.base64">error message</p>
 ```
-
-### phone
-
-```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" phone="CN"/>
-<p *ngIf="field.errors?.phone">error message</p>
-```
-
-details see [libphonenumber](https://github.com/halt-hammerzeit/libphonenumber-js)
 
 ### uuid
 

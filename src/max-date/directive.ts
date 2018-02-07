@@ -27,7 +27,7 @@ export class MaxDateValidator implements Validator, OnInit, OnChanges {
     for (let key in changes) {
       if (key === 'maxDate') {
         this.validator = maxDate(changes[key].currentValue);
-        if (this.onChange) this.onChange();
+        if (this.onChange) { this.onChange(); }
       }
     }
   }

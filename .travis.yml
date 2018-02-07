@@ -1,5 +1,35 @@
+dist: trusty
+sudo: required
 language: node_js
 node_js:
-  - "4"
-  - "5"
-  - "6"
+- '8'
+cache:
+  directories:
+  - node_modules
+os:
+- linux
+addons:
+  apt:
+    sources:
+    - google-chrome
+    packages:
+    - google-chrome-stable
+before_install:
+- echo "$TRAVIS_BRANCH"
+- echo "$TRAVIS_PULL_REQUEST"
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- export CHROME_BIN=chromium-browser
+script:
+- yarn run lint
+- yarn run test
+- yarn run build:demo
+
+env:
+  global:
+    - DEPLOY_BRANCH="master"
+    - SOURCE_DIR="dist"
+    - TARGET_BRANCH="gh-pages"
+    - SSH_KEY="travis_rsa"
+    - GIT_NAME="travis"
+    - GIT_EMAIL="andzej.maciusovic@gmail.com"

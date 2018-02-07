@@ -2,12 +2,16 @@ import { AbstractControl, Validators, ValidatorFn } from '@angular/forms';
 
 import { isPresent } from '../util/lang';
 
-export const max = (max: number): ValidatorFn => {
+export const max = (val: number): ValidatorFn => {
   return (control: AbstractControl): {[key: string]: any} => {
-    if (!isPresent(max)) return null;
-    if (isPresent(Validators.required(control))) return null;
+    if (!isPresent(val)) {
+        return null;
+    }
+    if (isPresent(Validators.required(control))) {
+        return null;
+    }
 
     let v: number = +control.value;
-    return v <= +max ? null : {actualValue: v, requiredValue: +max, max: true};
+    return v <= +val ? null : {actualValue: v, requiredValue: +val, max: true};
   };
 };
