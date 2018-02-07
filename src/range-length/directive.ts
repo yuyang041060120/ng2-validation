@@ -4,39 +4,41 @@ import { NG_VALIDATORS, Validator, ValidatorFn, AbstractControl } from '@angular
 import { rangeLength } from './';
 
 const RANGE_LENGTH_VALIDATOR: any = {
-  provide: NG_VALIDATORS,
-  useExisting: forwardRef(() => RangeLengthValidator),
-  multi: true
+    provide: NG_VALIDATORS,
+    useExisting: forwardRef(() => RangeLengthValidator),
+    multi: true
 };
 
 @Directive({
-  selector: '[rangeLength][formControlName],[rangeLength][formControl],[rangeLength][ngModel]',
-  providers: [RANGE_LENGTH_VALIDATOR]
+    selector: '[rangeLength][formControlName],[rangeLength][formControl],[rangeLength][ngModel]',
+    providers: [RANGE_LENGTH_VALIDATOR]
 })
 export class RangeLengthValidator implements Validator, OnInit, OnChanges {
-  @Input() rangeLength: [number];
+    @Input() rangeLength: [number];
 
-  private validator: ValidatorFn;
-  private onChange: () => void;
+    private validator: ValidatorFn;
+    private onChange: () => void;
 
-  ngOnInit() {
-    this.validator = rangeLength(this.rangeLength);
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    for (let key in changes) {
-      if (key === 'rangeLength') {
-        this.validator = rangeLength(changes[key].currentValue);
-        if (this.onChange) this.onChange();
-      }
+    ngOnInit() {
+        this.validator = rangeLength(this.rangeLength);
     }
-  }
 
-  validate(c: AbstractControl): {[key: string]: any} {
-    return this.validator(c);
-  }
+    ngOnChanges(changes: SimpleChanges) {
+        for (let key in changes) {
+            if (key === 'rangeLength') {
+                this.validator = rangeLength(changes[key].currentValue);
+                if (this.onChange) {
+                    this.onChange();
+                }
+            }
+        }
+    }
 
-  registerOnValidatorChange(fn: () => void): void {
-    this.onChange = fn;
-  }
+    validate(c: AbstractControl): { [key: string]: any } {
+        return this.validator(c);
+    }
+
+    registerOnValidatorChange(fn: () => void): void {
+        this.onChange = fn;
+    }
 }

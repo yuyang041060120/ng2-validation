@@ -27,7 +27,7 @@ export class RangeValidator implements Validator, OnInit, OnChanges {
     for (let key in changes) {
       if (key === 'range') {
         this.validator = range(changes[key].currentValue);
-        if (this.onChange) this.onChange();
+        if (this.onChange) { this.onChange(); }
       }
     }
   }

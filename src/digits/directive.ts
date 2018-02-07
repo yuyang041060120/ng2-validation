@@ -4,17 +4,17 @@ import { NG_VALIDATORS, Validator, AbstractControl } from '@angular/forms';
 import { digits } from './';
 
 const DIGITS_VALIDATOR: any = {
-  provide: NG_VALIDATORS,
-  useExisting: forwardRef(() => DigitsValidator),
-  multi: true
+    provide: NG_VALIDATORS,
+    useExisting: forwardRef(() => DigitsValidator),
+    multi: true
 };
 
 @Directive({
-  selector: '[digits][formControlName],[digits][formControl],[digits][ngModel]',
-  providers: [DIGITS_VALIDATOR]
+    selector: '[digits][formControlName],[digits][formControl],[digits][ngModel]',
+    providers: [DIGITS_VALIDATOR]
 })
 export class DigitsValidator implements Validator {
-  validate(c: AbstractControl): {[key: string]: any} {
-    return digits(c);
-  }
+    validate(c: AbstractControl): { [key: string]: any } {
+        return digits(c);
+    }
 }

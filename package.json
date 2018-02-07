@@ -13,7 +13,7 @@
     "test:watch": "karma start ./scripts/karma.conf.js --no-single-run --auto-watch",
     "test": "karma start ./scripts/karma.conf.js --single-run",
     "coveralls": "cat ./coverage/lcov/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "lint": "tslint --type-check --project ./src/tsconfig.json",
+    "lint": "tslint --project ./src/tsconfig.json",
     "release": "sh ./release.sh"
   },
   "devDependencies": {

@@ -3,15 +3,15 @@ import { FormControl } from '@angular/forms';
 import { base64 } from './';
 
 describe('Base64', () => {
-  const error = {base64: true};
+    const error = { base64: true };
 
-  it('"ZGFua29nYWk=" should be base64', () => {
-    let control = new FormControl('ZGFua29nYWk=');
-    expect(base64(control)).toBeNull();
-  });
+    it('"ZGFua29nYWk=" should be base64', () => {
+        let control = new FormControl('ZGFua29nYWk=');
+        expect(base64(control)).toBeNull();
+    });
 
-  it('"ZGFua" should not be base64', () => {
-    let control = new FormControl('ZGFua');
-    expect(base64(control)).toEqual(error);
-  });
+    it('"ZGFua" should not be base64', () => {
+        let control = new FormControl('ZGFua');
+        expect(base64(control)).toEqual(error);
+    });
 });

@@ -27,7 +27,7 @@ export class MinDateValidator implements Validator, OnInit, OnChanges {
     for (let key in changes) {
       if (key === 'minDate') {
         this.validator = minDate(changes[key].currentValue);
-        if (this.onChange) this.onChange();
+        if (this.onChange) { this.onChange(); }
       }
     }
   }
