@@ -1,3 +1,6 @@
+## Breaking changes
+Directive email rename to ng
+
 # Description
 
 Angular 4 custom validation, forked from [ng2-validation](https://github.com/yuyang041060120/ng2-validation).
@@ -152,7 +155,7 @@ export class AppModule {
 ### email
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" email>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" ngvemail>
 <p *ngIf="field.errors?.email">error message</p>
 ```
 
