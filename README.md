@@ -1,5 +1,5 @@
 ## Breaking changes
-Directive email rename to ng
+Directive email rename to ngvemail see [rsaenen/ng4-validators#5](https://github.com/rsaenen/ng4-validators/issues/5)
 
 # Description
 
