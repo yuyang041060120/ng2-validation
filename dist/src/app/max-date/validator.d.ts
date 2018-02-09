@@ -1,2 +1,2 @@
 import { ValidatorFn } from '@angular/forms';
-export declare const maxDate: (value: any) => ValidatorFn;
+export declare const maxDate: (maxInput: any) => ValidatorFn;

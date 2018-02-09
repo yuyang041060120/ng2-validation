@@ -1,9 +1,46 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms')) :
-	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/forms'], factory) :
-	(factory((global['ng4-validators'] = {}),global.ng.core,global.ng.forms));
-}(this, (function (exports,core,forms) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/forms'), require('@angular/core')) :
+	typeof define === 'function' && define.amd ? define(['exports', '@angular/forms', '@angular/core'], factory) :
+	(factory((global['ng4-validators'] = {}),global.ng.forms,global.ng.core));
+}(this, (function (exports,forms,core) { 'use strict';
 
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+this file except in compliance with the License. You may obtain a copy of the
+License at http://www.apache.org/licenses/LICENSE-2.0
+THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+MERCHANTABLITY OR NON-INFRINGEMENT.
+See the Apache Version 2.0 License for specific language governing permissions
+and limitations under the License.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+
+
+
+
+
+
+
+
+function __values(o) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    if (m) return m.call(o);
+    return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 /**
  * @param {?} obj
  * @return {?}
@@ -23,11 +60,18 @@ function isDate(obj) {
  * @return {?}
  */
 function parseDate(obj) {
-    if (typeof obj === 'object' && obj.year != null && obj.month != null && obj.day != null) {
-        return obj.year + '-' + obj.month + '-' + obj.day;
+    try {
+        if (typeof obj === 'object' && obj.year != null && obj.month != null && obj.day != null) {
+            return obj.year + '-' + obj.month + '-' + obj.day;
+        }
     }
+    catch (e) { }
     return obj;
 }
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var arrayLength = function (value) {
     return function (control) {
         if (isPresent(forms.Validators.required(control))) {
@@ -37,6 +81,10 @@ var arrayLength = function (value) {
         return Array.isArray(obj) && obj.length >= +value ? null : { arrayLength: +value };
     };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var base64 = function (control) {
     if (isPresent(forms.Validators.required(control))) {
         return null;
@@ -44,6 +92,10 @@ var base64 = function (control) {
     var /** @type {?} */ v = control.value;
     return /^(?:[A-Z0-9+\/]{4})*(?:[A-Z0-9+\/]{2}==|[A-Z0-9+\/]{3}=|[A-Z0-9+\/]{4})$/i.test(v) ? null : { 'base64': true };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var creditCard = function (control) {
     if (isPresent(forms.Validators.required(control))) {
         return null;
@@ -52,7 +104,7 @@ var creditCard = function (control) {
     var /** @type {?} */ sanitized = v.replace(/[^0-9]+/g, '');
     // problem with chrome
     /* tslint:disable */
-    if (!(/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/.test(sanitized))) {
+    if (!(/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11}|(?:9792)\d{12})$/.test(sanitized))) {
         return { creditCard: true };
     }
     /* tslint:enable */
@@ -82,6 +134,10 @@ var creditCard = function (control) {
     }
     return { creditCard: true };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var date = function (control) {
     if (isPresent(forms.Validators.required(control))) {
         return null;
@@ -89,6 +145,10 @@ var date = function (control) {
     var /** @type {?} */ v = control.value;
     return isDate(v) ? null : { date: true };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var dateISO = function (control) {
     if (isPresent(forms.Validators.required(control))) {
         return null;
@@ -96,6 +156,10 @@ var dateISO = function (control) {
     var /** @type {?} */ v = control.value;
     return /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test(v) ? null : { dateISO: true };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var digits = function (control) {
     if (isPresent(forms.Validators.required(control))) {
         return null;
@@ -103,6 +167,10 @@ var digits = function (control) {
     var /** @type {?} */ v = control.value;
     return /^\d+$/.test(v) ? null : { digits: true };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var email = function (control) {
     if (isPresent(forms.Validators.required(control))) {
         return null;
@@ -112,6 +180,10 @@ var email = function (control) {
     return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) ? null : { 'email': true };
     /* tslint:enable */
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var equal = function (val) {
     return function (control) {
         if (isPresent(forms.Validators.required(control))) {
@@ -121,6 +193,10 @@ var equal = function (val) {
         return val === v ? null : { equal: true };
     };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var equalTo = function (equalControl) {
     var /** @type {?} */ subscribe = false;
     return function (control) {
@@ -134,6 +210,10 @@ var equalTo = function (equalControl) {
         return equalControl.value === v ? null : { equalTo: true };
     };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var gt = function (value) {
     return function (control) {
         if (!isPresent(value)) {
@@ -146,6 +226,10 @@ var gt = function (value) {
         return v > +value ? null : { gt: true };
     };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var gte = function (value) {
     return function (control) {
         if (!isPresent(value)) {
@@ -158,6 +242,10 @@ var gte = function (value) {
         return v >= +value ? null : { gte: true };
     };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var json = function (control) {
     if (isPresent(forms.Validators.required(control))) {
         return null;
@@ -172,6 +260,10 @@ var json = function (control) {
     catch (e) { }
     return { json: true };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var lt = function (value) {
     return function (control) {
         if (!isPresent(value)) {
@@ -184,6 +276,10 @@ var lt = function (value) {
         return v < +value ? null : { lt: true };
     };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var lte = function (value) {
     return function (control) {
         if (!isPresent(value)) {
@@ -196,6 +292,10 @@ var lte = function (value) {
         return v <= +value ? null : { lte: true };
     };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var max = function (value) {
     return function (control) {
         if (!isPresent(value)) {
@@ -208,12 +308,37 @@ var max = function (value) {
         return v <= +value ? null : { actualValue: v, requiredValue: +value, max: true };
     };
 };
-var maxDate = function (value) {
-    value = parseDate(value);
-    if (!isDate(value) && !(value instanceof Function)) {
-        throw Error('maxDate value must be or return a formatted date');
-    }
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var maxDate = function (maxInput) {
+    var /** @type {?} */ value;
+    var /** @type {?} */ subscribe = false;
+    var /** @type {?} */ maxValue = maxInput;
+    var /** @type {?} */ isForm = maxInput instanceof forms.FormControl || maxInput instanceof forms.NgModel;
     return function (control) {
+        if (!subscribe && isForm) {
+            subscribe = true;
+            maxInput.valueChanges.subscribe(function () {
+                control.updateValueAndValidity();
+            });
+        }
+        if (isForm) {
+            maxValue = maxInput.value;
+        }
+        value = parseDate(maxValue);
+        if (!isDate(value) && !(value instanceof Function)) {
+            if (value == null) {
+                return { maxDate: true, error: 'maxDate is null' };
+            }
+            else if (isForm) {
+                return { maxDate: true, error: 'maxDate is invalid' };
+            }
+            else {
+                throw Error('maxDate value must be or return a formatted date');
+            }
+        }
         if (isPresent(forms.Validators.required(control))) {
             return null;
         }
@@ -224,9 +349,13 @@ var maxDate = function (value) {
         if (value instanceof Function) {
             value = value();
         }
-        return d <= new Date(value).getTime() ? null : { maxDate: true };
+        return d <= new Date(value).getTime() ? null : { maxDate: true, error: 'greater than maxDate' };
     };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var min = function (value) {
     return function (control) {
         if (!isPresent(value)) {
@@ -239,12 +368,37 @@ var min = function (value) {
         return v >= +value ? null : { actualValue: v, requiredValue: +value, min: true };
     };
 };
-var minDate = function (value) {
-    value = parseDate(value);
-    if (!isDate(value) && !(value instanceof Function)) {
-        throw Error('minDate value must be or return a formatted date');
-    }
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var minDate = function (minInput) {
+    var /** @type {?} */ value;
+    var /** @type {?} */ subscribe = false;
+    var /** @type {?} */ minValue = minInput;
+    var /** @type {?} */ isForm = minInput instanceof forms.FormControl || minInput instanceof forms.NgModel;
     return function (control) {
+        if (!subscribe && isForm) {
+            subscribe = true;
+            minInput.valueChanges.subscribe(function () {
+                control.updateValueAndValidity();
+            });
+        }
+        if (isForm) {
+            minValue = minInput.value;
+        }
+        value = parseDate(minValue);
+        if (!isDate(value) && !(value instanceof Function)) {
+            if (value == null) {
+                return { minDate: true, error: 'minDate is null' };
+            }
+            else if (isForm) {
+                return { minDate: true, error: 'minDate is invalid' };
+            }
+            else {
+                throw Error('minDate value must be or return a formatted date');
+            }
+        }
         if (isPresent(forms.Validators.required(control))) {
             return null;
         }
@@ -255,9 +409,13 @@ var minDate = function (value) {
         if (value instanceof Function) {
             value = value();
         }
-        return d >= new Date(value).getTime() ? null : { minDate: true };
+        return d >= new Date(value).getTime() ? null : { minDate: true, error: 'lower than minDate' };
     };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var notEqual = function (val) {
     return function (control) {
         if (isPresent(forms.Validators.required(control))) {
@@ -267,6 +425,10 @@ var notEqual = function (val) {
         return val !== v ? null : { notEqual: true };
     };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var notEqualTo = function (notEqualControl) {
     var /** @type {?} */ subscribe = false;
     return function (control) {
@@ -280,6 +442,10 @@ var notEqualTo = function (notEqualControl) {
         return notEqualControl.value !== v ? null : { notEqualTo: true };
     };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var number = function (control) {
     if (isPresent(forms.Validators.required(control))) {
         return null;
@@ -287,6 +453,10 @@ var number = function (control) {
     var /** @type {?} */ v = control.value;
     return /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(v) ? null : { 'number': true };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var property = function (value) {
     return function (control) {
         if (isPresent(forms.Validators.required(control))) {
@@ -295,16 +465,30 @@ var property = function (value) {
         var /** @type {?} */ properties = value.split(',');
         var /** @type {?} */ obj = control.value;
         var /** @type {?} */ isValid = true;
-        for (var _i = 0, properties_1 = properties; _i < properties_1.length; _i++) {
-            var prop = properties_1[_i];
-            if (obj[prop] == null) {
-                isValid = false;
-                break;
+        try {
+            for (var properties_1 = __values(properties), properties_1_1 = properties_1.next(); !properties_1_1.done; properties_1_1 = properties_1.next()) {
+                var prop = properties_1_1.value;
+                if (obj[prop] == null) {
+                    isValid = false;
+                    break;
+                }
             }
         }
+        catch (e_1_1) { e_1 = { error: e_1_1 }; }
+        finally {
+            try {
+                if (properties_1_1 && !properties_1_1.done && (_a = properties_1.return)) _a.call(properties_1);
+            }
+            finally { if (e_1) throw e_1.error; }
+        }
         return isValid ? null : { hasProperty: true, property: value };
+        var e_1, _a;
     };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var range = function (value) {
     return function (control) {
         if (!isPresent(value)) {
@@ -317,6 +501,10 @@ var range = function (value) {
         return v >= value[0] && v <= value[1] ? null : { actualValue: v, requiredValue: value, range: true };
     };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var rangeLength = function (value) {
     return function (control) {
         if (!isPresent(value)) {
@@ -329,6 +517,10 @@ var rangeLength = function (value) {
         return v.length >= value[0] && v.length <= value[1] ? null : { rangeLength: true };
     };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var uuids = {
     '3': /^[0-9A-F]{8}-[0-9A-F]{4}-3[0-9A-F]{3}-[0-9A-F]{4}-[0-9A-F]{12}$/i,
     '4': /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
@@ -345,6 +537,10 @@ var uuid = function (version) {
         return (new RegExp(pattern)).test(v) ? null : { uuid: true };
     };
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var url = function (control) {
     if (isPresent(forms.Validators.required(control))) {
         return null;
@@ -354,12 +550,16 @@ var url = function (control) {
     return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(v) ? null : { 'url': true };
     /* tslint:enable */
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var ARRAY_LENGTH_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return ArrayLengthValidator; }),
     multi: true
 };
-var ArrayLengthValidator = (function () {
+var ArrayLengthValidator = /** @class */ (function () {
     function ArrayLengthValidator() {
     }
     /**
@@ -404,19 +604,21 @@ ArrayLengthValidator.decorators = [
                 providers: [ARRAY_LENGTH_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 ArrayLengthValidator.ctorParameters = function () { return []; };
 ArrayLengthValidator.propDecorators = {
-    'arrayLength': [{ type: core.Input },],
+    "arrayLength": [{ type: core.Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var BASE64_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return Base64Validator; }),
     multi: true
 };
-var Base64Validator = (function () {
+var Base64Validator = /** @class */ (function () {
     function Base64Validator() {
     }
     /**
@@ -434,16 +636,18 @@ Base64Validator.decorators = [
                 providers: [BASE64_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 Base64Validator.ctorParameters = function () { return []; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var CREDIT_CARD_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return CreditCardValidator; }),
     multi: true
 };
-var CreditCardValidator = (function () {
+var CreditCardValidator = /** @class */ (function () {
     function CreditCardValidator() {
     }
     /**
@@ -461,16 +665,18 @@ CreditCardValidator.decorators = [
                 providers: [CREDIT_CARD_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 CreditCardValidator.ctorParameters = function () { return []; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var DATE_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return DateValidator; }),
     multi: true
 };
-var DateValidator = (function () {
+var DateValidator = /** @class */ (function () {
     function DateValidator() {
     }
     /**
@@ -488,16 +694,18 @@ DateValidator.decorators = [
                 providers: [DATE_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 DateValidator.ctorParameters = function () { return []; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var DATE_ISO_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return DateISOValidator; }),
     multi: true
 };
-var DateISOValidator = (function () {
+var DateISOValidator = /** @class */ (function () {
     function DateISOValidator() {
     }
     /**
@@ -515,16 +723,18 @@ DateISOValidator.decorators = [
                 providers: [DATE_ISO_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 DateISOValidator.ctorParameters = function () { return []; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var DIGITS_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return DigitsValidator; }),
     multi: true
 };
-var DigitsValidator = (function () {
+var DigitsValidator = /** @class */ (function () {
     function DigitsValidator() {
     }
     /**
@@ -542,16 +752,18 @@ DigitsValidator.decorators = [
                 providers: [DIGITS_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 DigitsValidator.ctorParameters = function () { return []; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var EMAIL_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return EmailValidator; }),
     multi: true
 };
-var EmailValidator = (function () {
+var EmailValidator = /** @class */ (function () {
     function EmailValidator() {
     }
     /**
@@ -565,20 +777,22 @@ var EmailValidator = (function () {
 }());
 EmailValidator.decorators = [
     { type: core.Directive, args: [{
-                selector: '[email][formControlName],[email][formControl],[email][ngModel]',
+                selector: '[ngvemail][formControlName],[ngvemail][formControl],[ngvemail][ngModel]',
                 providers: [EMAIL_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 EmailValidator.ctorParameters = function () { return []; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var EQUAL_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return EqualValidator; }),
     multi: true
 };
-var EqualValidator = (function () {
+var EqualValidator = /** @class */ (function () {
     function EqualValidator() {
     }
     /**
@@ -623,19 +837,21 @@ EqualValidator.decorators = [
                 providers: [EQUAL_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 EqualValidator.ctorParameters = function () { return []; };
 EqualValidator.propDecorators = {
-    'equal': [{ type: core.Input },],
+    "equal": [{ type: core.Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var EQUAL_TO_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return EqualToValidator; }),
     multi: true
 };
-var EqualToValidator = (function () {
+var EqualToValidator = /** @class */ (function () {
     function EqualToValidator() {
     }
     /**
@@ -659,19 +875,21 @@ EqualToValidator.decorators = [
                 providers: [EQUAL_TO_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 EqualToValidator.ctorParameters = function () { return []; };
 EqualToValidator.propDecorators = {
-    'equalTo': [{ type: core.Input },],
+    "equalTo": [{ type: core.Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var GREATER_THAN_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return GreaterThanValidator; }),
     multi: true
 };
-var GreaterThanValidator = (function () {
+var GreaterThanValidator = /** @class */ (function () {
     function GreaterThanValidator() {
     }
     /**
@@ -716,19 +934,21 @@ GreaterThanValidator.decorators = [
                 providers: [GREATER_THAN_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 GreaterThanValidator.ctorParameters = function () { return []; };
 GreaterThanValidator.propDecorators = {
-    'gt': [{ type: core.Input },],
+    "gt": [{ type: core.Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var GREATER_THAN_EQUAL_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return GreaterThanEqualValidator; }),
     multi: true
 };
-var GreaterThanEqualValidator = (function () {
+var GreaterThanEqualValidator = /** @class */ (function () {
     function GreaterThanEqualValidator() {
     }
     /**
@@ -773,19 +993,21 @@ GreaterThanEqualValidator.decorators = [
                 providers: [GREATER_THAN_EQUAL_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 GreaterThanEqualValidator.ctorParameters = function () { return []; };
 GreaterThanEqualValidator.propDecorators = {
-    'gte': [{ type: core.Input },],
+    "gte": [{ type: core.Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var JSON_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return JSONValidator; }),
     multi: true
 };
-var JSONValidator = (function () {
+var JSONValidator = /** @class */ (function () {
     function JSONValidator() {
     }
     /**
@@ -803,16 +1025,18 @@ JSONValidator.decorators = [
                 providers: [JSON_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 JSONValidator.ctorParameters = function () { return []; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var LESS_THAN_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return LessThanValidator; }),
     multi: true
 };
-var LessThanValidator = (function () {
+var LessThanValidator = /** @class */ (function () {
     function LessThanValidator() {
     }
     /**
@@ -857,19 +1081,21 @@ LessThanValidator.decorators = [
                 providers: [LESS_THAN_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 LessThanValidator.ctorParameters = function () { return []; };
 LessThanValidator.propDecorators = {
-    'lt': [{ type: core.Input },],
+    "lt": [{ type: core.Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var LESS_THAN_EQUAL_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return LessThanEqualValidator; }),
     multi: true
 };
-var LessThanEqualValidator = (function () {
+var LessThanEqualValidator = /** @class */ (function () {
     function LessThanEqualValidator() {
     }
     /**
@@ -914,19 +1140,21 @@ LessThanEqualValidator.decorators = [
                 providers: [LESS_THAN_EQUAL_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 LessThanEqualValidator.ctorParameters = function () { return []; };
 LessThanEqualValidator.propDecorators = {
-    'lte': [{ type: core.Input },],
+    "lte": [{ type: core.Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var MAX_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return MaxValidator; }),
     multi: true
 };
-var MaxValidator = (function () {
+var MaxValidator = /** @class */ (function () {
     function MaxValidator() {
     }
     /**
@@ -971,19 +1199,21 @@ MaxValidator.decorators = [
                 providers: [MAX_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 MaxValidator.ctorParameters = function () { return []; };
 MaxValidator.propDecorators = {
-    'max': [{ type: core.Input },],
+    "max": [{ type: core.Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var MAX_DATE_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return MaxDateValidator; }),
     multi: true
 };
-var MaxDateValidator = (function () {
+var MaxDateValidator = /** @class */ (function () {
     function MaxDateValidator() {
     }
     /**
@@ -1028,19 +1258,21 @@ MaxDateValidator.decorators = [
                 providers: [MAX_DATE_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 MaxDateValidator.ctorParameters = function () { return []; };
 MaxDateValidator.propDecorators = {
-    'maxDate': [{ type: core.Input },],
+    "maxDate": [{ type: core.Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var MIN_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return MinValidator; }),
     multi: true
 };
-var MinValidator = (function () {
+var MinValidator = /** @class */ (function () {
     function MinValidator() {
     }
     /**
@@ -1085,19 +1317,21 @@ MinValidator.decorators = [
                 providers: [MIN_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 MinValidator.ctorParameters = function () { return []; };
 MinValidator.propDecorators = {
-    'min': [{ type: core.Input },],
+    "min": [{ type: core.Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var MIN_DATE_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return MinDateValidator; }),
     multi: true
 };
-var MinDateValidator = (function () {
+var MinDateValidator = /** @class */ (function () {
     function MinDateValidator() {
     }
     /**
@@ -1142,19 +1376,21 @@ MinDateValidator.decorators = [
                 providers: [MIN_DATE_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 MinDateValidator.ctorParameters = function () { return []; };
 MinDateValidator.propDecorators = {
-    'minDate': [{ type: core.Input },],
+    "minDate": [{ type: core.Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var NOT_EQUAL_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return NotEqualValidator; }),
     multi: true
 };
-var NotEqualValidator = (function () {
+var NotEqualValidator = /** @class */ (function () {
     function NotEqualValidator() {
     }
     /**
@@ -1199,19 +1435,21 @@ NotEqualValidator.decorators = [
                 providers: [NOT_EQUAL_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NotEqualValidator.ctorParameters = function () { return []; };
 NotEqualValidator.propDecorators = {
-    'notEqual': [{ type: core.Input },],
+    "notEqual": [{ type: core.Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var NOT_EQUAL_TO_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return NotEqualToValidator; }),
     multi: true
 };
-var NotEqualToValidator = (function () {
+var NotEqualToValidator = /** @class */ (function () {
     function NotEqualToValidator() {
     }
     /**
@@ -1235,19 +1473,21 @@ NotEqualToValidator.decorators = [
                 providers: [NOT_EQUAL_TO_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NotEqualToValidator.ctorParameters = function () { return []; };
 NotEqualToValidator.propDecorators = {
-    'notEqualTo': [{ type: core.Input },],
+    "notEqualTo": [{ type: core.Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var NUMBER_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return NumberValidator; }),
     multi: true
 };
-var NumberValidator = (function () {
+var NumberValidator = /** @class */ (function () {
     function NumberValidator() {
     }
     /**
@@ -1265,16 +1505,18 @@ NumberValidator.decorators = [
                 providers: [NUMBER_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 NumberValidator.ctorParameters = function () { return []; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var PROPERTY_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return PropertyValidator; }),
     multi: true
 };
-var PropertyValidator = (function () {
+var PropertyValidator = /** @class */ (function () {
     function PropertyValidator() {
     }
     /**
@@ -1319,19 +1561,21 @@ PropertyValidator.decorators = [
                 providers: [PROPERTY_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 PropertyValidator.ctorParameters = function () { return []; };
 PropertyValidator.propDecorators = {
-    'property': [{ type: core.Input },],
+    "property": [{ type: core.Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var RANGE_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return RangeValidator; }),
     multi: true
 };
-var RangeValidator = (function () {
+var RangeValidator = /** @class */ (function () {
     function RangeValidator() {
     }
     /**
@@ -1376,19 +1620,21 @@ RangeValidator.decorators = [
                 providers: [RANGE_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 RangeValidator.ctorParameters = function () { return []; };
 RangeValidator.propDecorators = {
-    'range': [{ type: core.Input },],
+    "range": [{ type: core.Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var RANGE_LENGTH_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return RangeLengthValidator; }),
     multi: true
 };
-var RangeLengthValidator = (function () {
+var RangeLengthValidator = /** @class */ (function () {
     function RangeLengthValidator() {
     }
     /**
@@ -1433,19 +1679,21 @@ RangeLengthValidator.decorators = [
                 providers: [RANGE_LENGTH_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 RangeLengthValidator.ctorParameters = function () { return []; };
 RangeLengthValidator.propDecorators = {
-    'rangeLength': [{ type: core.Input },],
+    "rangeLength": [{ type: core.Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var URL_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return UrlValidator; }),
     multi: true
 };
-var UrlValidator = (function () {
+var UrlValidator = /** @class */ (function () {
     function UrlValidator() {
     }
     /**
@@ -1463,16 +1711,18 @@ UrlValidator.decorators = [
                 providers: [URL_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 UrlValidator.ctorParameters = function () { return []; };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var UUID_VALIDATOR = {
     provide: forms.NG_VALIDATORS,
     useExisting: core.forwardRef(function () { return UUIDValidator; }),
     multi: true
 };
-var UUIDValidator = (function () {
+var UUIDValidator = /** @class */ (function () {
     function UUIDValidator() {
     }
     /**
@@ -1517,13 +1767,15 @@ UUIDValidator.decorators = [
                 providers: [UUID_VALIDATOR]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 UUIDValidator.ctorParameters = function () { return []; };
 UUIDValidator.propDecorators = {
-    'uuid': [{ type: core.Input },],
+    "uuid": [{ type: core.Input },],
 };
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var CustomValidators = {
     arrayLength: arrayLength,
     base64: base64,
@@ -1580,7 +1832,7 @@ var CustomDirectives = [
     UrlValidator,
     UUIDValidator
 ];
-var CustomFormsModule = (function () {
+var CustomFormsModule = /** @class */ (function () {
     function CustomFormsModule() {
     }
     return CustomFormsModule;
@@ -1591,9 +1843,7 @@ CustomFormsModule.decorators = [
                 exports: [CustomDirectives]
             },] },
 ];
-/**
- * @nocollapse
- */
+/** @nocollapse */
 CustomFormsModule.ctorParameters = function () { return []; };
 
 exports.CustomValidators = CustomValidators;

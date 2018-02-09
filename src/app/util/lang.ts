@@ -7,8 +7,10 @@ export function isDate(obj: any): boolean {
 }
 
 export function parseDate(obj: any): string {
-  if (typeof obj === 'object' && obj.year != null && obj.month != null && obj.day != null) {
-    return obj.year + '-' + obj.month + '-' + obj.day;
-  }
+  try {
+    if (typeof obj === 'object' && obj.year != null && obj.month != null && obj.day != null) {
+      return obj.year + '-' + obj.month + '-' + obj.day;
+    }
+  } catch (e) {}
   return obj;
 }

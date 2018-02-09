@@ -1,7 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-.ng_build
+.ng_pkg_build
+/dist
+/dist-server
 /tmp
 /out-tsc
 

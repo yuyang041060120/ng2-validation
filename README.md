@@ -170,10 +170,20 @@ export class AppModule {
 <p *ngIf="field.errors?.minDate">error message</p>
 ```
 
+```html
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [minDate]="myOtherField">
+<p *ngIf="field.errors?.minDate">error message</p>
+```
+
 ### max date - maxDate
 
 ```html
 <input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" maxDate="2016-09-09">
+<p *ngIf="field.errors?.maxDate">error message</p>
+```
+
+```html
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [maxDate]="myOtherField">
 <p *ngIf="field.errors?.maxDate">error message</p>
 ```
 

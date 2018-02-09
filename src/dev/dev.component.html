@@ -76,7 +76,7 @@
         <label class="col-3 control-label">maxDate</label>
   
         <div class="col-9">
-          <input class="form-control" type="text" ngModel name="maxDate" #maxDate="ngModel" maxDate="2016-12-12">
+          <input class="form-control" type="text" ngModel name="maxDate" #maxDate="ngModel" [maxDate]="date">
           <p class="alert alert-danger" *ngIf="maxDate?.errors?.maxDate">maxDate error</p>
         </div>
       </div>
@@ -103,7 +103,7 @@
         <label class="col-3 control-label">email</label>
   
         <div class="col-9">
-          <input class="form-control" type="text" ngModel name="email" #email="ngModel" email>
+          <input class="form-control" type="text" ngModel name="email" #email="ngModel" ngvemail>
           <p class="alert alert-danger" *ngIf="email?.errors?.email">email error</p>
         </div>
       </div>

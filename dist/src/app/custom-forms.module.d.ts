@@ -15,9 +15,9 @@ export declare const CustomValidators: {
     lt: (value: number) => ValidatorFn;
     lte: (value: number) => ValidatorFn;
     max: (value: number) => ValidatorFn;
-    maxDate: (value: any) => ValidatorFn;
+    maxDate: (maxInput: any) => ValidatorFn;
     min: (value: number) => ValidatorFn;
-    minDate: (value: any) => ValidatorFn;
+    minDate: (minInput: any) => ValidatorFn;
     notEqual: (val: any) => ValidatorFn;
     notEqualTo: (notEqualControl: AbstractControl) => ValidatorFn;
     number: ValidatorFn;
