@@ -7,7 +7,6 @@ export const maxDate = (maxInput: any): ValidatorFn => {
   let maxValue = maxInput;
   const isForm = maxInput instanceof FormControl || maxInput instanceof NgModel;
   return (control: AbstractControl): {[key: string]: any} => {
-
     if (!subscribe && isForm) {
       subscribe = true;
       maxInput.valueChanges.subscribe(() => {
@@ -35,7 +34,7 @@ export const maxDate = (maxInput: any): ValidatorFn => {
       return null;
     }
 
-    const d = new Date(control.value).getTime();
+    const d = new Date(parseDate(control.value)).getTime();
 
     if (!isDate(d)) {
       return { value: true };

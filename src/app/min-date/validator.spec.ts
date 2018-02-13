@@ -46,6 +46,18 @@ describe('MinDate', () => {
     expect(minDate(obj)(control)).toBeNull();
   });
 
+  it('Date control object { year: 2017, month: 10, day: 11} should equal to "{minDate: true, error: \'lower than minDate\'}"', () => {
+    const obj = new FormControl('2018-10-01');
+    control = new FormControl({ year: 2017, month: 10, day: 11 });
+    expect(minDate(obj)(control)).toEqual({minDate: true, error: 'lower than minDate'});
+  });
+
+  it('Date control object { year: 2017, month: 10, day: 11} should equal to "null"', () => {
+    const obj = { year: 2016, month: 10, day: 11 };
+    control = new FormControl({ year: 2017, month: 10, day: 11 });
+    expect(minDate(obj)(control)).toBeNull();
+  });
+
   it('Date object { year: 2017, month: 10, day: 11} should equal to "{minDate: true, error: \'lower than minDate\'}"', () => {
     const obj = { year: 2017, month: 10, day: 11};
     control = new FormControl('2017-10-01');

@@ -35,7 +35,7 @@ export const minDate = (minInput: any): ValidatorFn => {
       return null;
     }
 
-    const d = new Date(control.value).getTime();
+    const d = new Date(parseDate(control.value)).getTime();
 
     if (!isDate(d)) {
       return { value: true };
