@@ -1,3 +1,6 @@
+## Breaking changes
+Directive email rename to ngvemail see [rsaenen/ng4-validators#5](https://github.com/rsaenen/ng4-validators/issues/5)
+
 # Description
 
 Angular 4 custom validation, forked from [ng2-validation](https://github.com/yuyang041060120/ng2-validation).
@@ -152,7 +155,7 @@ export class AppModule {
 ### email
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" email>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" ngvemail>
 <p *ngIf="field.errors?.email">error message</p>
 ```
 
@@ -170,10 +173,20 @@ export class AppModule {
 <p *ngIf="field.errors?.minDate">error message</p>
 ```
 
+```html
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [minDate]="myOtherField">
+<p *ngIf="field.errors?.minDate">error message</p>
+```
+
 ### max date - maxDate
 
 ```html
 <input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" maxDate="2016-09-09">
+<p *ngIf="field.errors?.maxDate">error message</p>
+```
+
+```html
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [maxDate]="myOtherField">
 <p *ngIf="field.errors?.maxDate">error message</p>
 ```
 
@@ -523,3 +536,8 @@ this.form = new FormGroup({
 # For developpers
 To run the projet : `npm start`
 Don't forget to run `npm test` and `npm lint` before each pull request. Thanks !
+
+# Changelog
+### 5.0.2
+- ngModel type [ngbDateStruct](https://github.com/ng-bootstrap/ng-bootstrap/blob/master/src/datepicker/ngb-date-struct.ts) support for maxDate and minDate.
+- Changelog initialization. 

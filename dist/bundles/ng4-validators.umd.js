@@ -342,7 +342,7 @@ var maxDate = function (maxInput) {
         if (isPresent(forms.Validators.required(control))) {
             return null;
         }
-        var /** @type {?} */ d = new Date(control.value).getTime();
+        var /** @type {?} */ d = new Date(parseDate(control.value)).getTime();
         if (!isDate(d)) {
             return { value: true };
         }
@@ -402,7 +402,7 @@ var minDate = function (minInput) {
         if (isPresent(forms.Validators.required(control))) {
             return null;
         }
-        var /** @type {?} */ d = new Date(control.value).getTime();
+        var /** @type {?} */ d = new Date(parseDate(control.value)).getTime();
         if (!isDate(d)) {
             return { value: true };
         }
