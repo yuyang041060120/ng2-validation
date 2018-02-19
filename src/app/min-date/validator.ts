@@ -23,7 +23,7 @@ export const minDate = (minInput: any): ValidatorFn => {
 
     if (!isDate(value) && !(value instanceof Function)) {
       if (value == null) {
-        return {minDate: true, error: 'minDate is null'};
+        return null;
       } else if (isForm) {
         return {minDate: true, error: 'minDate is invalid'};
       } else {

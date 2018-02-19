@@ -538,6 +538,8 @@ To run the projet : `npm start`
 Don't forget to run `npm test` and `npm lint` before each pull request. Thanks !
 
 # Changelog
+### 5.0.3
+- Fix issue ngModel equals to null with maxDate and minDate.
 ### 5.0.2
 - ngModel type [ngbDateStruct](https://github.com/ng-bootstrap/ng-bootstrap/blob/master/src/datepicker/ngb-date-struct.ts) support for maxDate and minDate.
 - Changelog initialization. 

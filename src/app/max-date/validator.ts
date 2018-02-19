@@ -22,7 +22,7 @@ export const maxDate = (maxInput: any): ValidatorFn => {
 
     if (!isDate(value) && !(value instanceof Function)) {
       if (value == null) {
-        return {maxDate: true, error: 'maxDate is null'};
+        return null;
       } else if (isForm) {
         return {maxDate: true, error: 'maxDate is invalid'};
       } else {
