@@ -2,6 +2,7 @@
 
 # compiled output
 .ng_pkg_build
+package-lock.json
 /dist
 /dist-server
 /tmp
