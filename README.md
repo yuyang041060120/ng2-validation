@@ -59,7 +59,7 @@ import `FormsModule` and `CustomFormsModule` in *app.module.ts*
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { CustomFormsModule } from 'ng2-validation'
+import { CustomFormsModule } from 'ng4-validators';
 
 import { AppComponent } from './app.component';
 
@@ -313,7 +313,7 @@ import `CustomValidators` in *app.component.ts*
 ```typescript
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { CustomValidators } from 'ng2-validation';
+import { CustomValidators } from 'ng4-validators';
 
 @Component({
     selector: 'app',
