@@ -1,3 +1,5 @@
+### [6.0.0]
+- Angular 6 support
 ### [5.1.0]
 - Fix dependencies causing issues in some cases, dependencies should be devDependencies
 - Remove `package-lock.json` see [angular-cli/angular-cli#7334](https://github.com/angular/angular-cli/issues/7334)
