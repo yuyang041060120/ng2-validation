@@ -1,53 +1,67 @@
 {
-  "name": "ng4-validators",
+  "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
+  "name": "ngx-custom-validators",
   "version": "6.0.0",
-  "description": "Angular 6 directives validation",
+  "description": "Angular custom directives for validation",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng-packagr -p ng-package.json",
+    "build": "ng-packagr -p package.json",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rsaenen/ng4-validators.git"
+    "url": "git+https://github.com/rsaenen/ngx-custom-validators.git"
   },
   "keywords": [
     "angular",
     "angular2",
+    "angular 2",
     "angular4",
+    "angular 4",
     "angular5",
+    "angular 5",
+    "angular6",
+    "angular 6",
     "directive",
     "reactive",
     "template",
     "forms",
     "validate",
-    "validation"
+    "validation",
+    "validators",
+    "custom"
   ],
   "author": "Ralf Saenen <ralf.saenen@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rsaenen/ng4-validators/issues"
+    "url": "https://github.com/rsaenen/ngx-custom-validators/issues"
   },
-  "homepage": "https://github.com/rsaenen/ng4-validators#readme",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public_api.ts"
+    }
+  },
+  "homepage": "https://github.com/rsaenen/ngx-custom-validators#readme",
   "peerDependencies": {
     "@angular/core": "^6.0.0",
     "@angular/forms": "^6.0.0"
   },
   "devDependencies": {
-    "@angular/animations": "^6.0.2",
-    "@angular/common": "^6.0.2",
-    "@angular/compiler": "^6.0.2",
-    "@angular/compiler-cli": "^6.0.2",
-    "@angular/core": "^6.0.2",
-    "@angular/cli": "6.0.1",
-    "@angular/forms": "^6.0.2",
-    "@angular/language-service": "^6.0.2",
-    "@angular/platform-browser": "^6.0.2",
-    "@angular/platform-browser-dynamic": "^6.0.2",
-    "@angular/router": "^6.0.2",
+    "@angular-devkit/build-angular": "~0.6.8",
+    "@angular/animations": "^6.0.7",
+    "@angular/cli": "~6.0.8",
+    "@angular/common": "^6.0.7",
+    "@angular/compiler": "^6.0.7",
+    "@angular/compiler-cli": "^6.0.7",
+    "@angular/core": "^6.0.7",
+    "@angular/forms": "^6.0.7",
+    "@angular/http": "^6.0.7",
+    "@angular/language-service": "^6.0.7",
+    "@angular/platform-browser": "^6.0.7",
+    "@angular/platform-browser-dynamic": "^6.0.7",
     "@types/jasmine": "~2.8.7",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~10.1.0",

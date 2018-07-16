@@ -1,12 +1,12 @@
 # Description
 
-Angular 4 custom validation, forked from [ng2-validation](https://github.com/yuyang041060120/ng2-validation).
+Angular Custom Validators, forked from [ng2-validation](https://github.com/yuyang041060120/ng2-validation).
 Directives for form validation (template or model driven).
 
 # Installation
 
 ```bash
-npm i ng4-validators --save
+npm i ngx-custom-validators --save
 ```
 
 # Validators
@@ -59,7 +59,7 @@ import `FormsModule` and `CustomFormsModule` in *app.module.ts*
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { CustomFormsModule } from 'ng4-validators';
+import { CustomFormsModule } from 'ngx-custom-validators';
 
 import { AppComponent } from './app.component';
 
@@ -313,7 +313,7 @@ import `CustomValidators` in *app.component.ts*
 ```typescript
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { CustomValidators } from 'ng4-validators';
+import { CustomValidators } from 'ngx-custom-validators';
 
 @Component({
     selector: 'app',

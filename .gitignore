@@ -1,12 +1,10 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-.ng_pkg_build
-package-lock.json
 /dist
-/dist-server
 /tmp
 /out-tsc
+/.ng_pkg_build
 
 # dependencies
 /node_modules
@@ -33,13 +31,11 @@ package-lock.json
 /coverage
 /libpeerconnection.log
 npm-debug.log
+yarn-error.log
 testem.log
 /typings
-
-# e2e
-/e2e/*.js
-/e2e/*.map
 
 # System Files
 .DS_Store
 Thumbs.db
+dist.tgz
