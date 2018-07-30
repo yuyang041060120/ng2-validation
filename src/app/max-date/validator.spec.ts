@@ -52,8 +52,8 @@ describe('MaxDate', () => {
     expect(maxDate(obj)(control)).toBeNull();
   });
 
-  it('Date(2017-10-01) should equal to "null"', () => {
-    const obj = { year: 2017, month: 10, day: 11};
+  it('Date(2017-11-01) should equal to "null"', () => {
+    const obj = { year: 2017, month: 11, day: 11};
     control = new FormControl('2017-10-01');
     expect(maxDate(obj)(control)).toBeNull();
   });

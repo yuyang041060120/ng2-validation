@@ -1,3 +1,5 @@
+### [6.0.1]
+- Date supports Moment.js
 ### [6.0.0]
 - Angular 6 support
 - Rename repository to ngx-custom-validators
