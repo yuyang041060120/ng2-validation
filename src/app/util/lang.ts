@@ -11,12 +11,12 @@ export function parseDate(obj: any): string {
     // Moment.js
     if (obj._d instanceof Date) {
       const d = obj._d as Date;
-      return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;
+      return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
     }
 
     // NgbDateStruct
     if (typeof obj === 'object' && obj.year != null && obj.month != null && obj.day != null) {
-      return `${obj.year}-${+obj.month - 1}-${obj.day}`;
+      return `${obj.year}-${+obj.month}-${obj.day}`;
     }
   } catch (e) {}
   return obj;

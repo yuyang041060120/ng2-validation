@@ -1,6 +1,7 @@
+import * as moment from 'moment';
 import { FormControl } from '@angular/forms';
-
 import { minDate } from './validator';
+
 
 describe('MinDate', () => {
   let control: FormControl;
@@ -28,6 +29,11 @@ describe('MinDate', () => {
   it('"Date(2016-09-10)" should equal to "null"', () => {
     control = new FormControl('2016-09-10');
     expect(minDate('2016-09-09')(control)).toBeNull();
+  });
+
+  it('"Date(2016-09-10)" moment should equal to "null"', () => {
+    control = new FormControl('2016-09-10');
+    expect(minDate(moment('2016-09-09'))(control)).toBeNull();
   });
 
   it('() => Date("2016-09-08)" should equal to "{minDate: true, error: \'lower than minDate\'}"', () => {
@@ -61,6 +67,12 @@ describe('MinDate', () => {
   it('Date object { year: 2017, month: 11, day: 11} should equal to "{minDate: true, error: \'lower than minDate\'}"', () => {
     const obj = { year: 2017, month: 11, day: 11};
     control = new FormControl('2017-10-01');
+    expect(minDate(obj)(control)).toEqual({minDate: true, error: 'lower than minDate'});
+  });
+
+  it('Date object { year: 2017, month: 11, day: 11} moment should equal to "{minDate: true, error: \'lower than minDate\'}"', () => {
+    const obj = { year: 2017, month: 11, day: 11};
+    control = new FormControl(moment('2017-10-01'));
     expect(minDate(obj)(control)).toEqual({minDate: true, error: 'lower than minDate'});
   });
 

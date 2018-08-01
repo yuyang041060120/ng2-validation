@@ -1,3 +1,5 @@
+### [6.0.2]
+- Fix issue with date/min-date/max-date validators with Moment.js and NgbDateStruct for months January and December
 ### [6.0.1]
 - Date supports Moment.js
 ### [6.0.0]
