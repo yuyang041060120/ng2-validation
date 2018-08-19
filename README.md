@@ -54,8 +54,8 @@ npm i ngx-custom-validators --save
 The paramater of each validator (if it has) can be accessible in the template with `reason`.
 ```html
 <input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [gt]="10">
-<!--> Will display : error message and must be greater than 10 <-->
-<p *ngIf="field.errors?.gt">error message and must be greater than {{ field.errors?.reason }}</p>1
+<!-- Will display : error message and must be greater than 10 -->
+<p *ngIf="field.errors?.gt">error message and must be greater than {{ field.errors?.reason }}</p>
 ``` 
 
 ## Template driven
