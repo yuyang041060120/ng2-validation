@@ -1,12 +1,12 @@
-import { AbstractControl, FormControl, NgModel, Validators, ValidatorFn } from '@angular/forms';
-import { isPresent, isDate, parseDate } from '../util/lang';
+import { AbstractControl, FormControl, NgModel, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { isDate, isPresent, parseDate } from '../util/lang';
 
 export const maxDate = (maxInput: any): ValidatorFn => {
   let value;
   let subscribe = false;
   let maxValue = maxInput;
   const isForm = maxInput instanceof FormControl || maxInput instanceof NgModel;
-  return (control: AbstractControl): {[key: string]: any} => {
+  return (control: AbstractControl): ValidationErrors => {
     if (!subscribe && isForm) {
       subscribe = true;
       maxInput.valueChanges.subscribe(() => {
@@ -24,7 +24,7 @@ export const maxDate = (maxInput: any): ValidatorFn => {
       if (value == null) {
         return null;
       } else if (isForm) {
-        return {maxDate: true, error: 'maxDate is invalid'};
+        return { maxDate: true, error: 'maxDate is invalid' };
       } else {
         throw Error('maxDate value must be or return a formatted date');
       }
@@ -43,6 +43,6 @@ export const maxDate = (maxInput: any): ValidatorFn => {
       value = value();
     }
 
-    return d <= new Date(value).getTime() ? null : {maxDate: true, error: 'greater than maxDate'};
+    return d <= new Date(value).getTime() ? null : { maxDate: true, reason: maxInput };
   };
 };

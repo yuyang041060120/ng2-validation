@@ -1,3 +1,8 @@
+### [6.0.3]
+- Modificiation of ArrayLength validator attribute (string -> number)
+- Using ValidationErrors from @angular/forms to replace {[key: string]: any}
+- Fix issue #12
+- Update dependencies
 ### [6.0.2]
 - Fix issue with date/min-date/max-date validators with Moment.js and NgbDateStruct for months January and December
 ### [6.0.1]

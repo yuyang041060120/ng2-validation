@@ -1,9 +1,8 @@
-import { AbstractControl, Validators, ValidatorFn } from '@angular/forms';
-
+import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { isPresent } from '../util/lang';
 
 export const property = (value: string): ValidatorFn => {
-  return (control: AbstractControl): {[key: string]: any} => {
+  return (control: AbstractControl): ValidationErrors => {
 
     if (isPresent(Validators.required(control))) {
       return null;
@@ -19,6 +18,6 @@ export const property = (value: string): ValidatorFn => {
         break;
       }
     }
-    return isValid ? null : { hasProperty: true, property: value };
+    return isValid ? null : { hasProperty: true, reason: value };
   };
 };

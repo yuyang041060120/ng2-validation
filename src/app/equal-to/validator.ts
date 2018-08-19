@@ -1,9 +1,9 @@
-import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export const equalTo = (equalControl: AbstractControl): ValidatorFn => {
   let subscribe = false;
 
-  return (control: AbstractControl): {[key: string]: boolean} => {
+  return (control: AbstractControl): ValidationErrors => {
     if (!subscribe) {
       subscribe = true;
       equalControl.valueChanges.subscribe(() => {
@@ -13,6 +13,6 @@ export const equalTo = (equalControl: AbstractControl): ValidatorFn => {
 
     const v: string = control.value;
 
-    return equalControl.value === v ? null : {equalTo: true};
+    return equalControl.value === v ? null : { equalTo: true, reason: equalControl };
   };
 };

@@ -1,15 +1,14 @@
-import { AbstractControl, Validators, ValidatorFn } from '@angular/forms';
-
+import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { isPresent } from '../util/lang';
 
-export const arrayLength = (value: string): ValidatorFn => {
-  return (control: AbstractControl): {[key: string]: any} => {
+export const arrayLength = (value: number): ValidatorFn => {
+  return (control: AbstractControl): ValidationErrors => {
 
     if (isPresent(Validators.required(control))) {
       return null;
     }
 
     const obj = control.value;
-    return Array.isArray(obj) && obj.length >= +value ? null : { arrayLength: +value };
+    return Array.isArray(obj) && obj.length >= +value ? null : { arrayLength: true, reason: value };
   };
 };

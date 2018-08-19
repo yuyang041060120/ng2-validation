@@ -1,5 +1,4 @@
-import { AbstractControl, Validators, ValidatorFn } from '@angular/forms';
-
+import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { isPresent } from '../util/lang';
 
 const uuids = {
@@ -10,7 +9,7 @@ const uuids = {
 };
 
 export const uuid = (version?: string): ValidatorFn => {
-  return (control: AbstractControl): {[key: string]: any} => {
+  return (control: AbstractControl): ValidationErrors => {
     if (isPresent(Validators.required(control))) {
       return null;
     }
@@ -18,6 +17,6 @@ export const uuid = (version?: string): ValidatorFn => {
     const v: string = control.value;
     const pattern = uuids[version] || uuids.all;
 
-    return (new RegExp(pattern)).test(v) ? null : {uuid: true};
+    return (new RegExp(pattern)).test(v) ? null : { uuid: true };
   };
 };

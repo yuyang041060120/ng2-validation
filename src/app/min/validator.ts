@@ -1,9 +1,8 @@
-import { AbstractControl, Validators, ValidatorFn } from '@angular/forms';
-
+import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { isPresent } from '../util/lang';
 
 export const min = (value: number): ValidatorFn => {
-  return (control: AbstractControl): {[key: string]: any} => {
+  return (control: AbstractControl): ValidationErrors => {
     if (!isPresent(value)) {
       return null;
     }
@@ -12,6 +11,6 @@ export const min = (value: number): ValidatorFn => {
     }
 
     const v: number = +control.value;
-    return v >= +value ? null : {actualValue: v, requiredValue: +value, min: true};
+    return v >= +value ? null : { min: true, reason: value };
   };
 };

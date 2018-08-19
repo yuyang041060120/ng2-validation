@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { lte } from './validator';
 
 describe('LTE', () => {
-  const error = {lte: true};
+  const error = { lte: true };
 
   it('3 should be lte 5', () => {
     const control = new FormControl(3);
@@ -17,6 +17,6 @@ describe('LTE', () => {
 
   it('5 should not be lte 3', () => {
     const control = new FormControl(5);
-    expect(lte(3)(control)).toEqual(error);
+    expect(lte(3)(control)).toEqual({ lte: true, reason: 3 });
   });
 });

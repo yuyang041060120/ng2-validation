@@ -1,9 +1,8 @@
-import { AbstractControl, Validators, ValidatorFn } from '@angular/forms';
-
+import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { isPresent } from '../util/lang';
 
 export const range = (value: Array<number>): ValidatorFn => {
-  return (control: AbstractControl): {[key: string]: any} => {
+  return (control: AbstractControl): ValidationErrors => {
     if (!isPresent(value)) {
       return null;
     }
@@ -12,6 +11,6 @@ export const range = (value: Array<number>): ValidatorFn => {
     }
 
     const v: number = +control.value;
-    return v >= value[0] && v <= value[1] ? null : {actualValue: v, requiredValue: value, range: true};
+    return v >= value[0] && v <= value[1] ? null : { range: true, reason: value };
   };
 };

@@ -1,9 +1,8 @@
-import { AbstractControl, Validators, ValidatorFn } from '@angular/forms';
-
+import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { isPresent } from '../util/lang';
 
 export const lte = (value: number): ValidatorFn => {
-  return (control: AbstractControl): {[key: string]: boolean} => {
+  return (control: AbstractControl): ValidationErrors => {
     if (!isPresent(value)) {
       return null;
     }
@@ -12,6 +11,6 @@ export const lte = (value: number): ValidatorFn => {
     }
 
     const v: number = +control.value;
-    return v <= +value ? null : {lte: true};
+    return v <= +value ? null : { lte: true, reason: value };
   };
 };

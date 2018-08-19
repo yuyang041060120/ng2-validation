@@ -15,12 +15,12 @@ describe('Property validator', () => {
 
   it('Input is object and has no identifier', () => {
     const control = new FormControl({ dumb: 1 });
-    expect(property('id')(control)).toEqual({ hasProperty: true, property: 'id' });
+    expect(property('id')(control)).toEqual({ hasProperty: true, reason: 'id' });
   });
 
   it('Input is string', () => {
     const control = new FormControl('dumb string');
-    expect(property('id')(control)).toEqual({ hasProperty: true, property: 'id' });
+    expect(property('id')(control)).toEqual({ hasProperty: true, reason: 'id' });
   });
 
   it('Input is object and has identifier', () => {
@@ -30,6 +30,6 @@ describe('Property validator', () => {
 
   it('Input is object and has no two properties', () => {
     const control = new FormControl({ value: 1 });
-    expect(property('id,value')(control)).toEqual({ hasProperty: true, property: 'id,value' });
+    expect(property('id,value')(control)).toEqual({ hasProperty: true, reason: 'id,value' });
   });
 });

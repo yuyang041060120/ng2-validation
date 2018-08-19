@@ -14,7 +14,7 @@ const ARRAY_LENGTH_VALIDATOR: any = {
   providers: [ARRAY_LENGTH_VALIDATOR]
 })
 export class ArrayLengthValidator implements Validator, OnInit, OnChanges {
-  @Input() arrayLength: string;
+  @Input() arrayLength: number;
 
   private validator: ValidatorFn;
   private onChange: () => void;

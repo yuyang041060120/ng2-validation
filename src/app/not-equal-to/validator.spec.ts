@@ -5,7 +5,6 @@ import { notEqualTo } from './validator';
 describe('NotEqualTo', () => {
   let notEqualControl: FormControl;
   let control: FormControl;
-  const error = {notEqualTo: true};
 
   beforeEach(() => {
     notEqualControl = new FormControl();
@@ -13,7 +12,8 @@ describe('NotEqualTo', () => {
   });
 
   it('all control is empty should valid', () => {
-    expect(notEqualTo(notEqualControl)(control)).toEqual(error);
+    console.log(notEqualTo(notEqualControl)(control));
+    expect(notEqualTo(notEqualControl)(control)).toEqual(null);
   });
 
   it('control.value = "xxx" and notEqualControl.value is empty should valid', () => {
@@ -30,7 +30,7 @@ describe('NotEqualTo', () => {
   it('control.value = "xxx" and notEqualControl.value = "xxx" should equal to "{notEqualTo: true}"', () => {
     control.setValue('xxx');
     notEqualControl.setValue('xxx');
-    expect(notEqualTo(notEqualControl)(control)).toEqual(error);
+    expect(notEqualTo(notEqualControl)(control)).toEqual({ notEqualTo: true, reason: notEqualControl });
   });
 
   it('control.value is empty and notEqualControl.value = "yyy" should valid', () => {

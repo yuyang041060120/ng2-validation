@@ -18,6 +18,6 @@ export function parseDate(obj: any): string {
     if (typeof obj === 'object' && obj.year != null && obj.month != null && obj.day != null) {
       return `${obj.year}-${+obj.month}-${obj.day}`;
     }
-  } catch (e) {}
+  } catch (e) { }
   return obj;
 }

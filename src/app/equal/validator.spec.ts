@@ -10,8 +10,8 @@ describe('Equal', () => {
     expect(equal('aaa')(control)).toBeNull();
   });
 
-  it('"aaa" and "bbb" should not be email', () => {
+  it('"aaa" and "bbb" should not be equal', () => {
     const control = new FormControl('bbb');
-    expect(equal('aaa')(control)).toEqual(error);
+    expect(equal('aaa')(control)).toEqual({equal: true, reason: 'aaa'});
   });
 });

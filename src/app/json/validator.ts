@@ -1,8 +1,7 @@
-import { AbstractControl, Validators, ValidatorFn } from '@angular/forms';
-
+import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { isPresent } from '../util/lang';
 
-export const json: ValidatorFn = (control: AbstractControl): {[key: string]: boolean} => {
+export const json: ValidatorFn = (control: AbstractControl): ValidationErrors => {
   if (isPresent(Validators.required(control))) {
     return null;
   }
@@ -16,5 +15,5 @@ export const json: ValidatorFn = (control: AbstractControl): {[key: string]: boo
       return null;
     }
   } catch (e) { }
-  return {json: true};
+  return { json: true };
 };
