@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
   "name": "ngx-custom-validators",
-  "version": "6.0.4",
+  "version": "6.0.5",
   "description": "Angular custom directives for validation",
   "scripts": {
     "ng": "ng",

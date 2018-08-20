@@ -16,13 +16,21 @@ export function parseDate(obj: any): string {
     // Moment.js
     if (obj._d instanceof Date) {
       const d = obj._d as Date;
-      return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+      const month = +d.getMonth() + 1;
+      const day = +d.getDate();
+      return `${d.getFullYear()}-${formatDayOrMonth(month)}-${formatDayOrMonth(day)}`;
     }
 
     // NgbDateStruct
     if (typeof obj === 'object' && obj.year != null && obj.month != null && obj.day != null) {
-      return `${obj.year}-${+obj.month}-${obj.day}`;
+      const month = +obj.month;
+      const day = +obj.day;
+      return `${obj.year}-${formatDayOrMonth(month)}-${formatDayOrMonth(day)}`;
     }
   } catch (e) { }
   return obj;
+}
+
+function formatDayOrMonth(month: number): string|number {
+  return month < 10 ? `0${month}` : month;
 }

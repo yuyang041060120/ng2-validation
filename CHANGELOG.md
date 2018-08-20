@@ -1,3 +1,5 @@
+### [6.0.5]
+- Fix issue [#11](https://github.com/rsaenen/ngx-custom-validators/issues/11)
 ### [6.0.4]
 - Fix issue [#11](https://github.com/rsaenen/ngx-custom-validators/issues/11)
 ### [6.0.3]

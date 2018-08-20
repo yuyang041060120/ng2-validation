@@ -10,6 +10,21 @@ describe('Date', () => {
     expect(date(control)).toBeNull();
   });
 
+  it('"2013-1-12" should be date', () => {
+    const control = new FormControl('2013-1-12');
+    expect(date(control)).toBeNull();
+  });
+
+  it('"2013-1-1" should be date', () => {
+    const control = new FormControl('2013-1-1');
+    expect(date(control)).toBeNull();
+  });
+
+  it('"2013-10-1" should be date', () => {
+    const control = new FormControl('2013-10-1');
+    expect(date(control)).toBeNull();
+  });
+
   it('"new Date()" should be date', () => {
     const control = new FormControl(new Date());
     expect(date(control)).toBeNull();
