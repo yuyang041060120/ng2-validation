@@ -30,7 +30,7 @@ describe('NotEqualTo', () => {
   it('control.value = "xxx" and notEqualControl.value = "xxx" should equal to "{notEqualTo: true}"', () => {
     control.setValue('xxx');
     notEqualControl.setValue('xxx');
-    expect(notEqualTo(notEqualControl)(control)).toEqual({ notEqualTo: true, reason: notEqualControl });
+    expect(notEqualTo(notEqualControl)(control)).toEqual({ notEqualTo: { control: notEqualControl, value: notEqualControl.value } });
   });
 
   it('control.value is empty and notEqualControl.value = "yyy" should valid', () => {

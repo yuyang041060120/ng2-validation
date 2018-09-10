@@ -15,6 +15,6 @@ describe('EqualTo', () => {
     const control = new FormControl('aaa');
     const control1 = new FormControl('bbb');
 
-    expect(equalTo(control1)(control)).toEqual({ equalTo: true, reason: control1 });
+    expect(equalTo(control1)(control)).toEqual({ equalTo: { control: control1, value: control1.value } });
   });
 });

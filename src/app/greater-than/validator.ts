@@ -11,6 +11,6 @@ export const gt = (value: number): ValidatorFn => {
     }
 
     const v: number = +control.value;
-    return v > +value ? null : { gt: true, reason: value };
+    return v > +value ? null : { gt: { value: value } };
   };
 };

@@ -9,6 +9,6 @@ export const equal = (val: any): ValidatorFn => {
 
     const v: any = control.value;
 
-    return val === v ? null : { equal: true, reason: val };
+    return val === v ? null : { equal: { value: val } };
   };
 };

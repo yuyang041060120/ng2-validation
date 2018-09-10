@@ -17,6 +17,6 @@ describe('LTE', () => {
 
   it('5 should not be lte 3', () => {
     const control = new FormControl(5);
-    expect(lte(3)(control)).toEqual({ lte: true, reason: 3 });
+    expect(lte(3)(control)).toEqual({ lte: { value: 3 } });
   });
 });

@@ -12,7 +12,7 @@ describe('Range [4, 9]', () => {
 
   it('"3" should equal to "{range: true, reason: [4, 9]}"', () => {
     control = new FormControl(3);
-    expect(validator(control)).toEqual({range: true, reason: [4, 9] });
+    expect(validator(control)).toEqual({ range: { value: [4, 9] } });
   });
 
   it('"4" should equal to "null"', () => {
@@ -27,6 +27,6 @@ describe('Range [4, 9]', () => {
 
   it('"10" should equal to "{range: true, reason: [4, 9]}"', () => {
     control = new FormControl(10);
-    expect(validator(control)).toEqual({range: true, reason: [4, 9] });
+    expect(validator(control)).toEqual({ range: { value: [4, 9] } });
   });
 });

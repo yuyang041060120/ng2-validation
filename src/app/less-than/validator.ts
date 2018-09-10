@@ -11,6 +11,6 @@ export const lt = (value: number): ValidatorFn => {
     }
 
     const v: number = +control.value;
-    return v < +value ? null : { lt: true, reason: value };
+    return v < +value ? null : { lt: { value: value } };
   };
 };

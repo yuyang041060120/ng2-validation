@@ -13,6 +13,6 @@ describe('GT', () => {
   it('3 should not be gt 5', () => {
     const control = new FormControl(3);
 
-    expect(gt(5)(control)).toEqual({ gt: true, reason: 5 });
+    expect(gt(5)(control)).toEqual({ gt: { value: 5 } });
   });
 });

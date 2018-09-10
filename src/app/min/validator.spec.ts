@@ -12,6 +12,6 @@ describe('Min', () => {
   it('9 should not be over 10', () => {
     const control = new FormControl(9);
 
-    expect(min(10)(control)).toEqual({min: true, reason: 10});
+    expect(min(10)(control)).toEqual({ min: { value: 10 } });
   });
 });

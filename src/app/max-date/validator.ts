@@ -24,7 +24,7 @@ export const maxDate = (maxInput: any): ValidatorFn => {
       if (value == null) {
         return null;
       } else if (isForm) {
-        return { maxDate: true, error: 'maxDate is invalid' };
+        return { maxDate: { error: 'maxDate is invalid' } };
       } else {
         throw Error('maxDate value must be or return a formatted date');
       }
@@ -43,6 +43,6 @@ export const maxDate = (maxInput: any): ValidatorFn => {
       value = value();
     }
 
-    return d <= new Date(value).getTime() ? null : { maxDate: true, reason: maxInput };
+    return d <= new Date(value).getTime() ? null : (isForm ? { maxDate: { control: maxInput, value: maxInput.value } } : { maxDate: { value: maxValue, control: undefined } });
   };
 };

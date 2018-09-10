@@ -18,6 +18,6 @@ export const property = (value: string): ValidatorFn => {
         break;
       }
     }
-    return isValid ? null : { hasProperty: true, reason: value };
+    return isValid ? null : { hasProperty: { value: value } };
   };
 };

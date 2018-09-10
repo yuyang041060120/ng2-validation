@@ -11,6 +11,6 @@ export const gte = (value: number): ValidatorFn => {
     }
 
     const v: number = +control.value;
-    return v >= +value ? null : { gte: true, reason: value };
+    return v >= +value ? null : { gte: { value: value } };
   };
 };

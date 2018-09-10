@@ -11,6 +11,6 @@ export const max = (value: number): ValidatorFn => {
     }
 
     const v: number = +control.value;
-    return v <= +value ? null : { max: true, reason: value };
+    return v <= +value ? null : { max: { value: value } };
   };
 };
