@@ -1,3 +1,5 @@
+### [6.1.0]
+- Merge pull request [#15](https://github.com/rsaenen/ngx-custom-validators/pull/15)
 ### [6.0.5]
 - Fix issue [#11](https://github.com/rsaenen/ngx-custom-validators/issues/11)
 ### [6.0.4]
