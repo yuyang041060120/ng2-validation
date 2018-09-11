@@ -11,6 +11,6 @@ export const min = (value: number): ValidatorFn => {
     }
 
     const v: number = +control.value;
-    return v >= +value ? null : { min: true, reason: value };
+    return v >= +value ? null : { min: { value: value } };
   };
 };

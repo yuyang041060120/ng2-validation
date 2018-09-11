@@ -9,6 +9,6 @@ export const arrayLength = (value: number): ValidatorFn => {
     }
 
     const obj = control.value;
-    return Array.isArray(obj) && obj.length >= +value ? null : { arrayLength: true, reason: value };
+    return Array.isArray(obj) && obj.length >= +value ? null : { arrayLength: { minLength: value } };
   };
 };

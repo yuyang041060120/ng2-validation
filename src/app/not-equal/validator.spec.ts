@@ -11,6 +11,6 @@ describe('NotEqual', () => {
 
   it('"aaa" and "aaa" should not be notEqual', () => {
     const control = new FormControl('aaa');
-    expect(notEqual('aaa')(control)).toEqual({ notEqual: true, reason: 'aaa' });
+    expect(notEqual('aaa')(control)).toEqual({ notEqual: { value: 'aaa' } });
   });
 });

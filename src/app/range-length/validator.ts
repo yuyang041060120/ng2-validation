@@ -11,6 +11,6 @@ export const rangeLength = (value: Array<number>): ValidatorFn => {
     }
 
     const v: string = control.value;
-    return v.length >= value[0] && v.length <= value[1] ? null : { rangeLength: true, reason: value };
+    return v.length >= value[0] && v.length <= value[1] ? null : { rangeLength: { value: value } };
   };
 };

@@ -16,6 +16,6 @@ export const notEqualTo = (notEqualControl: AbstractControl): ValidatorFn => {
       return null;
     }
 
-    return notEqualControl.value !== v ? null : { notEqualTo: true, reason: notEqualControl };
+    return notEqualControl.value !== v ? null : { notEqualTo: { control: notEqualControl, value: notEqualControl.value } };
   };
 };

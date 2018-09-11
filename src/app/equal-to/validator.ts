@@ -13,6 +13,6 @@ export const equalTo = (equalControl: AbstractControl): ValidatorFn => {
 
     const v: string = control.value;
 
-    return equalControl.value === v ? null : { equalTo: true, reason: equalControl };
+    return equalControl.value === v ? null : { equalTo: { control: equalControl, value: equalControl.value } };
   };
 };

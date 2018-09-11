@@ -12,7 +12,7 @@ describe('MaxDate', () => {
 
   it('"2016-09-10" should equal to "{maxDate: true, reason: \'xxx\'}"', () => {
     control = new FormControl('2016-09-10');
-    expect(maxDate('2016-09-09')(control)).toEqual({ maxDate: true, reason: '2016-09-09' });
+    expect(maxDate('2016-09-09')(control)).toEqual({ maxDate: { value: '2016-09-09', control: undefined } });
   });
 
   it('"2016-09-08" should equal to "null"', () => {
@@ -23,7 +23,7 @@ describe('MaxDate', () => {
   it('"Date(2016-09-10)" should equal to "{maxDate: true, reason: \'xxx\'}"', () => {
     const obj = new Date('2016-09-09');
     control = new FormControl('2016-09-10');
-    expect(maxDate(obj)(control)).toEqual({ maxDate: true, reason: obj });
+    expect(maxDate(obj)(control)).toEqual({ maxDate: { value: obj, control: undefined } });
   });
 
   it('"Date(2016-09-08)" should equal to "null"', () => {
@@ -34,7 +34,7 @@ describe('MaxDate', () => {
   it('"Date(2016-09-10)" should equal to "{maxDate: true, reason: \'xxx\'}"', () => {
     const obj = () => new Date('2016-09-09');
     control = new FormControl('2016-09-10');
-    expect(maxDate(obj)(control)).toEqual({ maxDate: true, reason: obj });
+    expect(maxDate(obj)(control)).toEqual({ maxDate: { value: obj, control: undefined } });
   });
 
   it('"Date(2016-09-08)" should equal to "null"', () => {
@@ -45,7 +45,7 @@ describe('MaxDate', () => {
   it('Date control object { year: 2018, month: 10, day: 11} should equal to "{maxDate: true, reason: \'xxx\'}"', () => {
     const obj = new FormControl('2017-10-01');
     control = new FormControl({ year: 2018, month: 10, day: 11 });
-    expect(maxDate(obj)(control)).toEqual({ maxDate: true, reason: obj });
+    expect(maxDate(obj)(control)).toEqual({ maxDate: { value: obj.value, control: obj } });
   });
 
   it('Date control object { year: 2016, month: 10, day: 11} should equal to "null"', () => {
@@ -63,7 +63,7 @@ describe('MaxDate', () => {
   it('Date(2017-11-01) should equal to "{maxDate: true, reason: \'xxx\'}"', () => {
     const obj = { year: 2017, month: 10, day: 11 };
     control = new FormControl('2017-11-01');
-    expect(maxDate(obj)(control)).toEqual({ maxDate: true, reason: obj });
+    expect(maxDate(obj)(control)).toEqual({ maxDate: { value: obj, control: undefined } });
   });
 
   it('Date form control should equal to "null"', () => {
@@ -75,6 +75,6 @@ describe('MaxDate', () => {
   it('Date form control should equal to "{maxDate: true, reason: \'xxx\'}"', () => {
     const control2 = new FormControl('2017-01-01');
     control = new FormControl('2017-11-01');
-    expect(maxDate(control2)(control)).toEqual({ maxDate: true, reason: control2 });
+    expect(maxDate(control2)(control)).toEqual({ maxDate: { value: control2.value, control: control2 } });
   });
 });

@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { equal } from './validator';
 
 describe('Equal', () => {
-  const error = {equal: true};
+  const error = { equal: true };
 
   it('"aaa" and "aaa" should be equal', () => {
     const control = new FormControl('aaa');
@@ -12,6 +12,6 @@ describe('Equal', () => {
 
   it('"aaa" and "bbb" should not be equal', () => {
     const control = new FormControl('bbb');
-    expect(equal('aaa')(control)).toEqual({equal: true, reason: 'aaa'});
+    expect(equal('aaa')(control)).toEqual({ equal: { value: 'aaa' } });
   });
 });

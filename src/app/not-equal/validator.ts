@@ -9,6 +9,6 @@ export const notEqual = (val: any): ValidatorFn => {
 
     const v: any = control.value;
 
-    return val !== v ? null : { notEqual: true, reason: val };
+    return val !== v ? null : { notEqual: { value: val } };
   };
 };
