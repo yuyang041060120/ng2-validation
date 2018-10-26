@@ -1,3 +1,5 @@
+### [7.0.0]
+- Angular 7 support
 ### [6.1.0]
 - Merge pull request [#15](https://github.com/rsaenen/ngx-custom-validators/pull/15)
 ### [6.0.5]
