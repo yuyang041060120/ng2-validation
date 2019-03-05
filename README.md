@@ -79,7 +79,7 @@ export class AppModule {
 }
 ```
 
-### range length - rangeLenght
+### range length - rangeLength
 
 ```html
 <input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [rangeLength]="[5, 9]">
