@@ -26,6 +26,7 @@ import { range } from './range/validator';
 import { rangeLength } from './range-length/validator';
 import { uuid } from './uuid/validator';
 import { url } from './url/validator';
+import { Iban } from './iban/validator';
 
 import { ArrayLengthValidator } from './array-length/directive';
 import { Base64Validator } from './base64/directive';
@@ -53,6 +54,7 @@ import { RangeValidator } from './range/directive';
 import { RangeLengthValidator } from './range-length/directive';
 import { UrlValidator } from './url/directive';
 import { UUIDValidator } from './uuid/directive';
+import { IbanValidator } from './iban/directive';
 
 export const CustomValidators = {
   arrayLength,
@@ -80,7 +82,8 @@ export const CustomValidators = {
   range,
   rangeLength,
   url,
-  uuid
+  uuid,
+  Iban
 };
 
 const CustomDirectives = [
@@ -109,7 +112,8 @@ const CustomDirectives = [
   RangeValidator,
   RangeLengthValidator,
   UrlValidator,
-  UUIDValidator
+  UUIDValidator,
+  IbanValidator
 ];
 
 @NgModule({
