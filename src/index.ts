@@ -19,12 +19,14 @@ import { min, MinValidator } from './min';
 import { minDate, MinDateValidator } from './min-date';
 import { notEqual, NotEqualValidator } from './not-equal';
 import { notEqualTo, NotEqualToValidator } from './not-equal-to';
+import { notWholeNumber, NotWholeNumberValidator } from './not-whole-number';
 import { number, NumberValidator } from './number';
 import { phone, PhoneValidator } from './phone';
 import { range, RangeValidator } from './range';
 import { rangeLength, RangeLengthValidator } from './range-length';
 import { url, UrlValidator } from './url';
 import { uuid, UUIDValidator } from './uuid';
+import { wholeNumber, WholeNumberValidator } from './whole-number';
 
 export const CustomValidators: any = {
   base64,
@@ -46,12 +48,14 @@ export const CustomValidators: any = {
   minDate,
   notEqual,
   notEqualTo,
+  notWholeNumber,
   number,
   phone,
   range,
   rangeLength,
   url,
-  uuid
+  uuid,
+  wholeNumber
 };
 
 const CUSTOM_FORM_DIRECTIVES = [
@@ -74,12 +78,14 @@ const CUSTOM_FORM_DIRECTIVES = [
   MinDateValidator,
   NotEqualValidator,
   NotEqualToValidator,
+  NotWholeNumberValidator,
   NumberValidator,
   PhoneValidator,
   RangeValidator,
   RangeLengthValidator,
   UrlValidator,
-  UUIDValidator
+  UUIDValidator,
+  WholeNumberValidator
 ];
 
 @NgModule({
