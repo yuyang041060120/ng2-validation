@@ -2,6 +2,8 @@
 
 ![](https://gw.alipayobjects.com/mdn/prod_intro/afts/img/A*LishR5jCiHsAAAAAAAAAAABkARQnAQ)
 
+> Deprecated, you can fork and publish yours.
+
 # Description
 
 Angular2 custom validation, inspired by jQuery validation.
