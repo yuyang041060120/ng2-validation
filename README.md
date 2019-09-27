@@ -2,67 +2,73 @@
 
 # Description
 
-Angular2 custom validation, inspired by jQuery validation.
+Angular Custom Validators, forked from [ng2-validation](https://github.com/yuyang041060120/ng2-validation).
+Directives for form validation (template or model driven).
 
-# Install
-
-```bash
-npm install ng2-validation --save
-```
-# Systemjs
+# Installation
 
 ```bash
-'ng2-validation': 'npm:ng2-validation/bundles/ng2-validation.umd.js'
+npm i ngx-custom-validators --save
 ```
 
 # Validators
 
-## angular2 built-in validators
+## Angular built-in validators
 
-- required
-- minlength
 - maxlength
+- minlength
 - pattern
+- required
 
-## custom validators
+## Custom validators
 
-- rangeLength
-- min
-- gt
-- gte
-- max
-- lt
-- lte
-- range
-- digits
-- number
-- url
-- email
-- date
-- minDate
-- maxDate
-- dateISO
-- creditCard
-- json
+- array length
 - base64
-- phone
-- uuid
+- credit card
+- date
+- date ISO
+- digits
+- email
 - equal
-- notEqual
-- equalTo
-- notEqualTo
+- not equal
+- equal to
+- not equal to
+- greater than
+- greater than or equal
+- json
+- less than
+- less than or equal
+- max
+- max date
+- min
+- min date
+- not equal
+- not equal to
+- number
+- property
+- range
+- range length
+- url
+- uuid
 
 # Usage
 
-## template driven
+The paramater of each validator (if it has) can be accessible in the template with `reason`.
+```html
+<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [gt]="10">
+<!-- Will display : error message and must be greater than 10 -->
+<p *ngIf="field.errors?.gt">error message and must be greater than {{ field.errors?.reason }}</p>
+``` 
+
+## Template driven
 
 import `FormsModule` and `CustomFormsModule` in *app.module.ts*
 
-```javascript
+```typescript
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { CustomFormsModule } from 'ng2-validation'
+import { CustomFormsModule } from 'ngx-custom-validators';
 
 import { AppComponent } from './app.component';
 
@@ -75,152 +81,153 @@ export class AppModule {
 }
 ```
 
-### rangeLength
+### range length - rangeLength
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [rangeLength]="[5, 9]"/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [rangeLength]="[5, 9]">
 <p *ngIf="field.errors?.rangeLength">error message</p>
 ```
 
 ### min
 
 ```html
-<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [min]="10"/>
+<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [min]="10">
 <p *ngIf="field.errors?.min">error message</p>
 ```
 
-### gt
+### greater than - gt
 
 ```html
-<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [gt]="10"/>
+<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [gt]="10">
 <p *ngIf="field.errors?.gt">error message</p>
 ```
 
-### gte
+### greater than or equal - gte
 
 ```html
-<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [gte]="10"/>
+<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [gte]="10">
 <p *ngIf="field.errors?.gte">error message</p>
 ```
 
 ### max
 
 ```html
-<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [max]="20"/>
+<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [max]="20">
 <p *ngIf="field.errors?.max">error message</p>
 ```
 
-### lt
+### less than - lt
 
 ```html
-<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [lt]="20"/>
+<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [lt]="20">
 <p *ngIf="field.errors?.lt">error message</p>
 ```
 
-### lte
+### less than or equal - lte
 
 ```html
-<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [lte]="20"/>
+<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [lte]="20">
 <p *ngIf="field.errors?.lte">error message</p>
 ```
 
 ### range
 
 ```html
-<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [range]="[10, 20]"/>
+<input type="number" [(ngModel)]="model.field" name="field" #field="ngModel" [range]="[10, 20]">
 <p *ngIf="field.errors?.range">error message</p>
 ```
 
 ### digits
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" digits/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" digits>
 <p *ngIf="field.errors?.digits">error message</p>
 ```
 
 ### number
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" number/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" number>
 <p *ngIf="field.errors?.number">error message</p>
 ```
 
 ### url
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" url/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" url>
 <p *ngIf="field.errors?.url">error message</p>
 ```
 
 ### email
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" email/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" ngvemail>
 <p *ngIf="field.errors?.email">error message</p>
 ```
 
 ### date
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" date/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" date>
 <p *ngIf="field.errors?.date">error message</p>
 ```
 
-### minDate
+### min date - minDate
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" minDate="2016-09-09"/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" minDate="2016-09-09">
 <p *ngIf="field.errors?.minDate">error message</p>
 ```
 
-### maxDate
+```html
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [minDate]="myOtherField">
+<p *ngIf="field.errors?.minDate">error message</p>
+```
+
+### max date - maxDate
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" maxDate="2016-09-09"/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" maxDate="2016-09-09">
 <p *ngIf="field.errors?.maxDate">error message</p>
 ```
 
-### dateISO
+```html
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [maxDate]="myOtherField">
+<p *ngIf="field.errors?.maxDate">error message</p>
+```
+
+### date ISO - dateISO
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" dateISO/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" dateISO>
 <p *ngIf="field.errors?.dateISO">error message</p>
 ```
 
-### creditCard
+### credit card - creditCard
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" creditCard/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" creditCard>
 <p *ngIf="field.errors?.creditCard">error message</p>
 ```
 
 ### json
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" json/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" json>
 <p *ngIf="field.errors?.json">error message</p>
 ```
 
 ### base64
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" base64/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" base64>
 <p *ngIf="field.errors?.base64">error message</p>
 ```
-
-### phone
-
-```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" phone="CN"/>
-<p *ngIf="field.errors?.phone">error message</p>
-```
-
-details see [libphonenumber](https://github.com/halt-hammerzeit/libphonenumber-js)
 
 ### uuid
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [uuid]="'all'"/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [uuid]="'all'">
 <p *ngIf="field.errors?.uuid">error message</p>
 ```
 
@@ -236,40 +243,65 @@ details see [libphonenumber](https://github.com/halt-hammerzeit/libphonenumber-j
 ### equal
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [equal]="'xxx'"/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [equal]="'xxx'">
 <p *ngIf="field.errors?.equal">error message</p>
 ```
 
-### equal
+### not equal - notEqual
 
 ```html
-<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [notEqual]="'xxx'"/>
+<input type="text" [(ngModel)]="model.field" name="field" #field="ngModel" [notEqual]="'xxx'">
 <p *ngIf="field.errors?.notEqual">error message</p>
 ```
 
-### equalTo
+### equal to - equalTo
 
 ```html
-<input type="password" ngModel name="password" #password="ngModel" required/>
+<input type="password" ngModel name="password" #password="ngModel" required>
 <p *ngIf="password.errors?.required">required error</p>
-<input type="password" ngModel name="certainPassword" #certainPassword="ngModel" [equalTo]="password"/>
+<input type="password" ngModel name="certainPassword" #certainPassword="ngModel" [equalTo]="password">
 <p *ngIf="certainPassword.errors?.equalTo">equalTo error</p>
 ```
 
-### notEqualTo
+### not equal to - notEqualTo
 
 ```html
-<input type="text" ngModel name="password" #password="ngModel" required/>
+<input type="text" ngModel name="password" #password="ngModel" required>
 <p *ngIf="password.errors?.required">required error</p>
-<input type="password" ngModel name="certainPassword" #certainPassword="ngModel" [notEqualTo]="password"/>
+<input type="password" ngModel name="certainPassword" #certainPassword="ngModel" [notEqualTo]="password">
 <p *ngIf="certainPassword.errors?.equalTo">equalTo error</p>
 ```
 
-## model driven
+### property
+
+```typescript
+public obj = { id: 1 } // OK
+public obj = { name: 'baguette' } // KO
+```
+
+```html
+<input type="text" ngModel name="obj" #obj="ngModel" property="id">
+<!-- For multiple properties check -->
+<input type="text" ngModel name="obj" #obj="ngModel" property="id,value,name">
+<p *ngIf="obj.errors?.property">property error</p>
+```
+
+### array length - ArrayLength
+```typescript
+public arr = [{ name: 'baguette' }, { name: 'croisant' }] // OK
+public arr = [{ name: 'baguette' }] // KO
+```
+
+```html
+<input type="text" ngModel name="arr" #arr="ngModel" arrayLength="2">
+<p *ngIf="arr.errors?.arrayLength">arrayLength error</p>
+```
+
+## Model driven
 
 import `ReactiveFormsModule` in *app.module.ts*
 
-```javascript
+```typescript
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -287,10 +319,10 @@ export class AppModule {
 
 import `CustomValidators` in *app.component.ts*
 
-```javascript
+```typescript
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { CustomValidators } from 'ng2-validation';
+import { CustomValidators } from 'ngx-custom-validators';
 
 @Component({
     selector: 'app',
@@ -308,139 +340,133 @@ export class AppComponent {
 ```
 
 ```html
-<input type="text" formControlName="field"/>
+<input type="text" formControlName="field">
 <p *ngIf="demoForm.from.controls.field.errors?.rangeLength">error message</p>
 ```
 
-### rangeLength
+### range length - rangeLenght
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.rangeLength([5, 9]))
 ```
 
 ### min
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.min(10))
 ```
 
-### gt
+### greater than - gt
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.gt(10))
 ```
 
 ### max
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.max(20))
 ```
 
-### lt
+### less than - lt
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.lt(20))
 ```
 
 ### range
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.range([10, 20]))
 ```
 
 ### digits
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.digits)
 ```
 
 ### number
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.number)
 ```
 
 ### url
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.url)
 ```
 
 ### email
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.email)
 ```
 
 ### date
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.date)
 ```
 
-### minDate
+### min date - minDate
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.minDate('2016-09-09'))
 ```
 
-### maxDate
+### max date - maxDate
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.maxDate('2016-09-09'))
 ```
 
-### dateISO
+### date ISO - dateISO
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.dateISO)
 ```
 
-### creditCard
+### credit card - creditCard
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.creditCard)
 ```
 
 ### json
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.json)
 ```
 
 ### base64
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.base64)
-```
-
-### phone
-
-```javascript
-new FormControl('', CustomValidators.phone('zh-CN'))
 ```
 
 ### uuid
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.uuid('3'))
 ```
 
 ### equal
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.equal('xxx'))
 ```
 
-### notEqual
+### not equal - notEqual
 
-```javascript
+```typescript
 new FormControl('', CustomValidators.notEqual('xxx'))
 ```
 
-### equalTo
+### equal to - equalTo
 
-```javascript
+```typescript
 let password = new FormControl('', Validators.required);
 let certainPassword = new FormControl('', CustomValidators.equalTo(password));
 
@@ -452,16 +478,16 @@ this.form = new FormGroup({
 
 ```html
 <form [formGroup]="form">
-  <input type="password" formControlName="password"/>
+  <input type="password" formControlName="password">
   <p *ngIf="form.controls.password.errors?.required">required error</p>
-  <input type="password" formControlName="certainPassword"/>
+  <input type="password" formControlName="certainPassword">
   <p *ngIf="form.controls.certainPassword.errors?.equalTo">equalTo error</p>
 </form>
 ```
 
-### notEqualTo
+### not equal to - notEqualTo
 
-```javascript
+```typescript
 let password = new FormControl('', Validators.required);
 let certainPassword = new FormControl('', CustomValidators.notEqualTo(password));
 
@@ -473,13 +499,46 @@ this.form = new FormGroup({
 
 ```html
 <form [formGroup]="form">
-  <input type="password" formControlName="password"/>
+  <input type="password" formControlName="password">
   <p *ngIf="form.controls.password.errors?.required">required error</p>
-  <input type="password" formControlName="certainPassword"/>
+  <input type="password" formControlName="certainPassword">
   <p *ngIf="form.controls.certainPassword.errors?.notEqualTo">notEqualTo error</p>
 </form>
 ```
 
-# License
+### property
+```typescript
+public obj = { id: 1 };
 
-MIT
+this.form = new FormGroup({
+  obj: new FormControl('', CustomValidators.property('id'))
+  // For multiple properties check
+  obj: new FormControl('', CustomValidators.property('id,value,name'))
+});
+```
+
+```html
+<form [formGroup]="form">
+  <input type="text" formControlName="obj">
+  <p *ngIf="form.controls.obj.errors?.property">property error</p>
+</form>
+```
+
+### array length - ArrayLength
+```typescript
+public arr = [{ name: 'baguette' }, { name: 'croisant' }]
+this.form = new FormGroup({
+  arr: new FormControl('', CustomValidators.arrayLength(2))
+});
+```
+
+```html
+<form [formGroup]="form">
+  <input type="text" formControlName="arr">
+  <p *ngIf="arr.errors?.arrayLength">arrayLength error</p>
+</form>
+```
+
+# For developpers
+To run the projet : `npm start`
+Don't forget to run `npm test` and `npm lint` before each pull request. Thanks !
