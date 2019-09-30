@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { base64, Base64Validator } from './base64';
 import { creditCard, CreditCardValidator } from './credit-card';
 import { date, DateValidator } from './date';
-import { dateISO, DateISOValidator } from './date-ios';
+import { dateISO, DateISOValidator } from './date-iso';
 import { digits, DigitsValidator } from './digits';
 import { email, EmailValidator } from './email';
 import { equal, EqualValidator } from './equal';
