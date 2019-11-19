@@ -127,6 +127,15 @@
     </div>
 
     <div class="form-group">
+      <label class="col-xs-3 control-label">notWholeNumber</label>
+
+      <div class="col-xs-9">
+        <input class="form-control" type="text" ngModel name="notWholeNumber" #notWholeNumber="ngModel" notWholeNumber="3"/>
+        <p class="alert alert-danger" *ngIf="notWholeNumber?.errors?.notWholeNumber">notWholeNumber error</p>
+      </div>
+    </div>
+
+    <div class="form-group">
       <label class="col-xs-3 control-label">equalTo</label>
 
       <div class="col-xs-9">
@@ -260,6 +269,15 @@
       <div class="col-xs-9">
         <input class="form-control" type="text" ngModel name="uuid" #uuid="ngModel" uuid="3"/>
         <p class="alert alert-danger" *ngIf="uuid?.errors?.uuid">uuid error</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-xs-3 control-label">wholeNumber</label>
+
+      <div class="col-xs-9">
+        <input class="form-control" type="text" ngModel name="wholeNumber" #wholeNumber="ngModel" wholeNumber="3"/>
+        <p class="alert alert-danger" *ngIf="wholeNumber?.errors?.wholeNumber">wholeNumber error</p>
       </div>
     </div>
   </form>
