@@ -1,14 +1,14 @@
 import { AbstractControl, Validators, ValidatorFn } from '@angular/forms';
-import { isValidNumber } from 'libphonenumber-js';
+import { isValidNumber, CountryCode } from 'libphonenumber-js';
 
 import { isPresent } from '../util/lang';
 
-export const phone = (country: string): ValidatorFn => {
+export const phone = (...country: string[]): ValidatorFn => {
   return (control: AbstractControl): { [key: string]: boolean } => {
     if (isPresent(Validators.required(control))) return null;
 
-    let v: string = control.value;
-
-    return isValidNumber({phone: v, country}) ? null : {phone: true};
+    return (country.some(c => {
+      return isValidNumber(control.value, c as CountryCode);
+    })) ? null : {phone: true};
   };
 };
