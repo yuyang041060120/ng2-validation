@@ -10,6 +10,7 @@ import { equal, EqualValidator } from './equal';
 import { equalTo, EqualToValidator } from './equal-to';
 import { gt, GreaterThanValidator } from './greater-than';
 import { gte, GreaterThanEqualValidator } from './greater-than-equal';
+import { gtTo, GreaterThanToValidator } from './greater-than-to';
 import { json, JSONValidator } from './json';
 import { lt, LessThanValidator } from './less-than';
 import { lte, LessThanEqualValidator } from './less-than-equal';
@@ -37,6 +38,7 @@ export const CustomValidators: any = {
   equalTo,
   gt,
   gte,
+  gtTo,
   json,
   lt,
   lte,
@@ -65,6 +67,7 @@ const CUSTOM_FORM_DIRECTIVES = [
   EqualToValidator,
   GreaterThanValidator,
   GreaterThanEqualValidator,
+  GreaterThanToValidator,
   JSONValidator,
   LessThanValidator,
   LessThanEqualValidator,
